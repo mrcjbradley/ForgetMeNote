@@ -9,7 +9,6 @@ class Api::UsersController < ApplicationController
     end
 
     def valid_email
-        # debugger
         @user = User.find_by(email: params[:email])
         if @user
             render json: { validEmail: true }

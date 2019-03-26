@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default (props) => (
-    <h1>Hello from root component!</h1>
+    <h1>ForgetMeNote</h1>
 );
