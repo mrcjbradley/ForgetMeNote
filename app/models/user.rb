@@ -39,8 +39,8 @@ class User < ApplicationRecord
         bc_pw.is_password?(pw)        
     end
 
-    def self.find_by_credentials(un, pw)
-        user = User.find_by(username: un)
+    def self.find_by_credentials(email, pw)
+        user = User.find_by(email: email)
         user && user.is_password?(pw) ? user : nil
     end
 
