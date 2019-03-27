@@ -1,24 +1,42 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import configureStore from './store/store';
+import ReactDOM from 'react-dom';
 import Root from './components/root';
 //TESTING!!!
-import * as SessAPIUtil from './util/session_api_util';
+// import * as SessAPIUtil from './util/session_api_util';
+import {
+    signUp,
+    logIn,
+    logOut
+} from './actions/session_actions';
 //END TESTING!!!
 
 document.addEventListener('DOMContentLoaded', () => {
-    const store = configureStore();
+    let store;
+    if (window.currentUser) {
+        const preloadedState = { session: { currentUser: window.currentUser } }; 
+        store = configureStore(preloadedState);
+        delete window.currentUser; 
+    } else {
+            store = configureStore();
+    }
+    
     const root = document.getElementById('root');
 
     //TESTING!!!
-        window.createUser = SessAPIUtil.createUser;
-        window.logIn = SessAPIUtil.logIn;
-        window.logOut = SessAPIUtil.logOut;
-        window.validateEmail = SessAPIUtil.validateEmail;
+        // window.signUp = SessAPIUtil.signUp;
+        // window.logIn = SessAPIUtil.logIn;
+        // window.logOut = SessAPIUtil.logOut;
+        // window.validateEmail = SessAPIUtil.validateEmail;
+        window.signUp = signUp;
+        window.logIn = logIn;
+        window.logOut = logOut;
         window.getState = store.getState;
         window.dispatch = store.dispatch;
 
     //END TESTING!!!
+
+ 
 
     ReactDOM.render( <Root store={store} />, root);
 });

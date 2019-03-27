@@ -1,8 +1,8 @@
-export const createUser = (user) => (
+export const signUp = (user) => (
     $.ajax({
         method: 'post',
         url: '/api/users',
-        data: { user }
+        data: { user } 
     })
 );
 
@@ -10,7 +10,7 @@ export const logIn = (user) => (
     $.ajax({
         method: 'post',
         url: '/api/session',
-        data: { user }
+        data: { user } 
     })
 );
 
@@ -25,6 +25,6 @@ export const validateEmail = (email) => (
 export const logOut = () => (
     $.ajax({
         method: 'delete',
-        url: '/api/session',
+        url: '/api/session'
     })
 );
