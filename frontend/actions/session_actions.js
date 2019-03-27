@@ -18,27 +18,25 @@ const logoutCurrentUser = () => ({
     type: LOGOUT_CURRENT_USER
 });
 
-const receiveSessionErrors = (errors) => ({
+const receiveSessionErrors = ({ errors }) => ({
     type: RECEIVE_SESSION_ERRORS,
     errors
 });
 
 export const signUp = user => dispatch => (
     SessAPIUtil.signUp(user)
-    .then(user => {
-        return dispatch(receiveCurrentUser(user));
-    }),
-    errors => dispatch(receiveSessionErrors(errors))
-);
+    .then(user => dispatch(receiveCurrentUser(user)), 
+    errors => dispatch(receiveSessionErrors(errors.responseJSON))
+));
 
 export const logIn = user => dispatch => (
     SessAPIUtil.logIn(user)
-    .then(user => dispatch(receiveCurrentUser(user)),
-    errors => dispatch(receiveSessionErrors(errors)))
+    .then(user => dispatch(receiveCurrentUser(user)))
+    .fail(errors => dispatch(receiveSessionErrors(errors.responseJSON)))
 );
 
 export const logOut = () => dispatch => (
     SessAPIUtil.logOut()
     .then(user => dispatch(logoutCurrentUser(user)),
-    errors => dispatch(receiveSessionErrors(errors)))
+    errors  => dispatch(receiveSessionErrors(errors.responseJSON)))
 );

@@ -6,7 +6,7 @@ class Api::SessionsController < ApplicationController
             log_in!(@user)
             render 'api/users/show'
         else
-            render json: { errors: ['Incorrect password.'], status: 404}  
+             render json: { errors: ["Incorrect password"] }, status: 404 
             # Evernote's Error Message ['Incorrect password. You modified your password 1,077 days ago.']
         end
     end
@@ -18,7 +18,7 @@ class Api::SessionsController < ApplicationController
             log_out!
             render json: {}
         else
-            render json: { errors: ['No logged in user.'], status: 404} 
+            render json: { errors: ['No logged in user.'] }, status: 404 
         end
     end
 
