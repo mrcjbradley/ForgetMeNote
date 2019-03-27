@@ -3,8 +3,12 @@ import { Link } from 'react-router-dom';
 
 export default () => (
     <>
-    <Link to='/signup'> Sign Up </Link>
-    <span> or </span>
-    <Link className="btn" to="/login"> Log In </Link>
+    <nav className="session-nav">
+        <ul>
+            <li><Link to='/signup'> Sign Up </Link></li>
+            <li><span> or </span></li>
+            <li><Link className="btn" to="/login"> Log In </Link></li>
+        </ul>
+    </nav>
     </>
 )

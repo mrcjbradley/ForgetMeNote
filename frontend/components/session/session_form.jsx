@@ -39,7 +39,9 @@ export default class SessionForm extends React.Component
                 <label >password<input onChange={this.handleChange('password')} type="password" value={this.state.password} /></label>
                 <input type="submit" value="Submit" />
                 &nbsp; or &nbsp;
-      <Link to={alternate}>{alternateText}</Link>
+                <div className="switch-context">
+                    <Link to={alternate}>{alternateText}</Link>
+                </div>
                 <ul>
                     {errorList}
                 </ul>

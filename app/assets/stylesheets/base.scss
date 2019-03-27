@@ -1,0 +1,238 @@
+// @import "./splashs/all";
+@import url("https://use.typekit.net/uzj7brn.css");
+
+// RESET
+
+html,
+body,
+div,
+span,
+h1,
+h2,
+h3,
+h4,
+a,
+ol,
+ul,
+li,
+form,
+label,
+article,
+aside,
+figure,
+figcaption,
+footer,
+header,
+nav {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    font-family: soleil,
+        sans-serif;
+    vertical-align: baseline;
+    box-sizing: border-box;
+}
+
+body {
+    line-height: 22px;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+img {
+    width: 100%
+}
+
+// END RESET
+
+
+
+.top {
+    background: #fff;
+     position: fixed;
+     top: 0;
+     width: 100%;
+     padding: 0px;
+     z-index: 999;
+    }
+    
+    .row {
+    background: #fff;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    max-width: 1220px;
+    margin: 0 auto;
+    padding: 0 40px;
+    // position: relative;
+}
+
+.splash-header {
+    .row {
+        height: 130px;
+        
+    }
+    .logo {
+        display: inline-block;
+        a {
+            display: block;
+            width: 177px;
+            height: 40px;
+            text-indent: -9999px;
+            background-size: contain;
+           
+        }
+        span {
+            position: absolute;
+            right: 9999px;
+        }
+        figure {
+            background-image: image-url("ForgetMeNote_lockup");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 250px;
+            height: 40px;
+            display: block;
+        }
+    }
+    .splash-nav {
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 22px;
+        margin-left: 50px + 80px;
+        li {
+            display: inline-block;
+            padding-bottom: 22px;
+            position: relative;
+            margin-left: 28px;
+            &:first-child {
+                margin-left: 0px;
+            }
+            a {
+                font-family: soleil, sans-serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: .5;
+            }
+        }
+    }
+    a {
+        color:#000;
+         &:link {
+             color: #000;
+             text-decoration: none;
+             transition: color .1s ease-in-out;
+         }
+         &:focus, &:hover{
+             color: #00a82d;
+             transition: color .1s ease-in-out;
+         }
+    }
+    .session-nav{
+        display: inline-block;
+        margin-left: auto;
+        li {
+            &:first-child {
+                margin-left: 0px;
+            }
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+        a {
+            color: #00a82d;
+            padding-bottom: 2px;
+            &:link {
+                font-size: 16px;
+                text-decoration: none;
+                transition: color .1s ease-in-out;
+            }
+            &:focus,
+            &:hover {
+                color: #14cc45;
+                transition: color .1s ease-in-out;
+            }
+        }
+    }
+}
+
+body {
+    font-size: 16px;
+    line-height: 22px;
+    color: black;
+    padding-top: 130px;
+}
+
+ol,
+p,
+table,
+ul {
+    font-family: Soleil, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 21px;
+}
+
+.btn {
+    font-family: Soleil_Bold,
+    Helvetica,
+    Arial,
+    sans-serif;
+    display: inline-block;
+    height: 40px;
+    min-width: 120px;
+    font-size: 14px;
+    line-height: 37px;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: .5px;
+    color: #00a82d;
+    border-radius: 3px;
+    border: 2px solid #00a82d;
+    padding: 0 10px;
+    transition: border .3s ease-in-out,
+    color .3s ease-in-out;
+    -webkit-font-smoothing: antialiased;
+    &:hover, &:focus {
+            color: #14cc45;
+            border: 2px solid #14cc45;
+            transition: border .1s ease-in-out,
+            color .1s ease-in-out;
+            
+    }
+}
+
+.splash-hero{
+    background-color: #00a82d;
+    background-image: image-url("main-green");
+    background-blend-mode: normal;
+    .row {
+        display: flex;
+        position: relative;
+        background-color: transparent;
+        // top: 200px;
+    }
+}
+
+.content-container {
+    
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    max-width: 1220px;
+    padding: 120px 0;
+
+    .cta {
+        color: white;
+    }
+
+}
