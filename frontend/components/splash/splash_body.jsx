@@ -11,9 +11,11 @@ export default () => (
                     <Link to='/signup' className="btn"> Sign Up for Free </Link>
                 </div>
                 <div className="image">
-                    <img src="https://via.placeholder.com/665x396" alt=""/>
+                    {/* <img src="../../../../app/assets/images/homepage-hero-desktop.png" alt=""/> */}
+                    <figure></figure>
                 </div>
             </div>
        </div>
     </section>
 )
+

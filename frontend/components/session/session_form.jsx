@@ -34,18 +34,33 @@ export default class SessionForm extends React.Component
         });
 
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label >email<input onChange={this.handleChange('email')} type="text" value={this.state.email} /></label>
-                <label >password<input onChange={this.handleChange('password')} type="password" value={this.state.password} /></label>
-                <input type="submit" value="Submit" />
-                &nbsp; or &nbsp;
-                <div className="switch-context">
-                    <Link to={alternate}>{alternateText}</Link>
+            <div className="formMain">
+                    <div className="formFrame">
+                        <div className={alternate.slice(1) + 'FormWrapper'}>
+                            <div className="formBody">
+                                <div className="heading">
+                                    <div className="formLogo">
+                                        <figure></figure>
+                                        <p className="tagline">Forget <em>Not</em> what's important.</p>
+                                    </div>
+                                </div>
+                                <form onSubmit={this.handleSubmit}>
+                                    <label >email<input onChange={this.handleChange('email')} type="text" value={this.state.email} /></label>
+                                    <label >password<input onChange={this.handleChange('password')} type="password" value={this.state.password} /></label>
+                                    <input type="submit" value="Submit" />
+                                    &nbsp; or &nbsp;
+                                    <div className="switch-context">
+                                        <Link to={alternate}>{alternateText}</Link>
+                                    </div>
+                                    <ul>
+                                        {errorList}
+                                    </ul>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <ul>
-                    {errorList}
-                </ul>
-            </form>
+ 
         );
     }
 }

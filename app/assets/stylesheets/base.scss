@@ -183,10 +183,7 @@ ul {
 }
 
 .btn {
-    font-family: Soleil_Bold,
-    Helvetica,
-    Arial,
-    sans-serif;
+    font-family: Soleil_Bold, Helvetica, Arial, sans-serif;
     display: inline-block;
     height: 40px;
     min-width: 120px;
@@ -227,12 +224,120 @@ ul {
     
     align-items: center;
     display: flex;
+    justify-content: space-between;
     margin: 0 auto;
     max-width: 1220px;
     padding: 120px 0;
 
     .cta {
         color: white;
+        padding: 0 40px 0 0;
+        width: 50%;
+        position: relative;
+        z-index: 1;
+        letter-spacing: 0;
+            h1{
+                font-size: 56px;
+                line-height: 72px;
+                margin-bottom:20px;
+                font-weight: 600;
+            }
+            p {
+                font-weight: 300;
+                font-size: 24px;
+                line-height: 40px;
+                margin-bottom: 35px;
+            }
+            .btn {
+                color: #00a82d;
+                display: inline;
+                background-color:white;
+                font-size: 16px;
+                font-weight: 600;
+                min-width: 240px;
+                text-transform: uppercase;
+                line-height: normal;
+                text-decoration: none;
+                text-align: center;
+                border: 0;
+                border-radius: 3px;
+                padding: 18px 32px 17px;
+                transition: background .3s ease-in-out;
+                -webkit-font-smoothing: antialiased;
+                letter-spacing: 1.5px;
+                &:hover, &:focus{
+                    background-color: #f7f7f7;
+                }
+            }
     }
 
+    .image {
+        width: 50%;
+        text-align: center;
+        figure{
+            background-image: image-url("homepage-hero-desktop");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 100%;
+            height: 350px;
+            display: inline-block;
+            
+        }
+    }
+
+}
+
+.formMain {
+     background-image: image-url("signin_background");
+     background-size: 228px 228px;
+     display: block;
+     width: 100vw;
+     height: 100vh;
+     position: fixed;
+     top: 0;
+     .formFrame{
+         position: absolute;
+         top:50%;
+         left: 50%;
+         transform: translate(-50%, -50%);
+         display: block;
+         .loginFormWrapper, .signupFormWrapper{
+            position:relative;
+            margin: 0 auto;
+            padding: 0 10px 0;
+            font-weight: 400;
+            .formBody{
+                background: #fff;
+                max-width: 512px;
+                margin: 0px auto 28px auto;
+                padding: 62.12px 99px 48px;
+                width: 314px;
+                box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+                -webkit-border-radius: 2px;
+                -moz-border-radius: 2px;
+                border-radius: 2px;
+                text-align: left;
+                display: block;
+                width: fit-content;
+                .heading{
+                    text-align: center;
+                    color: #aaaaaa;
+                   
+                    .formLogo{
+                        margin-bottom: 19px;
+                        
+                        figure {
+                                background-image: image-url("ForgetMeNote_lockup");
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                width: 250px;
+                                height: 40px;
+                               
+                        }
+                    }
+                }    
+            }
+         }
+     }
 }
