@@ -9,15 +9,18 @@ import {
 } from 'react-router-dom';
 
 const msp = ({session: {currentUser: {id}}}) => ({
-    loggedIn: Boolean(id),
+    loggedIn: Boolean(id)
 });
 
-const Auth = ({component: Component, path, loggedIn}) => ( 
-    <Route path={path} render={ props => ( loggedIn ? < Redirect to="/" /> : <Component {...props}/> )}/>
+const Auth = ({component: Component, path, loggedIn, exact}) => ( 
+    <Route exact={exact} path={path} render={props => {
+        // debugger
+        return ( loggedIn ? <Redirect to="/home" /> : <Component {...props}/> )}
+    }/>
 );
 
-const Protected = ({ component: Component, path, loggedIn }) => ( 
-    < Route path={path} render={ props => ( loggedIn ? <Component {...props} /> : <Redirect to="/signup"/>) }/>
+const Protected = ({ component: Component, path, loggedIn , exact}) => ( 
+    < Route exact={exact} path={path} render={props => ( loggedIn ? <Component {...props} /> : <Redirect to="/"/>) }/>
 );
 
 export const AuthRoute = withRouter(connect(msp)(Auth));
