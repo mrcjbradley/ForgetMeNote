@@ -48,11 +48,13 @@ export default class SessionForm extends React.Component
                                         <form onSubmit={this.handleSubmit}>
                                             <ol>
                                                 <li className="row">
-                                                    <div className="demo-user-wrapper">
+                                                    <Link className="demo-user-wrapper" to="/login">
                                                         <div className="demo-user-btn">
-                                                            <Link to="/login"> Sign in as Demo User </Link>
+                                                            <div >
+                                                                Sign in as Demo User 
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </Link>
                                                 </li>
                                                 <li className="row horizontalRow">
                                                     <div className="horizontalText">or</div>
@@ -63,7 +65,8 @@ export default class SessionForm extends React.Component
                                                         <input 
                                                         onChange={this.handleChange('email')} 
                                                         type="text" 
-                                                        value={this.state.email} />
+                                                        value={this.state.email} 
+                                                        placeholder="Email"/>
                                                     </div>
                                                 </li>
                                                 <li className="row">
@@ -71,11 +74,13 @@ export default class SessionForm extends React.Component
                                                         <input 
                                                         onChange={this.handleChange('password')} 
                                                         type="password" 
-                                                        value={this.state.password} />
+                                                        value={this.state.password} 
+                                                        placeholder="Password"/>
+                                                        
                                                     </div>
                                                 </li>
                                                 <li className="row">
-                                        <input className="btn-submit" type="submit" value="Submit" />
+                                        <input className="btn-submit" type="submit" value="Continue" />
                                                 </li>
                                             </ol>
                                                 <ul>
