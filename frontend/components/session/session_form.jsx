@@ -28,7 +28,7 @@ export default class SessionForm extends React.Component
         const { path } = this.props.match;
         const { errors } = this.props;
         const alternate = (path === '/login') ? '/signup' : '/login';
-        const alternateText = (path === '/login') ? 'sign up' : 'login';
+        const [alternateText, alternateQuestion] = (path === '/login') ? ['Create account', 'Don\'t have an account?'] : ['Sign In', 'Already have an account?'];
         const errorList = errors.map((error, idx) => {
             return <li key={idx}>{error}</li>
         });
@@ -44,18 +44,49 @@ export default class SessionForm extends React.Component
                                         <p className="tagline">Forget <em>Not</em> what's important.</p>
                                     </div>
                                 </div>
-                                <form onSubmit={this.handleSubmit}>
-                                    <label >email<input onChange={this.handleChange('email')} type="text" value={this.state.email} /></label>
-                                    <label >password<input onChange={this.handleChange('password')} type="password" value={this.state.password} /></label>
-                                    <input type="submit" value="Submit" />
-                                    &nbsp; or &nbsp;
-                                    <div className="switch-context">
-                                        <Link to={alternate}>{alternateText}</Link>
-                                    </div>
-                                    <ul>
-                                        {errorList}
-                                    </ul>
-                                </form>
+                                {/* <div className="form"> */}
+                                        <form onSubmit={this.handleSubmit}>
+                                            <ol>
+                                                <li className="row">
+                                                    <div className="demo-user-wrapper">
+                                                        <div className="demo-user-btn">
+                                                            <Link to="/login"> Sign in as Demo User </Link>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li className="row horizontalRow">
+                                                    <div className="horizontalText">or</div>
+                                                    <div className="horizontalLine"></div>
+                                                </li>
+                                                <li className="row">
+                                                    <div className="input-wrapper">
+                                                        <input 
+                                                        onChange={this.handleChange('email')} 
+                                                        type="text" 
+                                                        value={this.state.email} />
+                                                    </div>
+                                                </li>
+                                                <li className="row">
+                                                    <div className="input-wrapper">
+                                                        <input 
+                                                        onChange={this.handleChange('password')} 
+                                                        type="password" 
+                                                        value={this.state.password} />
+                                                    </div>
+                                                </li>
+                                                <li className="row">
+                                        <input className="btn-submit" type="submit" value="Submit" />
+                                                </li>
+                                            </ol>
+                                                <ul>
+                                                    {errorList}
+                                                </ul>
+                                        </form>
+                                {/* </div> */}
+                            <div className="switch-context">
+                            &nbsp; {alternateQuestion} &nbsp; <br/>
+                                <Link to={alternate}>{alternateText}</Link>
+                            </div>
                             </div>
                         </div>
                     </div>

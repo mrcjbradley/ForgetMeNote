@@ -1,5 +1,30 @@
 // @import "./splashs/all";
 @import url("https://use.typekit.net/uzj7brn.css");
+//VARIABLES
+$form-fonts: -apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+'Roboto',
+'Oxygen',
+'Ubuntu',
+'Cantarell',
+'Fira Sans',
+'Droid Sans',
+'Helvetica Neue',
+sans-serif,
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+'Roboto',
+'Oxygen',
+'Ubuntu',
+'Cantarell',
+'Fira Sans',
+'Droid Sans',
+'Helvetica Neue',
+sans-serif;
+//END VARIABLES
+
 
 // RESET
 
@@ -295,6 +320,7 @@ ul {
      height: 100vh;
      position: fixed;
      top: 0;
+         
      .formFrame{
          position: absolute;
          top:50%;
@@ -318,10 +344,12 @@ ul {
                 border-radius: 2px;
                 text-align: left;
                 display: block;
-                width: fit-content;
+                box-sizing: content-box;
+                // width: fit-content;
                 .heading{
                     text-align: center;
-                    color: #aaaaaa;
+                    color: #333;
+                    margin-bottom: 44px;
                    
                     .formLogo{
                         margin-bottom: 19px;
@@ -331,13 +359,147 @@ ul {
                                 background-size: contain;
                                 background-repeat: no-repeat;
                                 background-position: center;
-                                width: 250px;
+                                width: 100%;
                                 height: 40px;
                                
                         }
                     }
-                }    
+                }  
+                
             }
          }
      }
+}
+
+form li.row {
+    margin-bottom: 6px;
+    box-sizing: content-box;
+    &::before, &::after{
+        display: table;
+        content: "";
+    }
+    &::after {
+        clear: both;
+    }
+    horizontalRow{
+        position: relative;
+        margin-bottom: 18px;
+        margin-top: 17px;
+        }
+        .horizontalText {
+            width: 100%;
+            text-align: center;
+            background-color: #ffffff;
+            position: relative;
+            color: #ababab;
+            font-size: 14px;
+            z-index: 1;
+            overflow: hidden;
+            &::before{
+                margin-left: -52%;
+                text-align: right;
+                width: 50%;
+                top: 51%;
+                overflow: hidden;
+                height: 1px;
+                background-color: #d0d0d0;
+                content: '\a0';
+                position: absolute;
+            }
+            &::after{
+                margin-left: 2%;
+                text-align: right;
+                width: 50%;
+                top: 51%;
+                overflow: hidden;
+                height: 1px;
+                background-color: #d0d0d0;
+                content: '\a0';
+                position: absolute;
+            }
+          
+        }
+}
+
+.demo-user-wrapper {
+    
+    height: 40px; 
+    box-sizing: content-box;
+    width: 100%;
+    border-radius: 7px;
+    border: solid 1px #d0d0d0;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    background-color: #ffffff;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-basis: auto;
+    .demo-user-btn {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        a {
+            max-width: 280px;
+            // width: 100%;
+            font-size: 15px;
+            color: #6a6a6a;
+            display: inline-block;
+            position: relative;
+            // padding-left: 6px;
+            text-decoration: none;
+            font-family: $form-fonts;
+            font-weight: 200;
+        }
+    }
+}
+
+.input-wrapper{ 
+    input{
+        border-radius: 7px;
+        max-width: 280px;
+        color: #333333;
+        border: 1px solid #e6e6e6;
+        padding: 12px;
+        height: 40px;
+        line-height: 1.1875;
+        font-size: 1.33333333rem;
+        box-sizing: border-box;
+    }
+}
+
+.btn-submit {
+        background-color: #00a82d;
+        border-radius: 7px;
+        font-family: $form-fonts;
+        font-style: normal;
+        font-weight: 400;
+        width:100%;
+        line-height: 2;
+        font-size: 1rem;
+        height: 40px;
+        color: white;
+}
+
+.switch-context{
+    font-family: $form-fonts;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14px;
+    color: #737373;
+    text-align: center;
+    margin-top: 34px;
+    a{
+    transition: all .2s ease;
+    font-weight: 200;
+    font-size: 16px;
+    line-height: 18px;
+    color: #00a82d;
+    text-decoration: none;
+    margin-top:8px;
+    }
 }
