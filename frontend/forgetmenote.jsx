@@ -3,7 +3,7 @@ import configureStore from './store/store';
 import ReactDOM from 'react-dom';
 import Root from './components/root';
 //TESTING!!!
-// import * as SessAPIUtil from './util/session_api_util';
+import * as SessAPIUtil from './util/session_api_util';
 import {
     signUp,
     logIn,
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // window.signUp = SessAPIUtil.signUp;
         // window.logIn = SessAPIUtil.logIn;
         // window.logOut = SessAPIUtil.logOut;
-        // window.validateEmail = SessAPIUtil.validateEmail;
+        window.validateEmail = SessAPIUtil.validateEmail;
         window.signUp = signUp;
         window.logIn = logIn;
         window.logOut = logOut;

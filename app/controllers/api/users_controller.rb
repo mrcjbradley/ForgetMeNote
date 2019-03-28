@@ -11,9 +11,9 @@ class Api::UsersController < ApplicationController
     def valid_email
         @user = User.find_by(email: params[:email])
         if @user
-            render json: { validEmail: true }
+            render json: { validEmail: @user.email }
         else
-            render json: { errors: ['There is no account for the email you entered.'] }
+            render json: { errors: ['There is no account for the email you entered.'] }, status: 404
             # Evernote's error message 'There is no account for the username or email you entered.'
         end
     end

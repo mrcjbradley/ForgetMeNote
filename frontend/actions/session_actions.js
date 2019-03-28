@@ -2,11 +2,15 @@ import * as SessAPIUtil from '../util/session_api_util';
 export const [
     RECEIVE_CURRENT_USER,
     LOGOUT_CURRENT_USER,
-    RECEIVE_SESSION_ERRORS
+    RECEIVE_SESSION_ERRORS,
+    RECEIVE_VALID_EMAIL,
+    CLEAR_ERRORS
 ] = [
     'RECEIVE_CURRENT_USER',
     'LOGOUT_CURRENT_USER',
-    'RECEIVE_SESSION_ERRORS'
+    'RECEIVE_SESSION_ERRORS',
+    'RECEIVE_VALID_EMAIL',
+    'CLEAR_ERRORS'
 ];
 
 const receiveCurrentUser = (user) => ({
@@ -21,6 +25,15 @@ const logoutCurrentUser = () => ({
 const receiveSessionErrors = ({ errors }) => ({
     type: RECEIVE_SESSION_ERRORS,
     errors
+});
+
+const receiveValidEmail = ({validEmail}) => ({
+    type: RECEIVE_VALID_EMAIL,
+    validEmail 
+});
+
+export const clearErrors = () => ({
+    type: CLEAR_ERRORS
 });
 
 export const signUp = user => dispatch => (
@@ -40,3 +53,9 @@ export const logOut = () => dispatch => (
     .then(user => dispatch(logoutCurrentUser(user)),
     errors  => dispatch(receiveSessionErrors(errors.responseJSON)))
 );
+
+export const validateEmail = email => dispatch => (
+    SessAPIUtil.validateEmail(email)
+    .then(validEmail => dispatch(receiveValidEmail(validEmail)),
+    errors => dispatch(receiveSessionErrors(errors.responseJSON)))
+)
