@@ -398,6 +398,9 @@ form .row {
         position: relative;
         margin-bottom: 18px;
         margin-top: 17px;
+        .signupFormWrapper & {
+            display: none;
+        }
         }
         .horizontalText {
             width: 100%;
@@ -478,6 +481,9 @@ form .row {
             font-family: $form-fonts;
             font-weight: 200;
         }
+    }
+    .signupFormWrapper & {
+        display: none;
     }
 }
 

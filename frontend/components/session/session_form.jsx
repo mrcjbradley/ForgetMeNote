@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { validateEmail } from '../../actions/session_actions';
+import { userInfo } from 'os';
+
 
 export default class SessionForm extends React.Component
 {
@@ -9,27 +10,50 @@ export default class SessionForm extends React.Component
         super(props);
         this.state = Object.assign({},props.currentUser, this.props.errors, {password:''});
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.handleBlur = this.handleBlur.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
-  
+        this.handleDemo = this.handleDemo.bind(this);
+        this.demoUser = {
+            email: 'demo@user.login',
+            password: 'banana',
+        };
     }
 
+    
     handleChange(field){
         return (e) => {
             this.setState({ [field]: e.target.value });
             this.props.clearErrors();
         };
-        // this.toggleSubmitButton();
     }
-
+    
     componentWillUnmount(){
         this.props.clearErrors();
-       
     }
-
+    
     componentDidMount(){
         this.submit = document.getElementById('form-btn');
+        this.emailField = $('input[type=text]');
+        this.pwField = $('input[type=password]');
     }
+    
+    handleDemo(){
+        return (e) => {
+        e.preventDefault();
+        const { email, password } = this.demoUser;
+        setTimeout(()=>{
+            this.setState({email});
+         }, 300);
+        setTimeout(()=>{
+            $(this.submit).click();
+         }, 500);
+        setTimeout(()=>{
+            this.setState({password});
+        }, 2000);
+        setTimeout(()=>{
+            $(this.submit).click();
+        }, 3000);
+    };
+}
 
     toggleSubmitButton(){
         const { errors } = this.props;
@@ -45,8 +69,6 @@ export default class SessionForm extends React.Component
         this.toggleSubmitButton();
     }
 
-
-
     handleSubmit(e) {
         e.preventDefault();
         const {email} = this.state;
@@ -58,16 +80,15 @@ export default class SessionForm extends React.Component
                 this.props.history.push('/'); 
             });
         } else {
-            this.props.validateEmail(email);//.then(res => this.setState(res));
+            this.props.validateEmail(email);
         }
-        
     }
 
     handleFocus(e){
-        
         e.preventDefault();        
         this.props.clearErrors();
     } 
+
 
     render(){
         const { path } = this.props.match;
@@ -78,8 +99,6 @@ export default class SessionForm extends React.Component
         const errorList = errors.map((error, idx) => {
             return <span key={idx}>{error}</span>
         });
-        // const errorListOuter = <ul>{errorList}</ul>;    
-      
 
         return (
             <div className="formMain">
@@ -96,7 +115,7 @@ export default class SessionForm extends React.Component
                                         <form onSubmit={this.handleSubmit}>
                                             <ol>
                                     <li className="row">
-                                                    <Link className="demo-user-wrapper" to="/login">
+                                                    <Link onClick={this.handleDemo()} className="demo-user-wrapper" to="/login">
                                                         <div className="demo-user-btn">
                                                             <div >
                                                                 Sign in as Demo User 
@@ -132,7 +151,6 @@ export default class SessionForm extends React.Component
                                                         
                                                     </div>
                                                 </li>
-                                    {/* <li className={(this.state.errors.length > 0 )? 'show-me row' : 'hide-me row'}> */}
                                     <li className="row">
                                         <div className="input-wrapper">
                                             <div className={(this.props.errors.length > 0) ? 'show-me errors' : 'hide-me errors'}>
