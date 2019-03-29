@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { userInfo } from 'os';
+import { Link } from 'react-router-dom';
+
 
 
 export default class SessionForm extends React.Component
@@ -12,6 +12,8 @@ export default class SessionForm extends React.Component
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
         this.handleDemo = this.handleDemo.bind(this);
+        this.pwInput = React.createRef();
+        this.focusInput = this.focusInput.bind(this);
         this.demoUser = {
             email: 'demo@user.login',
             password: 'banana',
@@ -84,10 +86,14 @@ export default class SessionForm extends React.Component
         }
     }
 
-    handleFocus(e){
+    handleFocus(e){ 
         e.preventDefault();        
         this.props.clearErrors();
     } 
+
+    focusInput(){
+        this.pwInput.current.focus();
+    }
 
 
     render(){
@@ -97,7 +103,7 @@ export default class SessionForm extends React.Component
         const [alternate, wrapperClass] = (path === '/login') ? ['/signup', 'login'] : ['/login','signup'];
         const [alternateText, alternateQuestion] = (path === '/login') ? ['Create account', 'Don\'t have an account?'] : ['Sign In', 'Already have an account?'];
         const errorList = errors.map((error, idx) => {
-            return <span key={idx}>{error}</span>
+            return <span key={idx}>{error}<br /></span>
         });
 
         return (
@@ -145,6 +151,7 @@ export default class SessionForm extends React.Component
                                                         onChange={this.handleChange('password')} 
                                                         onFocus={this.handleFocus}
                                                         type="password" 
+                                                        ref={this.pwInput}
                                                         className={(this.props.currentUser.email && this.props.currentUser.email === this.state.email ) ? 'show-me' : 'hide-me'}
                                                         value={this.state.password} 
                                                         placeholder="Password"/>
@@ -160,7 +167,7 @@ export default class SessionForm extends React.Component
                                                 </li>
                                                 <li className="row">
                                                 <div className="input-wrapper">
-                                                    <input id="form-btn" className= "btn-submit show-me" type="submit" value="Continue" />
+                                            <input id="form-btn" className="btn-submit show-me" type="submit" value={(alternate === '/signup' && this.props.currentUser.email && this.props.currentUser.email === this.state.email) ? 'Sign In' : 'Continue'} />
                                                </div> 
                                                </li>
                                             </ol>
