@@ -14,7 +14,7 @@ const msp = ({session: {currentUser: {id}}}) => ({
 
 const Auth = ({component: Component, path, loggedIn, exact}) => ( 
     <Route exact={exact} path={path} render={props => {
-        // debugger
+
         return ( loggedIn ? <Redirect to="/home" /> : <Component {...props}/> )}
     }/>
 );

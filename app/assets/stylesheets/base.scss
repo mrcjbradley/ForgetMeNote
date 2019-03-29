@@ -578,7 +578,7 @@ line-height: 0px;
     .input-wrapper{
         line-height: 0;
     }
-    input[type=password],  .errors {
+    input[type=password]{
         // &.hide-me {
             @extend %hidden-form-style;
         // }
@@ -587,6 +587,18 @@ line-height: 0px;
             transition-delay: .7s;
 
         }
+    }
+        .errors {
+            // &.hide-me {
+            @extend %hidden-form-style;
+            // padding-left: 12px 16px;
+
+            // }
+            &.show-me {
+                @extend %show-style;
+                transition-delay: .7s;
+
+            }
     }
 
     .btn-submit {
@@ -598,16 +610,17 @@ line-height: 0px;
          &.show-me {
              @extend %show-style;
              transition: all .5s;
-             transition-delay: .5s;           
+             transition-delay: .5s;  
+             margin-top: 0px;         
          }
 
     }
     .errors {
     padding: 0;
     position: relative;
-    top: -25px;
+    top: 0px;
     height: 0px;
-    li{
+    span{
         color: #6a6a6a;
         font-family: $form-fonts;
         font-weight: 200;

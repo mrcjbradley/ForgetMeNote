@@ -11,6 +11,7 @@ export default class SessionForm extends React.Component
         this.handleSubmit = this.handleSubmit.bind(this);
         // this.handleBlur = this.handleBlur.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
+  
     }
 
     handleChange(field){
@@ -42,8 +43,6 @@ export default class SessionForm extends React.Component
 
     componentDidUpdate(){
         this.toggleSubmitButton();
-        // this.props.clearErrors();
-
     }
 
 
@@ -51,8 +50,10 @@ export default class SessionForm extends React.Component
     handleSubmit(e) {
         e.preventDefault();
         const {email} = this.state;
-        debugger
-        if (this.props.currentUser.email) {
+        if (this.props.match.path === "/signup"){
+            this.props.processForm(this.state).then(() => {
+                this.props.history.push('/');
+        });} else if (this.props.currentUser.email && this.props.currentUser.email === email){
             this.props.processForm(this.state).then(() => {
                 this.props.history.push('/'); 
             });
@@ -62,24 +63,11 @@ export default class SessionForm extends React.Component
         
     }
 
-    // handleBlur(e) {
-    //     e.preventDefault();
-    //     const { validEmail } = this.props;
-    //     const { email } = this.state;
-    //     if (validEmail)
-    //     {
-    //         return null;
-    //     } else {
-    //     this.props.validateEmail(email);//.then(res => this.setState(res));
-    //     }
-    // }
-
     handleFocus(e){
         
         e.preventDefault();        
         this.props.clearErrors();
-    }
-
+    } 
 
     render(){
         const { path } = this.props.match;
@@ -88,10 +76,10 @@ export default class SessionForm extends React.Component
         const [alternate, wrapperClass] = (path === '/login') ? ['/signup', 'login'] : ['/login','signup'];
         const [alternateText, alternateQuestion] = (path === '/login') ? ['Create account', 'Don\'t have an account?'] : ['Sign In', 'Already have an account?'];
         const errorList = errors.map((error, idx) => {
-            // debugger
-            return <li key={idx}>{error}</li>
+            return <span key={idx}>{error}</span>
         });
-        const errorListOuter = <ul>{errorList}</ul>;    
+        // const errorListOuter = <ul>{errorList}</ul>;    
+      
 
         return (
             <div className="formMain">
@@ -138,7 +126,7 @@ export default class SessionForm extends React.Component
                                                         onChange={this.handleChange('password')} 
                                                         onFocus={this.handleFocus}
                                                         type="password" 
-                                                        className={this.props.currentUser.email ? 'show-me' : 'hide-me'}
+                                                        className={(this.props.currentUser.email && this.props.currentUser.email === this.state.email ) ? 'show-me' : 'hide-me'}
                                                         value={this.state.password} 
                                                         placeholder="Password"/>
                                                         
@@ -148,7 +136,7 @@ export default class SessionForm extends React.Component
                                     <li className="row">
                                         <div className="input-wrapper">
                                             <div className={(this.props.errors.length > 0) ? 'show-me errors' : 'hide-me errors'}>
-                                                        {errorListOuter}
+                                                        {errorList}
                                                     </div>
                                                     </div>
                                                 </li>
