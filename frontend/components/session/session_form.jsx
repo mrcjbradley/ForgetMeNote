@@ -82,7 +82,7 @@ export default class SessionForm extends React.Component
                 this.props.history.push('/'); 
             });
         } else {
-            this.props.validateEmail(email);
+            this.props.validateEmail(email).then(()=> setTimeout(this.focusInput, 1000));
         }
     }
 
