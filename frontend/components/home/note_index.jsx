@@ -1,4 +1,6 @@
 import React from 'react';
+// import { connect } from 'react-redux'
+
 
 class NoteIndex extends React.Component {
     render(){
@@ -9,5 +11,8 @@ class NoteIndex extends React.Component {
         )
     }
 }
+
+// const msp = ({ entities: { notes } })
+
 
 export default NoteIndex

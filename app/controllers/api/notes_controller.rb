@@ -6,7 +6,7 @@ class Api::NotesController < ApplicationController
     end
 
     def create
-        @note = current_user.notes.new(note_params)
+        @note = current_user.default_notebook.notes.new(note_params)
         if @note.save
             render :show
         else
@@ -35,7 +35,7 @@ class Api::NotesController < ApplicationController
     def destroy
         @note = current_user.notes.find(params[:id])
         @note.destroy
-        render :index
+
     end
 
     def note_params
