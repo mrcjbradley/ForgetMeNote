@@ -14,7 +14,7 @@ import {
 document.addEventListener('DOMContentLoaded', () => {
     let store;
     if (window.unforgotten.user) {
-        debugger
+
 
         const preloadedState = { session: { currentUser: window.unforgotten.user } }; 
         store = configureStore(preloadedState);

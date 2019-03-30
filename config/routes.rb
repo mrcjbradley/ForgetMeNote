@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     resources :users, only: [ :create ]
     resource :session, only: [ :create, :destroy ]
     patch '/valid_email', to: 'users#valid_email'
+    resources :notes, except: [:new, :edit]
   end
 end

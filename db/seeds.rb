@@ -16,6 +16,7 @@ ActiveRecord::Base.transaction do
     seed_users.push(User.create(email: "demo@user.login", password: "banana"))
 
     seed_users.each do |user| 
+        user.update(default_notebook: user.notebooks.create(title: 'First Notebook'))
         5.times do 
             nb = user.default_notebook
             nb.notes.create(title: Faker::TvShows::DrWho.catch_phrase , content: Faker::TvShows::DrWho.quote ) 
