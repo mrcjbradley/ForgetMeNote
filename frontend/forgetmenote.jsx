@@ -13,10 +13,12 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
-    if (window.currentUser) {
-        const preloadedState = { session: { currentUser: window.currentUser } }; 
+    if (window.unforgotten.user) {
+        debugger
+
+        const preloadedState = { session: { currentUser: window.unforgotten.user } }; 
         store = configureStore(preloadedState);
-        delete window.currentUser; 
+        // delete window.currentUser; 
     } else {
             store = configureStore();
     }

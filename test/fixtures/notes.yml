@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: notes
+#
+#  id          :bigint(8)        not null, primary key
+#  title       :string           not null
+#  content     :text
+#  deleted_at  :datetime
+#  fav         :boolean
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  notebook_id :integer          not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  content: MyText
+  notebook_id: 
+  deleted_at: 2019-03-29 12:07:49
+  fav: false
+
+two:
+  title: MyString
+  content: MyText
+  notebook_id: 
+  deleted_at: 2019-03-29 12:07:49
+  fav: false

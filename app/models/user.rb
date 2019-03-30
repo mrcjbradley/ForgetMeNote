@@ -18,8 +18,10 @@ class User < ApplicationRecord
     validates :email, :session_token, uniqueness: true
     validates :password, length: { minimum: 6}, allow_nil: true
 
-    after_initialize :ensure_session_token
+    after_initialize :ensure_session_token 
+    after_save :first_notebook
     attr_reader :password
+    # attr_reader :default_notebook
 
     def ensure_session_token
         self.session_token ||= User.generate_session_token
@@ -48,4 +50,20 @@ class User < ApplicationRecord
         self.update(session_token: User.generate_session_token)
         self.session_token
     end
+
+    has_many :notebooks, foreign_key: :author_id, class_name: :Notebook
+    has_many :notes, through: :notebooks
+    belongs_to :default_notebook, foreign_key: :default_notebook_id, class_name: :Notebook, optional: true
+       
+    # def ensure_default_notebook
+    #     self.default_notebook ||= User.first_notebook
+    # end
+
+    def first_notebook
+        self.default_notebook = self.notebooks.create(title: 'First Notebook')
+    end
+
+
+    # has_many :tags, foreign_key: :author_id
+    # has_many :reminders
 end
