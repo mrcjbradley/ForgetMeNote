@@ -1,3 +1,50 @@
 // Place all the styles related to the api/notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+// $home-fontstack: -apple-system,  BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', san-serif
+//VARIABLES
+$form-fonts: -apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+'Roboto',
+'Oxygen',
+'Ubuntu',
+'Cantarell',
+'Fira Sans',
+'Droid Sans',
+'Helvetica Neue',
+sans-serif,
+-apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+'Roboto',
+'Oxygen',
+'Ubuntu',
+'Cantarell',
+'Fira Sans',
+'Droid Sans',
+'Helvetica Neue',
+sans-serif;
+//END VARIABLES
+
+.HomeScreen {
+    display: flex;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.HomeSidebar {
+    background: black;
+    width: 241px;
+    font-family: $form-fonts;
+}
+
+.NoteIndex {
+    width: 345px;
+    background: rgb(248, 248, 248);
+    font-family: $form-fonts;
+}

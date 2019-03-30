@@ -1,36 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { logOut } from '../../actions/session_actions';
+import HomeSidebar from './home_sidebar';
+import NoteIndex from './note_index';
 import { connect } from 'react-redux';
 
-class UserNav extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleClick = this.handleClick.bind(this);
-    }
-
-    handleClick(e){
-        e.preventDefault();
-        const { logOut } = this.props;
-        logOut();//.then(() => history.push('/'));
-    }
-
-    render(){
+export default () => {
         return(
-        <div>
-             Welcome to the note section! This is just some temporary content 
-            <button onClick={this.handleClick}>Log Out</button>
+        <div className="HomeScreen">
+            <HomeSidebar />
+            <NoteIndex />
+            <article className="NoteShow">
+                 Welcome to the note section! This is just some temporary content 
+            </article>   
         </div>
-        )};
+        );
     
 }
 
-// const msp = (state,{match: {history}}) => ({
-//     history
-// });
-
-const mdp = dispatch => ({
-    logOut: () => dispatch(logOut())
-});
-
-export default connect(undefined, mdp)(UserNav);
