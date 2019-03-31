@@ -51,6 +51,48 @@ sans-serif;
 
 }
 
+.NoteIndex_NoteIndexHeader {
+    height: 135px;
+    border-bottom: 1px solid #e6e6e6;
+    font-weight: 300;
+    line-height: 1.5;
+    padding-left: 25px;
+    padding-right: 18px;
+}
+
+.NoteIndex_NoteIndexTitle {
+    padding-top:15px;
+    padding-bottom:30px;
+
+    h1 {
+        min-width: 20px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        padding-right: 12px;
+        font-size: 20px;
+        letter-spacing: 0.03em;
+        font-weight: 400;
+        margin: .67em 0;
+    }
+
+}
+
+.NoteIndex_NoteIndexDetails {
+    display: flex;
+}
+
+.NoteIndex_Note-options {
+    display: flex;
+}
+
+.NoteIndex_NoteCount {
+    font-size: 13px;
+    font-family: $home-fonts;
+    color: rgb(166, 166, 166);
+    line-height: 19.5px;
+}
+
 .NoteItem {
     padding: 15px 25px;
     border: 1px solid rgb(242, 242, 242);

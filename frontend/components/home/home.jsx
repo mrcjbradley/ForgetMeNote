@@ -1,7 +1,7 @@
 import React from 'react';
 import { logOut } from '../../actions/session_actions';
 import HomeSidebar from './home_sidebar';
-import NoteIndex from './note_index';
+import NoteIndex from './notes/note_index';
 import { connect } from 'react-redux';
 
 export default () => {
