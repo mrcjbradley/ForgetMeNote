@@ -4,7 +4,8 @@
 
 // $home-fontstack: -apple-system,  BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', san-serif
 //VARIABLES
-$form-fonts: -apple-system,
+$home-fonts: 
+-apple-system,
 BlinkMacSystemFont,
 'Segoe UI',
 'Roboto',
@@ -40,11 +41,48 @@ sans-serif;
 .HomeSidebar {
     background: black;
     width: 241px;
-    font-family: $form-fonts;
+    font-family: $home-fonts;
 }
 
 .NoteIndex {
     width: 345px;
     background: rgb(248, 248, 248);
-    font-family: $form-fonts;
+    font-family: $home-fonts;
+
+}
+
+.NoteItem {
+    padding: 15px 25px;
+    border: 1px solid rgb(242, 242, 242);
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.NoteItem_NoteTitle {
+    font-size: 14px;
+    line-height: 24px;
+    font-family: $home-fonts;
+    text-overflow: ellipsis;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+
+.NoteItem_NoteContent {
+    height: 40px;
+    font-size: 13px;
+    font-weight: 300;
+    font-family: $home-fonts;
+    text-overflow: ellipsis;
+    white-space: pre-wrap;
+    overflow: hidden;
+    margin-bottom: 5px;
+    line-height: 19.5px;
+}
+
+.NoteItem_NoteUpdated {
+    font-size: 12px;
+    font-family: $home-fonts;
+    color: rgb(166,166,166);
+    line-height: 18px;
 }
