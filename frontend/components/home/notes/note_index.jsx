@@ -28,16 +28,20 @@ class NoteIndex extends React.Component {
                 <span className="NoteIndex_NoteCount">
                     {notes.length} notes
                 </span>
-                <nav className="NoteIndex_Note-options">
-                    <ul>
-                        <li>Sorting/Filtering Options</li>
-                    </ul>
-                </nav>
-                <nav className="NoteIndex_Note-Tags">
-                    <ul>
-                        <li>Tags</li>
-                    </ul>
-                </nav>
+                <div className="NoteIndex_NoteTagsOptions">
+                    <nav className="NoteIndex_Note-options">
+                    <div className="bg--option-dd-icon"></div>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </nav>
+                    <nav className="NoteIndex_NoteTags">
+                        <div className="bg--tag-icon"></div>
+                        <ul>
+                            <li></li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
             </header>
             <ul>

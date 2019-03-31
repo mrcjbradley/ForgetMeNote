@@ -78,12 +78,22 @@ sans-serif;
 
 }
 
-.NoteIndex_NoteIndexDetails {
-    display: flex;
+@mixin pointer {
+    &:hover {
+        cursor: pointer;
+    }
 }
 
-.NoteIndex_Note-options {
+.NoteIndex_NoteIndexDetails {
     display: flex;
+    justify-content: space-between;
+}
+
+.NoteIndex_NoteTagsOptions {
+    display: flex;
+    width:48px;
+    justify-content: space-between;
+    @include pointer;
 }
 
 .NoteIndex_NoteCount {
@@ -91,6 +101,29 @@ sans-serif;
     font-family: $home-fonts;
     color: rgb(166, 166, 166);
     line-height: 19.5px;
+    @include pointer;
+}
+
+.bg--option-dd-icon {
+    background-image: image_url("index_options");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 18px;
+    height: 18px;
+    display: block;
+    padding: 2px;
+}
+
+.bg--tag-icon {
+    background-image: image_url("tags");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 18px;
+    height: 18px;
+    display: block;
+    padding: 2px;
 }
 
 .NoteItem {
