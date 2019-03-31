@@ -2,6 +2,8 @@ import React from 'react';
 import { getAllNotes } from '../../../actions/note_actions';
 import { connect } from 'react-redux';
 import NoteIndexItem from './note_index_item';
+import NoteOptionsSortMenu from './note_options_sort_menu';
+
 
 
 class NoteIndex extends React.Component {
@@ -43,51 +45,7 @@ class NoteIndex extends React.Component {
                 <div className="NoteIndex_NoteTagsOptions">
                     <nav className="NoteIndex_NoteOptions">
                     <div className="bg--option-dd-icon"></div>
-                        <ul className="NoteOptions_SortMenu">
-                        <h2 className="SortByTitle">Sort by...</h2>
-                            <li className="SortByOption" 
-                                onMouseEnter={this.handleMouseEnter} 
-                                onClick={this.handleOptionClick}
-                                onMouseLeave={this.handleMouseLeave}>
-                                Date created: Most to least recent
-                                <span className="bg--check-icon"></span>
-                            </li>
-                            <li className="SortByOption" 
-                                onMouseEnter={this.handleMouseEnter} 
-                                onClick={this.handleOptionClick}
-                                onMouseLeave={this.handleMouseLeave}>
-                                Date created: Least to most recent
-                                <span className="bg--check-icon"></span>
-                            </li>
-                            <li className="SortByOption" 
-                                onMouseEnter={this.handleMouseEnter} 
-                                onClick={this.handleOptionClick}
-                                onMouseLeave={this.handleMouseLeave}>
-                                Date updated: Most to least recent
-                                <span className="bg--check-icon"></span>
-                            </li>
-                            <li className="SortByOption" 
-                                onMouseEnter={this.handleMouseEnter} 
-                                onClick={this.handleOptionClick}
-                                onMouseLeave={this.handleMouseLeave}>
-                                Date updated: Least to most recent
-                                <span className="bg--check-icon"></span>
-                            </li>
-                            <li className="SortByOption" 
-                                onMouseEnter={this.handleMouseEnter} 
-                                onClick={this.handleOptionClick}
-                                onMouseLeave={this.handleMouseLeave}>
-                                Title: A to Z
-                                <span className="bg--check-icon"></span>
-                            </li>
-                            <li className="SortByOption" 
-                                onMouseEnter={this.handleMouseEnter} 
-                                onClick={this.handleOptionClick}
-                                onMouseLeave={this.handleMouseLeave}>
-                                Title: Z to A
-                                <span className="bg--check-icon"></span>
-                            </li>
-                        </ul>
+                    <NoteOptionsSortMenu />
                     </nav>
                     <nav className="NoteIndex_NoteTags">
                         <div className="bg--tag-icon"></div>
