@@ -27,6 +27,15 @@ BlinkMacSystemFont,
 'Droid Sans',
 'Helvetica Neue',
 sans-serif;
+
+@mixin pointer {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+$dark-beige: #f2f2f2;
+$beige: rgb(248, 248, 248);
 //END VARIABLES
 
 .HomeScreen {
@@ -46,7 +55,7 @@ sans-serif;
 
 .NoteIndex {
     width: 345px;
-    background: rgb(248, 248, 248);
+    background: $beige;
     font-family: $home-fonts;
 
 }
@@ -76,12 +85,6 @@ sans-serif;
         margin: .67em 0;
     }
 
-}
-
-@mixin pointer {
-    &:hover {
-        cursor: pointer;
-    }
 }
 
 .NoteIndex_NoteIndexDetails {
@@ -114,6 +117,76 @@ sans-serif;
     display: block;
     padding: 2px;
 }
+.bg--check-icon {
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 14px;
+    height: 14px;
+    display: block;
+    padding: 2px;
+
+    .SortByOption.grey & {
+        background-image: image_url("grey_check");
+    }
+
+    .SortByOption.active & {
+    background-image: image_url("blue_check");
+    }
+}
+
+.NoteOptions_SortMenu {
+    z-index: 1000;
+    top: 127.594px;
+    left: 515px;
+    position: absolute;
+    font-family: sans-serif;
+    line-height: 1.5;
+    width: 303.203px;
+    height: 264px;
+    background: white;
+    border-radius: 3px;
+    color: #666;
+    font-size: 14px;
+    box-shadow: 0 0 0 1px rgba(99, 114, 130, .16),
+    0 4px 12px rgba(27, 39, 51, .08);
+    margin: 6px 0;
+    padding: 12px 0;
+}
+
+.SortByTitle {
+    font-size: 15px;
+    font-weight: 400;
+    // line-height: 22.5px;
+    color: #7a8083;
+    display: block;
+    padding: 0 30px 5px 20px;
+}
+
+.SortByOption {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 24px;
+    padding: 6px 30px 6px 20px;
+    transition-duration: 0.1s;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-timing-function: ease-in-out;
+    
+    &:hover {
+        color: #555;
+        background-color: #f5f5f5;
+    }
+    
+    &.active {
+        color: #0081c2;
+    }
+
+}
 
 .bg--tag-icon {
     background-image: image_url("tags");
@@ -130,6 +203,12 @@ sans-serif;
     padding: 15px 25px;
     border: 1px solid rgb(242, 242, 242);
     border-bottom: 1px solid #e6e6e6;
+
+    &:hover, &:active {
+        background: $dark-beige;
+    }
+    @include pointer;
+
 }
 
 .NoteItem_NoteTitle {
