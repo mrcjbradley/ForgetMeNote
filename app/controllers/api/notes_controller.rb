@@ -36,7 +36,6 @@ class Api::NotesController < ApplicationController
         @note = current_user.notes.find(params[:id])
         @note.destroy
         render json: { noteId: @note.id }
-}
     end
 
     def note_params

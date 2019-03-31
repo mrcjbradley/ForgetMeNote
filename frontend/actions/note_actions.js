@@ -11,12 +11,12 @@ export const [
     'RECEIVE_NOTE_ERRORS'
 ];
 
-const receiveAllNotes = ({ notes }) => ({
+const receiveAllNotes = notes => ({
     type: RECEIVE_ALL_NOTES,
     notes
 });
 
-const receiveNote = ({ note }) => ({
+const receiveNote = note => ({
     type: RECEIVE_NOTE,
     note
 });
