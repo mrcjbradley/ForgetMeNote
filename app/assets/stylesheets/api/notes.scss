@@ -50,11 +50,13 @@ $beige: rgb(248, 248, 248);
 .HomeSidebar {
     background: black;
     width: 241px;
+    min-width: 241px;
     font-family: $home-fonts;
 }
 
 .NoteIndex {
     width: 345px;
+    min-width: 345px;
     background: $beige;
     font-family: $home-fonts;
     display: flex;
@@ -261,4 +263,60 @@ $beige: rgb(248, 248, 248);
 .NoteIndex_NoteRoll {
     overflow-y: scroll;
     height: 100%;
+}
+
+.NoteShow {
+    width: 100%;
+    // max-width: 800px;
+    display: flex;
+}
+
+.NoteShow_NoteForm {
+    width:100%;
+}
+
+.NoteDetail_NoteHeader {
+    display: flex;
+    flex-direction: column;
+    font-family:$home-fonts;
+}
+
+.NoteDetail_NoteHeaderNav{
+    display: flex;
+    justify-content: space-between;
+    height: 54px;
+}
+
+.NoteShow_ToolBar {
+    width: 100%;
+    display: block;
+    box-sizing: content-box;
+    height: 24px;
+    padding: 5px 0 10px;
+    margin: 0 40px;
+}
+
+.NoteDetail_NoteTitle {
+    border: 0;
+    width: 100%;
+    display: block;
+    font-size: 34px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 8px 40px 4px;
+    outline: none;
+    z-index: 1;
+    cursor: text;
+}
+
+.NoteDetail_NoteContent {
+    border: 0;
+    display: block;
+    width: 100%;
+    resize:none;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 24px;
+    padding: 12px 40px 16px;
+
 }
