@@ -2,6 +2,8 @@ import React from 'react';
 import TimeAgo from 'react-timeago';
 import { connect } from 'react-redux';
 import { getNote } from '../../../actions/note_actions';
+import { NavLink } from 'react-router-dom';
+
 
 
 class NoteIndexItem extends React.Component {
@@ -19,16 +21,18 @@ class NoteIndexItem extends React.Component {
         const { note, active, getNote } = this.props;
         return(
             <li className={"NoteItem" + active}>
-                <div className="NoteItem_NoteTitle">
-                    {note.title}
-                </div>
-                <div className="NoteItem_NoteContent">
-                    {this.previewGenerator(note.content)}
-                </div>
-                <div className="NoteItem_NoteUpdated">
-                    <TimeAgo date={note.updated_at} />
-                </div>
-            </li>
+            <NavLink to={`/home/notes/${note.id}`} >
+                    <div className="NoteItem_NoteTitle">
+                        {note.title}
+                    </div>
+                    <div className="NoteItem_NoteContent">
+                        {this.previewGenerator(note.content)}
+                    </div>
+                    <div className="NoteItem_NoteUpdated">
+                        <TimeAgo date={note.updated_at} />
+                    </div>
+            </NavLink>
+                </li>
         )
     }
 }

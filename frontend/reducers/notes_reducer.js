@@ -14,9 +14,8 @@ const NotesReducer = (oldState={}, action) => {
             nextState = notes;
             return nextState;
         case RECEIVE_NOTE:
-            const { note } = action;
-            const noteObj = { [note.id]: note };
-            nextState = merge({}, nextState, noteObj);
+        const { note } = action;
+            nextState = merge({}, nextState, { [note.id]: note });
             return nextState;
         case REMOVE_NOTE:
             const { noteId } = action;

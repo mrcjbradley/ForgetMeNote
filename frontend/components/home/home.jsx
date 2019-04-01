@@ -2,18 +2,19 @@ import React from 'react';
 import { logOut } from '../../actions/session_actions';
 import HomeSidebar from './home_sidebar';
 import NoteIndex from './notes/note_index';
-import { connect } from 'react-redux';
+import NotePannel from './notes/note_pannel';
+import NoteDetail from './notes/note_detail';
+import { Route } from 'react-router-dom';
 
-export default () => {
+export default (props) => {
         return(
         <div className="HomeScreen">
             <HomeSidebar />
             <NoteIndex />
-            <article className="NoteShow">
-                 Welcome to the note section! This is just some temporary content 
-            </article>   
+            <Route path="/home/notes/:noteId" exact component={NoteDetail} />
         </div>
         );
     
 }
+
 

@@ -3,7 +3,7 @@ import {
     RECEIVE_NOTE,
     REMOVE_NOTE
 } from '../actions/note_actions';
-import { newestNote } from '../util/selectors';
+import { newestNote, mostRecentlyUpdatedNote } from '../util/selectors';
 import { merge } from 'lodash';
 
 const _placeHolder = {
@@ -15,13 +15,13 @@ const _placeHolder = {
 };
 
 const UIReducer = ( oldState = _placeHolder, action ) => {
-    Object.freeze(oldState)
+    Object.freeze(oldState);
 
     let nextState = merge({}, oldState);
     switch(action.type){
         case RECEIVE_ALL_NOTES:
-            const newest = newestNote(Object.values(action.notes));
-            nextState = merge({}, nextState, {currentNoteId: newest.id});
+            const newest = mostRecentlyUpdatedNote(Object.values(action.notes));
+            nextState = merge({}, nextState, {currentNoteId: nextState.currentNoteId || newest.id});
             return nextState;
         case RECEIVE_NOTE:
             const { note: {id: currentNoteId} } = action;

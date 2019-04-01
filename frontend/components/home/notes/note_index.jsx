@@ -1,8 +1,10 @@
 import React from 'react';
-import { getAllNotes } from '../../../actions/note_actions';
+import { getAllNotes, getNote } from '../../../actions/note_actions';
 import { connect } from 'react-redux';
 import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
+import NoteDetail from './note_detail';
+import { Route } from 'react-router-dom';
 
 
 
@@ -17,8 +19,9 @@ class NoteIndex extends React.Component {
     }
 
     componentDidMount(){
-        const { getAllNotes } = this.props;
+        const { getAllNotes, history, currentNoteId } = this.props;
         getAllNotes();
+        
     }
 
     handleMouseEnter(e){
@@ -99,6 +102,7 @@ class NoteIndex extends React.Component {
            return <NoteIndexItem note={note} key={note.id} />
         });
         return(
+            <>
         <aside className="NoteIndex">
             <header className="NoteIndex_NoteIndexHeader">
                 <div className="NoteIndex_NoteIndexTitle">
@@ -122,17 +126,21 @@ class NoteIndex extends React.Component {
                 </div>
             </div>
             </header>
-            <ul>
+            <ul className="NoteIndex_NoteRoll">
                 {noteItems}
             </ul>
         </aside>
+
+        </>
         )
     }
 }
 
-const msp = ({ entities: { notes } , session: {currentUser: {note_sort_order}}}) => ({
+const msp = ({ entities: { notes } , ui:{currentNoteId}, session: {currentUser: {note_sort_order}}}, {history}) => ({
     notes: Object.values(notes),
-    note_sort_order
+    note_sort_order,
+    history,
+    currentNoteId
 
 })
 

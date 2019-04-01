@@ -57,6 +57,8 @@ $beige: rgb(248, 248, 248);
     width: 345px;
     background: $beige;
     font-family: $home-fonts;
+    display: flex;
+    flex-direction: column;
 
 }
 
@@ -67,6 +69,7 @@ $beige: rgb(248, 248, 248);
     line-height: 1.5;
     padding-left: 25px;
     padding-right: 18px;
+    
 }
 
 .NoteIndex_NoteIndexTitle {
@@ -213,6 +216,11 @@ $beige: rgb(248, 248, 248);
     border: 1px solid rgb(242, 242, 242);
     border-bottom: 1px solid #e6e6e6;
 
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
     &:hover, &.active {
         background: $dark-beige;
     }
@@ -248,4 +256,9 @@ $beige: rgb(248, 248, 248);
     font-family: $home-fonts;
     color: rgb(166,166,166);
     line-height: 18px;
+}
+
+.NoteIndex_NoteRoll {
+    overflow-y: scroll;
+    height: 100%;
 }

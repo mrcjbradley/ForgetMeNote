@@ -60,3 +60,7 @@
  export const newestNote = (notes) => {
     return orderNoteIndexItems(notes, 'Date created: Most to least recent')[0]; 
  }; 
+
+ export const mostRecentlyUpdatedNote = (notes) => {
+    return orderNoteIndexItems(notes, 'Date updated: Most to least recent')[0]; 
+ }; 
