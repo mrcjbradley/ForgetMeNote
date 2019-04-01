@@ -281,7 +281,7 @@ $beige: rgb(248, 248, 248);
 }
 
 .NoteShow {
-    width: 100%;
+    // width: 100%;
     // max-width: 800px;
     display: flex;
 }
@@ -373,7 +373,7 @@ $beige: rgb(248, 248, 248);
 }
 
 .NoteDetail_DisableWrapper {
-    height: 100%;
+    height: inherit;
 }
 
 .NoteDetail_NoteContent {
