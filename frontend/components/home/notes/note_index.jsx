@@ -96,14 +96,14 @@ class NoteIndex extends React.Component {
     }
 
     render(){
-        const { notes } = this.props;
+        const { notes, fullscreen } = this.props;
         const { sortMenu } = this.state;
         const noteItems = this.orderNoteIndexItems(notes).map(note => {
            return <NoteIndexItem note={note} key={note.id} />
         });
         return(
             <>
-        <aside className="NoteIndex">
+        <aside className={ fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
             <header className="NoteIndex_NoteIndexHeader">
                 <div className="NoteIndex_NoteIndexTitle">
                     <h1 className="">All Notes</h1>
@@ -136,13 +136,16 @@ class NoteIndex extends React.Component {
     }
 }
 
-const msp = ({ entities: { notes } , ui:{currentNoteId}, session: {currentUser: {note_sort_order}}}, {history}) => ({
+const msp = ({ entities: { notes }, ui: { currentNoteId, editorPreferences:{ fullscreen }}, session: {currentUser: {note_sort_order}}}, {history}) => {
+
+    return({
     notes: Object.values(notes),
     note_sort_order,
     history,
-    currentNoteId
+    currentNoteId,
+    fullscreen
 
-})
+})}
 
 const mdp = dispatch => ({
     getAllNotes: () => dispatch(getAllNotes())

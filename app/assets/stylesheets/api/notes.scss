@@ -52,6 +52,13 @@ $beige: rgb(248, 248, 248);
     width: 241px;
     min-width: 241px;
     font-family: $home-fonts;
+    transition: all .5s ease-in-out;
+
+        &.hide-me {
+        width: 0px;
+        min-width: 0px;
+        opacity: 0;
+    }
 }
 
 .NoteIndex {
@@ -61,6 +68,13 @@ $beige: rgb(248, 248, 248);
     font-family: $home-fonts;
     display: flex;
     flex-direction: column;
+    transition: all .5s ease-in-out;
+
+    &.hide-me {
+        width: 0px;
+        min-width: 0px;
+        opacity: 0;
+    }
 
 }
 
@@ -95,6 +109,7 @@ $beige: rgb(248, 248, 248);
 .NoteIndex_NoteIndexDetails {
     display: flex;
     justify-content: space-between;
+    padding-bottom: 10px;
 }
 
 .NoteIndex_NoteTagsOptions {
@@ -283,8 +298,56 @@ $beige: rgb(248, 248, 248);
 
 .NoteDetail_NoteHeaderNav{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     height: 54px;
+    border-bottom: 1px solid #ededed;
+    margin: 0px 20px;
+}
+
+.NoteHeaderNav_left {
+    display: flex;
+    height: fit-content;
+}
+
+.NoteHeaderNav_NoteBookLinkWrapper {
+    display: flex;
+    justify-content: space-between;
+    min-width: 108px;
+    font-size: 13px;
+    
+    
+    a {
+        text-decoration: none;
+        color: #7a8083;
+        font-weight: 300;
+    }
+}
+
+.bg--notebook-icon {
+    background-image: image_url("notebook_icon");
+    display: block;
+    // box-sizing:content-box;
+    height: 15;
+    min-width: 15px;
+    background-repeat:no-repeat;
+    background-size: 15px 15px;
+    background-position: center;
+    padding-right: 5px;
+}
+
+.bg--expand-icon {
+    background-image: image_url("expand_icon");
+    display: block;
+    box-sizing:content-box;
+    height: 20;
+    min-width: 20px;
+    background-repeat:no-repeat;
+    background-size: 18px 18px;
+    background-position: center;
+    padding: 0 12px 0 25px;
+    margin-right: 18px;
+    border-right: 1.5px solid lighten(#a6a6a6, 25%);
 }
 
 .NoteShow_ToolBar {
@@ -309,14 +372,25 @@ $beige: rgb(248, 248, 248);
     cursor: text;
 }
 
+.NoteDetail_DisableWrapper {
+    height: 100%;
+}
+
 .NoteDetail_NoteContent {
     border: 0;
     display: block;
     width: 100%;
+    height: 100%;
     resize:none;
     font-size: 14px;
     font-weight: 300;
     line-height: 24px;
     padding: 12px 40px 16px;
+    box-sizing: content-box;
+    
+    &:focus{
+        border: none;
+        outline: none;
+    }
 
 }

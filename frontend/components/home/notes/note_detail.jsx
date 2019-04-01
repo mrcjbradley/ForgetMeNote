@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getNote, patchNote } from '../../../actions/note_actions';
+import { toggleFullScreen } from '../../../actions/ui_actions';
 import { Link } from 'react-router-dom';
 
 class NoteDetail extends React.Component {
@@ -8,6 +9,7 @@ class NoteDetail extends React.Component {
         super(props);
         this.state = this.props.note;
         this.handleBlur = this.handleBlur.bind(this);
+        this.toggleFullScreen = this.toggleFullScreen.bind(this);
     }
 
     componentDidMount(){
@@ -45,6 +47,12 @@ class NoteDetail extends React.Component {
         };
     } 
 
+    toggleFullScreen(e){
+        debugger
+        e.preventDefault();
+        this.props.toggleFullScreen();
+    }
+
     render(){
         // debugger
         const { title, content } = this.state;
@@ -55,8 +63,11 @@ class NoteDetail extends React.Component {
                     <div className="NoteDetail_NoteHeader">
                         <nav className="NoteDetail_NoteHeaderNav">
                             <nav className="NoteHeaderNav_left">
-                                <div className="NoteHeaderNav_Expand"></div>
-                                <Link to="#" className="NoteHeaderNav_NoteBookLink"> <span className="bg--notebook-icon"></span>First Notebook</Link>
+                                <Link to="#" className="bg--expand-icon" onClick={this.toggleFullScreen}></Link>
+                                <div className="NoteHeaderNav_NoteBookLinkWrapper">
+                                    <div className="bg--notebook-icon"></div>
+                                    <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
+                                </div>
                             </nav>
                             <div className="NoteHeaderNav_MoreOptions">...</div>
                         </nav>
@@ -95,7 +106,8 @@ const msp = ({entities: {notes}}, {match:{params:{noteId}}}) => {
 
 const mdp = dispatch => ({
     getNote: noteId => dispatch(getNote(noteId)),
-    patchNote: noteId => dispatch(patchNote(noteId))
+    patchNote: noteId => dispatch(patchNote(noteId)),
+    toggleFullScreen: () => dispatch(toggleFullScreen())
 })
 
 

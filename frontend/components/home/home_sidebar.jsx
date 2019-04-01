@@ -1,9 +1,12 @@
 import React from 'react';
 import UserNav from './user_nav';
+import { connect } from 'react-redux';
 
-const HomeSidebar = (props) => {
-    return (
-        <aside className="HomeSidebar">
+class HomeSidebar extends React.Component {
+    render(){
+        const { fullscreen } = this.props;
+        return (
+            <aside className={fullscreen ? "HomeSidebar hide-me" : "HomeSidebar"}>
             <UserNav />
             <nav className="HomeSidebar_searc-nav">
                 <h3 className="HomeSidebar_search-bar">
@@ -53,7 +56,12 @@ const HomeSidebar = (props) => {
                 </h3>
             </nav>
         </aside>
-    );
+    )};
 };
 
-export default HomeSidebar;
+const msp = ({ ui: { editorPreferences: { fullscreen } }}) => ({
+    fullscreen
+})
+
+
+export default connect(msp)(HomeSidebar);
