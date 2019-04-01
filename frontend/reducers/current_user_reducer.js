@@ -10,7 +10,9 @@ import { validateEmail } from '../util/session_api_util';
 const _nullUser = {
     id: null,
     email: null,
-    image_url: null
+    image_url: null,
+    default_notebook_id: null,
+    note_sort_order: null
 };
 
 export default (oldState = _nullUser, {type, user, validEmail}) => {

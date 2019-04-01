@@ -58,4 +58,9 @@ export const validateEmail = email => dispatch => (
     SessAPIUtil.validateEmail(email)
     .then(validEmail => dispatch(receiveValidEmail(validEmail)),
     errors => dispatch(receiveSessionErrors(errors.responseJSON)))
-)
+);
+
+export const updateUser = user => dispatch => (
+    SessAPIUtil.updateUser(user)
+    .then(user => dispatch(receiveCurrentUser(user)))
+);

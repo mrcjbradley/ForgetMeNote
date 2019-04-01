@@ -22,6 +22,14 @@ export const validateEmail = (email) => (
     })
 );
 
+export const updateUser = (user) => (
+    $.ajax({
+        method: 'patch',
+        url: `/api/users/${user.id}`,
+        data: { user }
+    })
+);
+
 export const logOut = () => (
     $.ajax({
         method: 'delete',

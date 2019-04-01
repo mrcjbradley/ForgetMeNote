@@ -10,6 +10,7 @@
 #  image_url           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  note_sort_order     :string           not null
 #
 
 class User < ApplicationRecord
@@ -18,7 +19,7 @@ class User < ApplicationRecord
     validates :email, :session_token, uniqueness: true
     validates :password, length: { minimum: 6}, allow_nil: true
 
-    after_initialize :ensure_session_token #, :first_notebook 
+    after_initialize :ensure_session_token, :ensure_note_sort_order #, :first_notebook 
     # after_save :first_notebook
     attr_reader :password
     # attr_reader :default_notebook
@@ -49,6 +50,10 @@ class User < ApplicationRecord
     def reset_session_token!
         self.update(session_token: User.generate_session_token)
         self.session_token
+    end
+
+    def ensure_note_sort_order
+        self.note_sort_order ||= "Date created: Most to least recent"
     end
 
     has_many :notebooks, foreign_key: :author_id, class_name: :Notebook

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_29_184611) do
+ActiveRecord::Schema.define(version: 2019_04_01_012313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 2019_03_29_184611) do
     t.string "image_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "note_sort_order", null: false
     t.index ["default_notebook_id"], name: "index_users_on_default_notebook_id"
     t.index ["email", "password_digest"], name: "index_users_on_email_and_password_digest", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true

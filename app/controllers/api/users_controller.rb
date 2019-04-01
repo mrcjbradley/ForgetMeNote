@@ -20,7 +20,20 @@ class Api::UsersController < ApplicationController
         end
     end
 
+    def update
+        if logged_in?
+            @user = current_user
+            if @user.update(user_params)
+                render :show
+            else
+                render json: { errors: @user.errors.full_messages } , status: 404
+            end
+        else
+            render json: { errors: ['Invalid credentials.']}, status: 401
+        end
+    end
+
     def user_params
-        params.require(:user).permit(:email, :password)
+        params.require(:user).permit(:email, :password, :default_notebook_id, :note_sort_order)
     end
 end

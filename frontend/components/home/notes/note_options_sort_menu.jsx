@@ -1,6 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { updateUser } from '../../../actions/session_actions';
+
 
 class NoteOptionsSortMenu extends React.Component {
+
+    constructor(props){
+        super(props);
+        this.handleOptionClick = this.handleOptionClick.bind(this);
+    }
+
+    componentDidMount(){
+        const orderTypes = [
+            'Date created: Most to least recent',
+            'Date created: Least to most recent',
+            'Date updated: Most to least recent',
+            'Date updated: Least to most recent',
+            'Title: A to Z',
+            'Title: Z to A'
+        ];
+        const { currentUser: {note_sort_order} } = this.props;
+        const chosen = orderTypes.indexOf(note_sort_order);
+        $($('.SortByOption')[chosen]).addClass('active');
+    }
 
     handleMouseEnter(e) {
         $(e.target).addClass('grey');
@@ -13,8 +35,11 @@ class NoteOptionsSortMenu extends React.Component {
     handleOptionClick(e) {
         $(e.target).siblings().removeClass('active');
         $(e.target).addClass('active');
+        const { updateUser, currentUser, toggleSortDisplay } = this.props;
+        const newPref = { note_sort_order: e.target.innerText };
+        updateUser(Object.assign({}, currentUser, newPref))
+        .then(toggleSortDisplay());
     }
-
 
     render() {
         return (
@@ -64,6 +89,17 @@ class NoteOptionsSortMenu extends React.Component {
                 </li>
             </ul>
         )
-}};
+}
+};
 
-export default NoteOptionsSortMenu;
+const msp = ({ session: { currentUser } }, { toggleSortDisplay }) => ({
+    currentUser,
+    toggleSortDisplay
+})
+
+const mdp = dispatch => ({
+    updateUser: user => dispatch(updateUser(user))
+})
+
+export default connect(msp, mdp)(NoteOptionsSortMenu);
+
