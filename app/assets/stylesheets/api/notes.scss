@@ -188,6 +188,15 @@ $beige: rgb(248, 248, 248);
 
 }
 
+.clickOutWrapper {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+}
+
 .bg--tag-icon {
     background-image: image_url("tags");
     background-size: contain;
@@ -204,7 +213,7 @@ $beige: rgb(248, 248, 248);
     border: 1px solid rgb(242, 242, 242);
     border-bottom: 1px solid #e6e6e6;
 
-    &:hover, &:active {
+    &:hover, &.active {
         background: $dark-beige;
     }
     @include pointer;

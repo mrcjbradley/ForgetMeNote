@@ -92,7 +92,6 @@ class NoteIndex extends React.Component {
 
     }
 
-
     render(){
         const { notes } = this.props;
         const { sortMenu } = this.state;

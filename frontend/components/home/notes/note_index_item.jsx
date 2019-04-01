@@ -1,24 +1,24 @@
 import React from 'react';
 import TimeAgo from 'react-timeago';
+import { connect } from 'react-redux';
+import { getNote } from '../../../actions/note_actions';
 
 
 class NoteIndexItem extends React.Component {
     
     previewGenerator(content){
         const charCount = content.length;
-        if (charCount <= 75)
-        {
+        if (charCount <= 75) {
             return content;
-        } else
-        {
+        } else {
             return content.slice(0, 75) + '...';
         }
     }
 
     render(){
-        const { note } = this.props;
+        const { note, active, getNote } = this.props;
         return(
-            <li className="NoteItem">
+            <li className={"NoteItem" + active}>
                 <div className="NoteItem_NoteTitle">
                     {note.title}
                 </div>
@@ -33,4 +33,17 @@ class NoteIndexItem extends React.Component {
     }
 }
 
-export default NoteIndexItem;
+const msp = ({ui: {currentNoteId}}, { note }) => {
+    const active = note.id === currentNoteId ? " active" : "";
+    return ({
+        note,
+        active
+    });
+};
+
+const mdp = dispatch => ({
+    getNote: noteId => dispatch(getNote(noteId))
+});
+
+
+export default connect(msp,mdp)(NoteIndexItem);
