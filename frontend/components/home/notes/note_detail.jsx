@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getNote } from '../../../actions/note_actions';
+import { getNote, patchNote } from '../../../actions/note_actions';
 import { Link } from 'react-router-dom';
 
 class NoteDetail extends React.Component {
     constructor(props){
         super(props);
         this.state = this.props.note;
+        this.handleBlur = this.handleBlur.bind(this);
     }
 
     componentDidMount(){
@@ -31,6 +32,11 @@ class NoteDetail extends React.Component {
         return e => {
             this.setState({[field]: e.target.value});
         };
+    }
+
+    handleBlur(e){
+        const { patchNote } = this.props;
+        patchNote(this.state);
     }
 
     toggleDisabled(klass){
@@ -61,6 +67,7 @@ class NoteDetail extends React.Component {
                                 onChange={this.handleChange('title')} 
                                 value={title} 
                                 disabled
+                                onBlur={this.handleBlur}
                             />
                         </div>
                     </div>
@@ -69,7 +76,8 @@ class NoteDetail extends React.Component {
                         className="NoteDetail_NoteContent" 
                         onChange={this.handleChange('content')} 
                         value={content} 
-                        disabled>
+                        disabled
+                        onBlur={this.handleBlur}>
                         </textarea>
                     </div>
                 </form>
@@ -86,7 +94,8 @@ const msp = ({entities: {notes}}, {match:{params:{noteId}}}) => {
 };
 
 const mdp = dispatch => ({
-    getNote: noteId => dispatch(getNote(noteId))
+    getNote: noteId => dispatch(getNote(noteId)),
+    patchNote: noteId => dispatch(patchNote(noteId))
 })
 
 
