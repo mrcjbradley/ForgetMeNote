@@ -9,7 +9,7 @@ import { NavLink } from 'react-router-dom';
 class NoteIndexItem extends React.Component {
     
     previewGenerator(content){
-        const charCount = content.length;
+        const charCount = content ? content.length : 0;
         if (charCount <= 75) {
             return content;
         } else {

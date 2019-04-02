@@ -56,11 +56,13 @@ $beige: rgb(248, 248, 248);
     display:flex;
     flex-direction: column;
     padding-left: 20px;
+    z-index: inherit;
 
         &.hide-me {
         width: 0px;
         min-width: 0px;
         opacity: 0;
+        z-index: 0;
     }
 }
 

@@ -1,24 +1,41 @@
 import React from 'react';
 import UserNav from './user_nav';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { postNote } from '../../actions/note_actions';
 
 class HomeSidebar extends React.Component {
+    constructor(props){
+        super(props);
+        this.newNote = this.newNote.bind(this);
+    }
+
+    newNote(e){
+        e.preventDefault();
+        const { postNote, history, default_notebook_id } = this.props;
+        const blankNote = {notebook_id: default_notebook_id};
+        postNote(blankNote).then(({note}) => {
+            // debugger
+            history.push(`home/notes/${note.id}`);
+        }); 
+    }
+
     render(){
         const { fullscreen } = this.props;
         return (
             <aside className={fullscreen ? "HomeSidebar hide-me" : "HomeSidebar"}>
             <UserNav/>
-            <nav className="HomeSidebar_searc-nav">
+            {/* <nav className="HomeSidebar_searc-nav">
                 <h3 className="HomeSidebar_search-bar">
                     Search Bar
                 </h3>
-            </nav>
+            </nav> */}
             <nav className="HomeSidebar_new-note-nav">
-                <h3 className="HomeSidebar_new-note-button">
+                <Link to="#" onClick={this.newNote} className="HomeSidebar_new-note-button">
                     New Note
-                </h3>
+                </Link>
             </nav>
-            <nav className="HomeSidebar_shortcuts-nav">
+            {/* <nav className="HomeSidebar_shortcuts-nav">
                 <ul className="HomeSidebar_shortcuts">
                     <li className="shortcuts_menu">
                         Shortcuts
@@ -28,7 +45,7 @@ class HomeSidebar extends React.Component {
                         </ul>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
             <nav className="HomeSidebar_notes-nav">
                 <h3 className="HomeSidebar_all-notes-button">
                     All Notes
@@ -45,11 +62,11 @@ class HomeSidebar extends React.Component {
                     </li>
                 </ul>
             </nav>
-            <nav className="HomeSidebar_Tags-nav">
+            {/* <nav className="HomeSidebar_Tags-nav">
                 <h3 className="HomeSidebar_all-Tags-button">
                     Tags
                 </h3>
-            </nav>
+            </nav> */}
             <nav className="HomeSidebar_Trash-nav">
                 <h3 className="HomeSidebar_all-Trash-button">
                     Trash
@@ -59,9 +76,15 @@ class HomeSidebar extends React.Component {
     )};
 };
 
-const msp = ({ ui: { editorPreferences: { fullscreen } } }) => ({
-    fullscreen
+const msp = ({ ui: { editorPreferences: { fullscreen } }, session: {currentUser: {default_notebook_id}} },  {history} ) => ({
+    fullscreen,
+    history,
+    default_notebook_id
+})
+
+const mdp = dispatch => ({
+    postNote: note => dispatch(postNote(note))
 })
 
 
-export default connect(msp)(HomeSidebar);
+export default connect(msp, mdp)(HomeSidebar);
