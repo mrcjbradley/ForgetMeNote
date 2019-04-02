@@ -1,7 +1,7 @@
 import React from 'react';
 import UserNav from './user_nav';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { postNote } from '../../actions/note_actions';
 
 class HomeSidebar extends React.Component {
@@ -46,9 +46,9 @@ class HomeSidebar extends React.Component {
                 </ul>
             </nav> */}
             <nav className="HomeSidebar_notes-nav">
-                <h3 className="HomeSidebar_all-notes-button">
-                    All Notes
-                </h3>
+                <NavLink to="/home/notes" className="HomeSidebar_all-notes-button">
+                    <div className="bg--note-icon"></div>  All Notes
+                </NavLink>
             </nav>
             <nav className="HomeSidebar_Notebooks-nav">
                 <ul className="HomeSidebar_Notebooks">

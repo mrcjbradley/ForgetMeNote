@@ -55,7 +55,7 @@ $beige: rgb(248, 248, 248);
     transition: all .5s ease-in-out;
     display:flex;
     flex-direction: column;
-    padding-left: 20px;
+    // padding-left: 20px;
     z-index: inherit;
 
         &.hide-me {
@@ -70,6 +70,7 @@ $beige: rgb(248, 248, 248);
     height: 56px;
     display:flex;
     align-items: center;
+    padding-left: 20px;
 }
 
 .currentUserInfo {
@@ -143,7 +144,7 @@ $beige: rgb(248, 248, 248);
 .userNav_sessionOptions {
         z-index: 1000;
         top: 48px;
-        left: 20px;
+        left: 22px;
         position: absolute;
         font-family: sans-serif;
         line-height: 1.5;
@@ -183,7 +184,7 @@ $beige: rgb(248, 248, 248);
     }
 }
 
-.HomeSidebar_new-note-button {
+@mixin home-sidebar-nav {
     display: flex;
     align-items: center;
     font-size: 14px;
@@ -191,10 +192,15 @@ $beige: rgb(248, 248, 248);
     text-align: left;
     cursor: pointer;
     text-decoration: none;
-    color: white;
     font-weight: 400;
     margin-left: 0 12px;
-    padding: 18px 6px 18px 6px;
+    padding: 18px 0;
+}
+
+.HomeSidebar_new-note-button {
+    @include home-sidebar-nav();
+    color: white;
+    padding-left: 25px;
 
     &:hover .bg--new-note-icon {
         //  background-size: 35px 35px;
@@ -217,6 +223,37 @@ $beige: rgb(248, 248, 248);
      border-radius: 100%;
      overflow: visible;
     transition: all 0.2s ease-in-out;
+}
+
+.HomeSidebar_notes-nav {
+    @include home-sidebar-nav();
+}
+
+.HomeSidebar_all-notes-button {
+    display: flex;
+    text-decoration: inherit;
+    align-items: center;
+    width: 100%;
+    padding: 9px 0px 9px 22px;
+    color: #ccc;
+    
+    
+    &.active {
+        font-weight: 500;
+        color: #e6e6e6;
+        background-color: #404040;
+    }
+}
+
+.bg--note-icon {
+    background-image: image_url("note_icon");
+    background-size: 17px 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 16px;
+    display: block;
+    padding: 0px;
 }
 
 .NoteIndex {
