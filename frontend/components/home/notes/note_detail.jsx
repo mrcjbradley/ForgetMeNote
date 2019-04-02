@@ -48,15 +48,12 @@ class NoteDetail extends React.Component {
     } 
 
     toggleFullScreen(e){
-        debugger
         e.preventDefault();
         this.props.toggleFullScreen();
     }
 
     render(){
-        // debugger
         const { title, content } = this.state;
-        // debugger
         return(
             <article className="NoteShow" >
                 <form className="NoteShow_NoteForm">
