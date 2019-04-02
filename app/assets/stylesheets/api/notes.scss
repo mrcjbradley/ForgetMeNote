@@ -562,6 +562,10 @@ $beige: rgb(248, 248, 248);
      background-position: center;
      padding: 0 12px 0 25px;
     //  margin-right: 18px;
+
+    &:hover {
+        background-image: image_url("more_icon_green");
+    }
 }
 
 .MoreOptions_DropDown {

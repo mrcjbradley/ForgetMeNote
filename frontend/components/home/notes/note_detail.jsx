@@ -53,6 +53,7 @@ class NoteDetail extends React.Component {
         // debugger
         e.preventDefault();
         this.props.toggleFullScreen();
+        $('.js-expand-icon').toggleClass('green');
         $('.userNav_toggleMenu').toggle().delay(1000);
 
     }
@@ -78,7 +79,7 @@ render(){
                 <div className="NoteDetail_NoteHeader">
                     <nav className="NoteDetail_NoteHeaderNav">
                         <nav className="NoteHeaderNav_left">
-                            <Link to="#" className="bg--expand-icon" onClick={this.toggleFullScreen}></Link>
+                            <Link to="#" className="bg--expand-icon js-expand-icon" onClick={this.toggleFullScreen}></Link>
                             <div className="NoteHeaderNav_NoteBookLinkWrapper">
                                 <div className="bg--notebook-icon"></div>
                                 <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
