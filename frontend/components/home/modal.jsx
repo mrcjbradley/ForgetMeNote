@@ -66,7 +66,7 @@ render(){
 const msp = ({  entities: {notes}, ui: { currentNote: {currentNoteId} , modal } }, { history } ) => {
     const note = notes[currentNoteId] ? notes[currentNoteId] : {};
     let nextId = '';
-    if (Object.values(notes).length >= 1) {
+    if (Object.values(notes).length >= 2) {
         const allNotes = Object.values(notes);
         const notDeleted = notDeletedNotes(allNotes);
         const nextNote = secondMostRecentlyUpdatedNote(notDeleted);

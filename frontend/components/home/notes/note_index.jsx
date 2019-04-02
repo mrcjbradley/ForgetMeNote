@@ -1,11 +1,7 @@
 import React from 'react';
-import { getAllNotes, getNote } from '../../../actions/note_actions';
-import { connect } from 'react-redux';
 import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
-import NoteDetail from './note_detail';
-import { Route } from 'react-router-dom';
-import { notDeletedNotes } from '../../../util/selectors';
+
 
 
 
@@ -97,7 +93,7 @@ class NoteIndex extends React.Component {
     }
 
     render(){
-        const { notes, fullscreen } = this.props;
+        const { notes, fullscreen, headerText} = this.props;
         const { sortMenu } = this.state;
         const noteItems = this.orderNoteIndexItems(notes).map(note => {
            return <NoteIndexItem note={note} key={note.id} />
@@ -107,7 +103,7 @@ class NoteIndex extends React.Component {
         <aside className={ fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
             <header className="NoteIndex_NoteIndexHeader">
                 <div className="NoteIndex_NoteIndexTitle">
-                    <h1 className="">All Notes</h1>
+                    <h1 className="">{headerText}</h1>
                 </div>
             <div className="NoteIndex_NoteIndexDetails">
                 <span className="NoteIndex_NoteCount">
@@ -137,20 +133,5 @@ class NoteIndex extends React.Component {
     }
 }
 
-const msp = ({ entities: { notes }, ui: { currentNoteId, editorPreferences:{ fullscreen }}, session: {currentUser: {note_sort_order}}}, {history}) => {
 
-    return({
-    notes: notDeletedNotes(Object.values(notes)),
-    note_sort_order,
-    history,
-    currentNoteId,
-    fullscreen
-
-})}
-
-const mdp = dispatch => ({
-    getAllNotes: () => dispatch(getAllNotes())
-})
-
-
-export default connect(msp, mdp)(NoteIndex);
+export default NoteIndex;

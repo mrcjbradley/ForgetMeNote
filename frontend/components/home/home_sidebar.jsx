@@ -50,7 +50,7 @@ class HomeSidebar extends React.Component {
                     <div className="bg--note-icon"></div>  All Notes
                 </NavLink>
             </nav>
-            <nav className="HomeSidebar_Notebooks-nav">
+            {/* <nav className="HomeSidebar_Notebooks-nav">
                 <ul className="HomeSidebar_Notebooks">
                     <li className="Notebooks_menu">
                         Notebooks
@@ -60,16 +60,17 @@ class HomeSidebar extends React.Component {
                         </ul>
                     </li>
                 </ul>
-            </nav>
+            </nav> */}
             {/* <nav className="HomeSidebar_Tags-nav">
                 <h3 className="HomeSidebar_all-Tags-button">
                     Tags
                 </h3>
             </nav> */}
-            <nav className="HomeSidebar_Trash-nav">
-                <h3 className="HomeSidebar_all-Trash-button">
-                    Trash
-                </h3>
+                <nav className="HomeSidebar_Trash-nav">
+
+               <NavLink to="/home/trash" className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
+                            <div className="bg--note-icon"></div> Trash
+                </NavLink>
             </nav>
         </aside>
     )};
