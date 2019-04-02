@@ -12,7 +12,7 @@ const modalReducer = ( oldState = _placeHolder, { type, modal } ) => {
     let nextState = merge({}, oldState);
     switch(type){
         case OPEN_MODAL:
-            nextState = merge({}, nextState, modal);
+            nextState = merge({}, nextState,{open: true}, {modal});
             return nextState;
         default:
             return nextState;

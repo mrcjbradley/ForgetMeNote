@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getNote, patchNote } from '../../../actions/note_actions';
 import { toggleFullScreen } from '../../../actions/ui_actions';
+import { openModal } from '../../../actions/ui_actions';
 import { Link } from 'react-router-dom';
 
 class NoteDetail extends React.Component {
@@ -10,6 +11,7 @@ class NoteDetail extends React.Component {
         this.state = this.props.note;
         this.handleBlur = this.handleBlur.bind(this);
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
+        this.handleDeleteNote = this.handleDeleteNote.bind(this);
     }
 
     componentDidMount(){
@@ -61,7 +63,11 @@ class NoteDetail extends React.Component {
     }
 
     handleDeleteNote(e){
-
+        const modal = {
+            title: 'Delete note',
+            content: `${this.props.note.title} will be moved to trash.`
+        };
+        this.props.openModal(modal);
     }
 
 render(){
@@ -84,8 +90,10 @@ render(){
                             </Link>
                             <div style={{ display: 'none' }} onClick={this.toggleMoreMenu} className="clickOutWrapper js-more-menu">
                                 <ul className="MoreOptions_DropDown">
-                                    <li className="MoreOption">
-                                        Delete note
+                                    <li className="MoreOption" onClick={this.handleDeleteNote}>
+                                    
+                                            Delete note
+                                    
                                     </li>
                                 </ul>
                             </div>
@@ -127,7 +135,8 @@ const msp = ({entities: {notes}}, {match:{params:{noteId}}}) => {
 const mdp = dispatch => ({
     getNote: noteId => dispatch(getNote(noteId)),
     patchNote: noteId => dispatch(patchNote(noteId)),
-    toggleFullScreen: () => dispatch(toggleFullScreen())
+    toggleFullScreen: () => dispatch(toggleFullScreen()),
+    openModal: modal => dispatch(openModal(modal))
 })
 
 
