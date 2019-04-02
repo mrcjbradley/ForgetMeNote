@@ -48,16 +48,136 @@ $beige: rgb(248, 248, 248);
 }
 
 .HomeSidebar {
-    background: black;
+    background: rgb(26,26,26);
     width: 241px;
     min-width: 241px;
     font-family: $home-fonts;
     transition: all .5s ease-in-out;
+    display:flex;
+    flex-direction: column;
+    padding-left: 20px;
 
         &.hide-me {
         width: 0px;
         min-width: 0px;
         opacity: 0;
+    }
+}
+
+.userNav {
+    height: 56px;
+    display:flex;
+    align-items: center;
+}
+
+.currentUserInfo {
+    display: flex;
+    min-height: 28px;
+    width: 188px;
+    padding: 6px;
+    
+}
+
+.userNav_toggleMenu {
+    height: 28px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    font-weight: 300;
+}
+
+
+.accountTitle {
+    padding: 3px 20px;
+    font-size: 14px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #b3b3b3;
+}
+
+.bg--user-icon {
+    background-blend-mode: overlay;
+    display: block;
+    box-sizing: content-box;
+    width: 28px;
+    height: 28px;
+    background-size: 35px 35px;
+    background-position: center;
+    margin-right: 10px;
+    border: 1px solid white;
+    border-radius: 100%;
+    overflow: visible;
+
+    &.inner {
+
+        margin-left: 20px;
+        margin-top: 3px;
+
+    }
+    
+    // border-right: 1.5px solid lighten(#a6a6a6, 25%);
+}
+
+
+
+.CurrentUserEmail {
+    font-size: 13px;
+    font-weiht: 300;
+    text-align: left;
+    color: #ccc;
+    line-height: 19px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-decoration: none;
+
+    &.inner {
+        color: black;
+        font-size: 16px;
+        padding: 3px 20px 3px 0;
+    }
+
+}
+
+.userNav_sessionOptions {
+        z-index: 1000;
+        top: 48px;
+        left: 20px;
+        position: absolute;
+        font-family: sans-serif;
+        line-height: 1.5;
+        width: 267.391px;
+        height: fit-content;
+        background: white;
+        border-radius: 3px;
+        color: #666;
+        font-size: 14px;
+        box-shadow: 0 0 0 1px rgba(99, 114, 130, .16),
+        0 4px 12px rgba(27, 39, 51, .08);
+        margin: 6px 3px;
+        padding: 12px 0;
+}
+
+.spacerRow {
+    height: 16px;
+    width: 100%;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #ededed;
+}
+
+.logoutWrapper a {
+    display: flex;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 24px;
+    text-decoration: none;
+    color:#666;
+    width: 100%;
+    padding: 3px 20px;
+
+    &:hover{
+    color: #555;
+    background-color: #f5f5f5;
+
     }
 }
 
@@ -351,6 +471,7 @@ $beige: rgb(248, 248, 248);
     margin-right: 18px;
     border-right: 1.5px solid lighten(#a6a6a6, 25%);
 }
+
 
 .NoteShow_ToolBar {
     width: 100%;

@@ -7,7 +7,7 @@ class HomeSidebar extends React.Component {
         const { fullscreen } = this.props;
         return (
             <aside className={fullscreen ? "HomeSidebar hide-me" : "HomeSidebar"}>
-            <UserNav />
+            <UserNav/>
             <nav className="HomeSidebar_searc-nav">
                 <h3 className="HomeSidebar_search-bar">
                     Search Bar
@@ -59,7 +59,7 @@ class HomeSidebar extends React.Component {
     )};
 };
 
-const msp = ({ ui: { editorPreferences: { fullscreen } }}) => ({
+const msp = ({ ui: { editorPreferences: { fullscreen } } }) => ({
     fullscreen
 })
 

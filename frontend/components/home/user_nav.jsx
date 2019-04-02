@@ -18,25 +18,39 @@ class UserNav extends React.Component
         logOut();//.then(() => history.push('/'));
     }
 
-    render()
-    {
+    render(){
+        const { currentUser } = this.props;
+        const bgImg = { backgroundImage: `url(${currentUser.image_url})`};
         return (
             <nav className="userNav">
+                <div className="currentUserInfo">
+                    <Link to="#" className="userNav_toggleMenu">
+                        <div className="bg--user-icon" style={bgImg}></div>
+                        <span className="CurrentUserEmail">{currentUser.email}</span>
+                    </Link>
+                </div>
                 <ul className="userNav_sessionOptions">
-                    <Link className="userNav_logoutLink" to="#" onClick={this.handleClick}>Log Out</Link>
+                    <li className="accountTitle">Account</li>
+                    <li className='userNav_toggleMenu'>
+                        <div className="bg--user-icon inner" style={bgImg}></div>
+                        <span className="CurrentUserEmail inner">{currentUser.email}</span>
+                    </li>
+                    <li className="spacerRow"></li>
+                    <li className="logoutWrapper"> 
+                        <Link className="userNav_logoutLink" to="#" onClick={this.handleClick}>Sign out {currentUser.email}</Link>
+                    </li>
                 </ul>
             </nav>
         )
     };
-
 }
 
-// const msp = (state,{match: {history}}) => ({
-//     history
-// });
+const msp = ({ session: { currentUser } }) => ({
+    currentUser
+});
 
 const mdp = dispatch => ({
     logOut: () => dispatch(logOut())
 });
 
-export default connect(undefined, mdp)(UserNav);
+export default connect(msp, mdp)(UserNav);
