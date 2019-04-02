@@ -15,7 +15,6 @@ class HomeSidebar extends React.Component {
         const { postNote, history, default_notebook_id } = this.props;
         const blankNote = {notebook_id: default_notebook_id};
         postNote(blankNote).then(({note}) => {
-            // debugger
             history.push(`home/notes/${note.id}`);
         }); 
     }
@@ -32,7 +31,7 @@ class HomeSidebar extends React.Component {
             </nav> */}
             <nav className="HomeSidebar_new-note-nav">
                 <Link to="#" onClick={this.newNote} className="HomeSidebar_new-note-button">
-                    New Note
+                <div className="bg--new-note-icon"></div> New Note
                 </Link>
             </nav>
             {/* <nav className="HomeSidebar_shortcuts-nav">
