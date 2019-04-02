@@ -7,10 +7,11 @@ const _placeHolder =  { fullscreen: false };
 
 const editorPreferencesReducer = ( oldState = _placeHolder, action ) => {
     Object.freeze(oldState);
+    // debugger
     let nextState = merge({}, oldState);
     switch(action.type){
         case TOGGLE_FULL_SCREEN:
-            nextState.editorPreferences.fullscreen = !nextState.editorPreferences.fullscreen;
+            nextState.fullscreen = !nextState.fullscreen;
             return nextState;
         default:
             return nextState;

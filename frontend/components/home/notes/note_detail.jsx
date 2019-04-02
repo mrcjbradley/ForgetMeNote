@@ -50,8 +50,8 @@ class NoteDetail extends React.Component {
     toggleFullScreen(e){
         // debugger
         e.preventDefault();
-        $('.userNav_toggleMenu').toggle().delay(1000);
         this.props.toggleFullScreen();
+        $('.userNav_toggleMenu').toggle().delay(1000);
 
     }
 
@@ -61,7 +61,7 @@ class NoteDetail extends React.Component {
     }
 
     handleDeleteNote(e){
-        
+
     }
 
 render(){
