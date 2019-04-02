@@ -43,59 +43,59 @@ class NoteOptionsSortMenu extends React.Component {
         .then(toggleSortDisplay());
     }
 
-    render() {
-        const { toggleSortDisplay } = this.props;
-        return (
-            <>
-            <div className="clickOutWrapper" onClick={toggleSortDisplay}>
-            </div>
-                <ul className="NoteOptions_SortMenu">
-                    <h2 className="SortByTitle">Sort by...</h2>
-                    <li className="SortByOption"
-                        onMouseEnter={this.handleMouseEnter}
-                        onClick={this.handleOptionClick}
-                        onMouseLeave={this.handleMouseLeave}>
-                        Date created: Most to least recent
-                <span className="bg--check-icon"></span>
-                    </li>
-                    <li className="SortByOption"
-                        onMouseEnter={this.handleMouseEnter}
-                        onClick={this.handleOptionClick}
-                        onMouseLeave={this.handleMouseLeave}>
-                        Date created: Least to most recent
-                <span className="bg--check-icon"></span>
-                    </li>
-                    <li className="SortByOption"
-                        onMouseEnter={this.handleMouseEnter}
-                        onClick={this.handleOptionClick}
-                        onMouseLeave={this.handleMouseLeave}>
-                        Date updated: Most to least recent
-                <span className="bg--check-icon"></span>
-                    </li>
-                    <li className="SortByOption"
-                        onMouseEnter={this.handleMouseEnter}
-                        onClick={this.handleOptionClick}
-                        onMouseLeave={this.handleMouseLeave}>
-                        Date updated: Least to most recent
-                <span className="bg--check-icon"></span>
-                    </li>
-                    <li className="SortByOption"
-                        onMouseEnter={this.handleMouseEnter}
-                        onClick={this.handleOptionClick}
-                        onMouseLeave={this.handleMouseLeave}>
-                        Title: A to Z
-                <span className="bg--check-icon"></span>
-                    </li>
-                    <li className="SortByOption"
-                        onMouseEnter={this.handleMouseEnter}
-                        onClick={this.handleOptionClick}
-                        onMouseLeave={this.handleMouseLeave}>
-                        Title: Z to A
-                <span className="bg--check-icon"></span>
-                    </li>
-                </ul>
-            </>
-        )
+render() {
+    const { toggleSortDisplay } = this.props;
+    return (
+        <>
+        <div className="clickOutWrapper" onClick={toggleSortDisplay}>
+        </div>
+            <ul className="NoteOptions_SortMenu">
+                <h2 className="SortByTitle">Sort by...</h2>
+                <li className="SortByOption"
+                    onMouseEnter={this.handleMouseEnter}
+                    onClick={this.handleOptionClick}
+                    onMouseLeave={this.handleMouseLeave}>
+                    Date created: Most to least recent
+            <span className="bg--check-icon"></span>
+                </li>
+                <li className="SortByOption"
+                    onMouseEnter={this.handleMouseEnter}
+                    onClick={this.handleOptionClick}
+                    onMouseLeave={this.handleMouseLeave}>
+                    Date created: Least to most recent
+            <span className="bg--check-icon"></span>
+                </li>
+                <li className="SortByOption"
+                    onMouseEnter={this.handleMouseEnter}
+                    onClick={this.handleOptionClick}
+                    onMouseLeave={this.handleMouseLeave}>
+                    Date updated: Most to least recent
+            <span className="bg--check-icon"></span>
+                </li>
+                <li className="SortByOption"
+                    onMouseEnter={this.handleMouseEnter}
+                    onClick={this.handleOptionClick}
+                    onMouseLeave={this.handleMouseLeave}>
+                    Date updated: Least to most recent
+            <span className="bg--check-icon"></span>
+                </li>
+                <li className="SortByOption"
+                    onMouseEnter={this.handleMouseEnter}
+                    onClick={this.handleOptionClick}
+                    onMouseLeave={this.handleMouseLeave}>
+                    Title: A to Z
+            <span className="bg--check-icon"></span>
+                </li>
+                <li className="SortByOption"
+                    onMouseEnter={this.handleMouseEnter}
+                    onClick={this.handleOptionClick}
+                    onMouseLeave={this.handleMouseLeave}>
+                    Title: Z to A
+            <span className="bg--check-icon"></span>
+                </li>
+            </ul>
+        </>
+    )
 }
 };
 

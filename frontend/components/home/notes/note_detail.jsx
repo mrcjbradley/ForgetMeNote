@@ -48,50 +48,73 @@ class NoteDetail extends React.Component {
     } 
 
     toggleFullScreen(e){
+        // debugger
         e.preventDefault();
+        $('.userNav_toggleMenu').toggle().delay(1000);
         this.props.toggleFullScreen();
+
     }
 
-    render(){
-        const { title, content } = this.state;
-        return(
-            <article className="NoteShow" >
-                <form className="NoteShow_NoteForm">
-                    <div className="NoteDetail_NoteHeader">
-                        <nav className="NoteDetail_NoteHeaderNav">
-                            <nav className="NoteHeaderNav_left">
-                                <Link to="#" className="bg--expand-icon" onClick={this.toggleFullScreen}></Link>
-                                <div className="NoteHeaderNav_NoteBookLinkWrapper">
-                                    <div className="bg--notebook-icon"></div>
-                                    <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
-                                </div>
-                            </nav>
-                            <div className="NoteHeaderNav_MoreOptions">...</div>
-                        </nav>
-                        <div className="NoteShow_ToolBar"></div>
-                        <div className="NoteDetail_DisableWrapper" onClick={this.toggleDisabled("NoteDetail_NoteTitle")}>
-                            <input type="text" 
-                                className="NoteDetail_NoteTitle" 
-                                onChange={this.handleChange('title')} 
-                                value={title} 
-                                disabled
-                                onBlur={this.handleBlur}
-                            />
-                        </div>
-                    </div>
-                    <div className="NoteDetail_DisableWrapper" onClick={this.toggleDisabled("NoteDetail_NoteContent")}>
-                        <textarea 
-                        className="NoteDetail_NoteContent" 
-                        onChange={this.handleChange('content')} 
-                        value={content} 
-                        disabled
-                        onBlur={this.handleBlur}>
-                        </textarea>
-                    </div>
-                </form>
-            </article>
-        );
+    toggleMoreMenu(e){
+        e.preventDefault();
+        $('.js-more-menu').toggle();
     }
+
+    handleDeleteNote(e){
+        
+    }
+
+render(){
+    const { title, content } = this.state;
+    return(
+        <article className="NoteShow" >
+            <form className="NoteShow_NoteForm">
+                <div className="NoteDetail_NoteHeader">
+                    <nav className="NoteDetail_NoteHeaderNav">
+                        <nav className="NoteHeaderNav_left">
+                            <Link to="#" className="bg--expand-icon" onClick={this.toggleFullScreen}></Link>
+                            <div className="NoteHeaderNav_NoteBookLinkWrapper">
+                                <div className="bg--notebook-icon"></div>
+                                <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
+                            </div>
+                        </nav>
+                        <nav className="NoteHeaderNav_MoreOptions">
+                            <Link to="#" onClick={this.toggleMoreMenu}>
+                                <div className="bg--more-icon"> </div>
+                            </Link>
+                            <div style={{ display: 'none' }} onClick={this.toggleMoreMenu} className="clickOutWrapper js-more-menu">
+                                <ul className="MoreOptions_DropDown">
+                                    <li className="MoreOption">
+                                        Delete note
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </nav>
+                    <div className="NoteShow_ToolBar"></div>
+                    <div className="NoteDetail_DisableWrapper" onClick={this.toggleDisabled("NoteDetail_NoteTitle")}>
+                        <input type="text" 
+                            className="NoteDetail_NoteTitle" 
+                            onChange={this.handleChange('title')} 
+                            value={title} 
+                            disabled
+                            onBlur={this.handleBlur}
+                        />
+                    </div>
+                </div>
+                <div className="NoteDetail_DisableWrapper" onClick={this.toggleDisabled("NoteDetail_NoteContent")}>
+                    <textarea 
+                    className="NoteDetail_NoteContent" 
+                    onChange={this.handleChange('content')} 
+                    value={content} 
+                    disabled
+                    onBlur={this.handleBlur}>
+                    </textarea>
+                </div>
+            </form>
+        </article>
+    );
+}
 }
 
 
