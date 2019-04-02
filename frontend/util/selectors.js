@@ -64,3 +64,15 @@
  export const mostRecentlyUpdatedNote = (notes) => {
     return orderNoteIndexItems(notes, 'Date updated: Most to least recent')[0]; 
  }; 
+
+ export const secondMostRecentlyUpdatedNote = (notes) => {
+    return orderNoteIndexItems(notes, 'Date updated: Most to least recent')[1]; 
+ }; 
+
+ export const deletedNotes = (notes) => {
+    return notes.filter(note => note.deleted_at !== null);
+ };
+
+ export const notDeletedNotes = (notes) => {
+    return notes.filter(note => note.deleted_at === null);
+ };

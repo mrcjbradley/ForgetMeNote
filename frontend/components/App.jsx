@@ -12,7 +12,7 @@ import Home from './home/home';
 
 export default () => (
     <div>
-
+        
         <AuthRoute path='/' exact component={Splash} />
         <ProtectedRoute path='/home' component={Home} />
         <AuthRoute path='/signup' component={SignupFormContainer} />

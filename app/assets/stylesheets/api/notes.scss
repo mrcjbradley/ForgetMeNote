@@ -640,3 +640,80 @@ $beige: rgb(248, 248, 248);
     }
 
 }
+
+.modalBody {
+    width: 500px;
+    height: 200px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: 1s ease-in width;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .08),
+    0 2px 15px rgba(0, 0, 0, .2);
+    border-radius: 4px;
+    font-family: $home-fonts;
+    
+}
+
+.clickOutWrapper.modal {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(42, 51, 60, .4);
+}
+
+.modalHeader {
+    padding: 20px 25px 18px;
+    display: flex;
+}
+
+.modalTitle {
+    font-size: 18px;
+}
+
+.modalContent {
+    padding: 10px 25px 25px;
+    font-size: 14px;
+    word-break: break-word;
+    font-weight: 300;
+}
+
+.modalFooter {
+    border-top: 1px solid #e6e6e6;
+    padding: 20px 25px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-btn {
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 10px;
+    text-transform: capitalize;
+    
+    &:last-child {
+        margin-right: 0;
+        text-transform: capitalize;
+    }
+
+    &.continue {
+        background: #00a82d;
+        border-color: #00a82d;
+        color: white;
+        text-transform: capitalize;
+    }
+
+    &.cancel {
+        color: #b3b3b3;
+        border-color: #ededed;
+        text-transform: capitalize;
+
+    }
+}

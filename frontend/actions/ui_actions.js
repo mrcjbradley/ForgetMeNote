@@ -1,12 +1,14 @@
 export const [
     RECEIVE_CURRENT_NOTE,
     TOGGLE_FULL_SCREEN,
-    OPEN_MODAL
+    OPEN_MODAL,
+    CLOSE_MODAL
 ] = 
 [
     'RECEIVE_CURRENT_NOTE',
     'TOGGLE_FULL_SCREEN',
-    'OPEN_MODAL'
+    'OPEN_MODAL',
+    'CLOSE_MODAL'
 ];
 
 export const receiveCurrentNote = noteId => ({
@@ -21,4 +23,8 @@ export const toggleFullScreen = () => ({
 export const openModal = modal => ({
     type: OPEN_MODAL,
     modal
+});
+
+export const closeModal = () => ({
+    type: CLOSE_MODAL
 });

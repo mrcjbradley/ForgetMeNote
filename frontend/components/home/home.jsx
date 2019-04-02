@@ -4,10 +4,12 @@ import HomeSidebar from './home_sidebar';
 import NoteIndex from './notes/note_index';
 import NoteDetail from './notes/note_detail';
 import { Route } from 'react-router-dom';
+import Modal from './modal';
 
 export default (props) => {
         return(
         <div className="HomeScreen">
+            <Route path="/home" component={Modal} />
             <Route path="/home" component={HomeSidebar} />
             <NoteIndex />
             <Route path="/home/notes/:noteId" exact component={NoteDetail} />

@@ -5,6 +5,7 @@ import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
 import NoteDetail from './note_detail';
 import { Route } from 'react-router-dom';
+import { notDeletedNotes } from '../../../util/selectors';
 
 
 
@@ -139,7 +140,7 @@ class NoteIndex extends React.Component {
 const msp = ({ entities: { notes }, ui: { currentNoteId, editorPreferences:{ fullscreen }}, session: {currentUser: {note_sort_order}}}, {history}) => {
 
     return({
-    notes: Object.values(notes),
+    notes: notDeletedNotes(Object.values(notes)),
     note_sort_order,
     history,
     currentNoteId,

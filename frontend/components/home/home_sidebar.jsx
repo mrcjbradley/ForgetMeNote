@@ -15,7 +15,7 @@ class HomeSidebar extends React.Component {
         const { postNote, history, default_notebook_id } = this.props;
         const blankNote = {notebook_id: default_notebook_id};
         postNote(blankNote).then(({note}) => {
-            history.push(`home/notes/${note.id}`);
+            history.push(`/home/notes/${note.id}`);
         }); 
     }
 
