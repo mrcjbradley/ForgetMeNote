@@ -19,9 +19,10 @@ class NoteIndexItem extends React.Component {
 
     render(){
         const { note, active, getNote } = this.props;
+        const navPath = typeof note.deleted_at === 'string' ? '/home/trash/' : '/home/notes/';
         return(
             <li className={"NoteItem" + active}>
-            <NavLink to={`/home/notes/${note.id}`} >
+            <NavLink to={`${navPath}${note.id}`} >
                     <div className="NoteItem_NoteTitle">
                         {note.title}
                     </div>
@@ -37,7 +38,7 @@ class NoteIndexItem extends React.Component {
     }
 }
 
-const msp = ({ui: {currentNoteId}}, { note }) => {
+const msp = ({ui: {currentNote: {currentNoteId}}}, { note }) => {
     const active = note.id === currentNoteId ? " active" : "";
     return ({
         note,

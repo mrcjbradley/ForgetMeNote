@@ -21,13 +21,8 @@ const currentNoteReducer = (oldState = _placeHolder, action) => {
             });
             return nextState;
         case RECEIVE_NOTE:
-            const {
-                note: {
-                    id: currentNoteId
-                }
-            } = action;
-            nextState = merge({}, nextState, {
-                currentNoteId
+            const { note: { id: currentNoteId } } = action;
+            nextState = merge({}, nextState, {  currentNoteId
             });
             return nextState;
         default:

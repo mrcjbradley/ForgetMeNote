@@ -4,6 +4,7 @@ import { getNote, patchNote } from '../../../actions/note_actions';
 import { toggleFullScreen } from '../../../actions/ui_actions';
 import { openModal } from '../../../actions/ui_actions';
 import { Link } from 'react-router-dom';
+import { merge } from 'lodash';
 
 class NoteDetail extends React.Component {
     constructor(props){
@@ -12,23 +13,27 @@ class NoteDetail extends React.Component {
         this.handleBlur = this.handleBlur.bind(this);
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
         this.handleDeleteNote = this.handleDeleteNote.bind(this);
+        this.handleRestoreNote = this.handleRestoreNote.bind(this);
     }
 
     componentDidMount(){
         // if (oldProps.noteId !== newProps.noteId){
+        
         const { getNote, noteId } = this.props;
+        if (noteId) {
         getNote(noteId).then(({note})=> {
             this.setState(note);
             // debugger
         });
-        // }
+        }
     }
 
     componentDidUpdate(prevProps, prevState){
         const { getNote, noteId, note } = this.props;
         if (prevProps.noteId !== noteId){
-            this.setState(note);
             // debugger
+            // this.setState(note);
+            getNote(noteId)
         };
     }
 
@@ -71,8 +76,18 @@ class NoteDetail extends React.Component {
         this.props.openModal(modal);
     }
 
+    handleRestoreNote(e){
+        const { patchNote, note, history, noteId } = this.props;
+        const restoredNote = merge({}, note, {deleted_at: null});
+        patchNote(restoredNote).then((note) => history.push(`/home/notes/${noteId}`) );
+
+    }
+
 render(){
     const { title, content } = this.state;
+    const { deleted_at } = this.props.note;
+    const isDeleted = Boolean(typeof deleted_at === 'string');
+    // debugger
     return(
         <article className="NoteShow" >
             <form className="NoteShow_NoteForm">
@@ -91,9 +106,9 @@ render(){
                             </Link>
                             <div style={{ display: 'none' }} onClick={this.toggleMoreMenu} className="clickOutWrapper js-more-menu">
                                 <ul className="MoreOptions_DropDown">
-                                    <li className="MoreOption" onClick={this.handleDeleteNote}>
+                                    <li className="MoreOption" onClick={ isDeleted ? this.handleRestoreNote : this.handleDeleteNote}>
                                     
-                                            Delete note
+                                            {isDeleted ? "Restore note" : "Delete note"}
                                     
                                     </li>
                                 </ul>
@@ -101,7 +116,7 @@ render(){
                         </nav>
                     </nav>
                     <div className="NoteShow_ToolBar"></div>
-                    <div className="NoteDetail_DisableWrapper" onClick={this.toggleDisabled("NoteDetail_NoteTitle")}>
+                    <div className="NoteDetail_DisableWrapper" onClick={ isDeleted ?  null : this.toggleDisabled("NoteDetail_NoteTitle")}>
                         <input type="text" 
                             className="NoteDetail_NoteTitle" 
                             onChange={this.handleChange('title')} 
@@ -111,7 +126,7 @@ render(){
                         />
                     </div>
                 </div>
-                <div className="NoteDetail_DisableWrapper" onClick={this.toggleDisabled("NoteDetail_NoteContent")}>
+                <div className="NoteDetail_DisableWrapper" onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteContent")}>
                     <textarea 
                     className="NoteDetail_NoteContent" 
                     onChange={this.handleChange('content')} 
@@ -127,10 +142,12 @@ render(){
 }
 
 
-const msp = ({entities: {notes}}, {match:{params:{noteId}}}) => {
-    // debugger
-    const note = notes[noteId]; // || {title: null, content: null};
-    return { note: note ? note : { title: '', content: '' }, noteId }
+const msp = ({entities: {notes}, ui: { currentNote: {currentNoteId}} }, {history, match:{params:{noteId}}}) => {
+
+     
+    const note = (typeof noteId === 'undefined') ? (notes[currentNoteId] || { title: '', content: '' }) :( notes[noteId] || { title: '', content: '' });
+    return { note, noteId: noteId ? noteId : currentNoteId, history }
+    debugger
 };
 
 const mdp = dispatch => ({
