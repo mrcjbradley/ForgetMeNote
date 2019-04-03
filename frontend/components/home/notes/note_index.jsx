@@ -1,6 +1,8 @@
 import React from 'react';
 import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
+import { Redirect, Route } from 'react-router-dom';
+import NoteDetail from './note_detail';
 
 
 
@@ -130,7 +132,7 @@ class NoteIndex extends React.Component {
                 {noteItems}
             </ul>
         </aside>
-
+       <Route exact path='/home/notes' component={NoteDetail} />
         </>
         )
     }
