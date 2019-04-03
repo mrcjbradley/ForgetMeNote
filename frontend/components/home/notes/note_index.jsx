@@ -98,6 +98,14 @@ class NoteIndex extends React.Component {
         const noteItems = this.orderNoteIndexItems(notes).map(note => {
            return <NoteIndexItem note={note} key={note.id} />
         });
+        const tagsIcon = (
+            <nav className="NoteIndex_NoteTags">
+                <div className="bg--tag-icon"></div>
+                <ul>
+                    <li></li>
+                </ul>
+            </nav>
+        )
         return(
             <>
         <aside className={ fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
@@ -114,12 +122,7 @@ class NoteIndex extends React.Component {
                     <div onClick={this.toggleSortDisplay} className="bg--option-dd-icon"></div>
                     { sortMenu ? <NoteOptionsSortMenu toggleSortDisplay={this.toggleSortDisplay}/> : null}
                     </nav>
-                    <nav className="NoteIndex_NoteTags">
-                        <div className="bg--tag-icon"></div>
-                        <ul>
-                            <li></li>
-                        </ul>
-                    </nav>
+                    { headerText === 'Trash' ? null : tagsIcon }
                 </div>
             </div>
             </header>

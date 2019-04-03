@@ -32,8 +32,8 @@ class NoteDetail extends React.Component {
         const { getNote, noteId, note } = this.props;
         if (prevProps.noteId !== noteId){
             // debugger
-            // this.setState(note);
-            getNote(noteId)
+            getNote(noteId).then(() => this.setState(note));
+            
         };
     }
 

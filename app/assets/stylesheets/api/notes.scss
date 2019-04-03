@@ -327,11 +327,13 @@ $beige: rgb(248, 248, 248);
 
 .NoteIndex_NoteTagsOptions {
     display: flex;
-    width:48px;
+    width:fit-content;
     justify-content: space-between;
     @include pointer;
 }
-
+.NoteIndex_NoteTags {
+    margin-left: 12px;
+}
 .NoteIndex_NoteCount {
     font-size: 13px;
     font-family: $home-fonts;
