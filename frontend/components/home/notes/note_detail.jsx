@@ -87,6 +87,10 @@ render(){
     const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
+    const nbQuickLink = (<div className="NoteHeaderNav_NoteBookLinkWrapper">
+        <div className="bg--notebook-icon"></div>
+        <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
+    </div>)
     // debugger
     return(
         <article className="NoteShow" >
@@ -95,10 +99,7 @@ render(){
                     <nav className="NoteDetail_NoteHeaderNav">
                         <nav className="NoteHeaderNav_left">
                             <Link to="#" className="bg--expand-icon js-expand-icon" onClick={this.toggleFullScreen}></Link>
-                            <div className="NoteHeaderNav_NoteBookLinkWrapper">
-                                <div className="bg--notebook-icon"></div>
-                                <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
-                            </div>
+                            { isDeleted ? '' : nbQuickLink }
                         </nav>
                         <nav className="NoteHeaderNav_MoreOptions">
                             <Link to="#" onClick={this.toggleMoreMenu}>
@@ -142,12 +143,19 @@ render(){
 }
 
 
-const msp = ({entities: {notes}, ui: { currentNote: {currentNoteId}} }, {history, match:{params:{noteId}}}) => {
+const msp = ({entities: {notes}, ui: { currentNote: {currentNoteId}} }, ownProps) => {
+    let note = {};
+    if (ownProps.recentNote) {
+        note = ownProps.recentNote;
+    } else {
+         note = (typeof ownProps.match.params.noteId === 'undefined') ? (notes[currentNoteId] || { title: '', content: '' }) :( notes[ownProps.match.params.noteId] || { title: '', content: '' });
+    };
+    // debugger
+    return { note, 
+            noteId: ownProps.match.params.noteId ? ownProps.match.params.noteId : note.id,
+            history: ownProps.history 
+             }
 
-     
-    const note = (typeof noteId === 'undefined') ? (notes[currentNoteId] || { title: '', content: '' }) :( notes[noteId] || { title: '', content: '' });
-    return { note, noteId: noteId ? noteId : currentNoteId, history }
-    debugger
 };
 
 const mdp = dispatch => ({

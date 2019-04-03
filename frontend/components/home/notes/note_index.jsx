@@ -3,6 +3,7 @@ import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
 import { Redirect, Route } from 'react-router-dom';
 import NoteDetail from './note_detail';
+import { mostRecentlyUpdatedNote } from '../../../util/selectors';
 
 
 
@@ -47,6 +48,7 @@ class NoteIndex extends React.Component {
         const {  note_sort_order } = this.props;
         const chosen = orderTypes.indexOf(note_sort_order);
         // debugger
+        
         switch(chosen){
             case 0:
                 return notes.sort((n1, n2) => {
@@ -95,7 +97,7 @@ class NoteIndex extends React.Component {
     }
 
     render(){
-        const { notes, fullscreen, headerText} = this.props;
+        const { notes, fullscreen, headerText, mostRecentId} = this.props;
         const { sortMenu } = this.state;
         const noteItems = this.orderNoteIndexItems(notes).map(note => {
            return <NoteIndexItem note={note} key={note.id} />
@@ -108,6 +110,7 @@ class NoteIndex extends React.Component {
                 </ul>
             </nav>
         )
+        const mostRecent = notes.find(note => note.id === mostRecentId);
         return(
             <>
         <aside className={ fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
@@ -132,7 +135,7 @@ class NoteIndex extends React.Component {
                 {noteItems}
             </ul>
         </aside>
-       <Route exact path='/home/notes' component={NoteDetail} />
+       
         </>
         )
     }
