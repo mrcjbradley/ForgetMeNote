@@ -66,8 +66,9 @@ class Api::NotesController < ApplicationController
     end
 
     def empty_trash
-        @notes = current_user.notes.where.not(deleted_at: nil)
-        @notes.destroy_all
+        @trashed_notes = current_user.notes.where.not(deleted_at: nil)
+        @trashed_notes.destroy_all
+        @notes = current_user.notes.all
         render :index
     end
     def note_params

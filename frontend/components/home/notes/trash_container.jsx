@@ -12,10 +12,20 @@ const msp = (state , ownProps ) => {
     const { session: { currentUser: { note_sort_order } } } = state;
     const { history, match: {params} } = ownProps;
     const mostRecentId = params.noteId ? params.noteId : recentTrashId;
+    const emptyTrashNote = {
+        content: "",
+        created_at: `${new Date()}`,
+        deleted_at: `${new Date()}`,
+        fav: false,
+        id: -1,
+        notebook_id: 547,
+        title: "Trash is empty!",
+        updated_at: `${new Date()}`
+    };
     // debugger
         return ({
 
-            notes: deletedNotes(_.values(notes)),
+            notes: recentTrashId === -1 ? [emptyTrashNote] : deletedNotes(_.values(notes)),
             note_sort_order,
             history,
             fullscreen,

@@ -119,7 +119,8 @@ class NoteIndex extends React.Component {
         const { sortMenu } = this.state;
         // const activeSignifier = headerText === 'Trash' ? recentTrashId : recentNoteId ;
         const noteItems = this.orderNoteIndexItems(this.state.notes).map(note => {
-           return <NoteIndexItem note={note} key={note.id} />
+            
+            return note.id === -1 ? null : <NoteIndexItem note={note} key={note.id} />
         });
         const tagsIcon = (
             <nav className="NoteIndex_NoteTags">
@@ -139,11 +140,11 @@ class NoteIndex extends React.Component {
             <header className="NoteIndex_NoteIndexHeader">
                 <div className="NoteIndex_NoteIndexTitle">
                     <h1 className="">{headerText}</h1>
-                    {headerText === 'Trash' ? emptyTrashBtn : null}
+                    {headerText === 'Trash' && noteItems[0] !== null ? emptyTrashBtn : null}
                 </div>
             <div className="NoteIndex_NoteIndexDetails">
                 <span className="NoteIndex_NoteCount">
-                    {notes.length} notes
+                    {noteItems[0] === null ? '0' : notes.length} notes
                 </span>
                 <div className="NoteIndex_NoteTagsOptions">
                     <nav className="NoteIndex_NoteOptions">
