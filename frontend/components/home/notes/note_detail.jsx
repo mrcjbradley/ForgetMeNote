@@ -101,7 +101,7 @@ render(){
                             <Link to="#" className="bg--expand-icon js-expand-icon" onClick={this.toggleFullScreen}></Link>
                             { isDeleted ? '' : nbQuickLink }
                         </nav>
-                        <nav className="NoteHeaderNav_MoreOptions">
+                        <nav className="NoteHeaderNav_MoreOptions" style={this.props.note.id === -1 ? { display: 'none'}: null }>
                             <Link to="#" onClick={this.toggleMoreMenu}>
                                 <div className="bg--more-icon"> </div>
                             </Link>
