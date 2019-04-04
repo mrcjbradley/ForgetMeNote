@@ -11,13 +11,13 @@ const msp = (state, ownProps) => {
     // const { history, match: { path, params: {noteId} } } = ownProps;
     // let filtered = Object.values(notes);
     // let note = {title: '', content: ''};
-    // // debugger
+    // 
     // if (path.includes('/home/notes')) {
     //     filtered = notDeletedNotes(filtered);
     //     note = filtered[recentNoteId];
     // }    
     // if (path.includes('/home/trash')) {
-    //     // debugger
+    //     
     //     filtered = deletedNotes(filtered);    
     //     note = filtered[recentTrashId];
     // }    
@@ -25,7 +25,7 @@ const msp = (state, ownProps) => {
     // //     debugger
     // //     note = notes[noteId] ;
     // // }
-    // debugger
+    
     return ({
         note: ownProps.note,
         history: ownProps.history,

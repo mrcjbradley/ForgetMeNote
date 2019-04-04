@@ -22,7 +22,7 @@ const msp = (state , ownProps ) => {
         title: "Trash is empty!",
         updated_at: `${new Date()}`
     };
-    // debugger
+    
         return ({
 
             notes: recentTrashId === -1 ? [emptyTrashNote] : deletedNotes(_.values(notes)),

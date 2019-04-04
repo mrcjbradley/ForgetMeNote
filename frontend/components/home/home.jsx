@@ -9,7 +9,7 @@ import Modal from './modal';
 import { connect } from 'react-redux';
 
 const Home = (props) => {
-// debugger
+
     
 
         return(

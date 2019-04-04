@@ -9,7 +9,7 @@
          'Title: Z to A'
      ];
      const chosen = orderTypes.indexOf(note_sort_order);
-     // debugger
+     
      switch (chosen) {
          case 0:
              return notes.sort((n1, n2) => {

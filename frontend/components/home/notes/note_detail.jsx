@@ -17,7 +17,7 @@ class NoteDetail extends React.Component {
     componentDidMount(){
         
         const { getNote, note } = this.props;
-        // debugger
+        
         // if (note) {
         getNote(note.id);//then(({note})=> {
             //this.setState(note);
@@ -28,7 +28,7 @@ class NoteDetail extends React.Component {
     componentDidUpdate(prevProps, prevState){
         // const { getNote } = this.props;
         if (prevProps.note !== this.props.note){
-            // debugger
+            
             this.setState(this.props.note);
             // getNote(this.props.note.id)//.then((note) => this.setState(note));
         }
@@ -52,7 +52,7 @@ class NoteDetail extends React.Component {
     } 
 
     toggleFullScreen(e){
-        // debugger
+        
         e.preventDefault();
         this.props.toggleFullScreen();
         $('.js-expand-icon').toggleClass('green');
@@ -82,7 +82,7 @@ class NoteDetail extends React.Component {
 
 render(){
     if (!this.props.note) return null;
-    // debugger
+    
     const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
@@ -90,7 +90,7 @@ render(){
         <div className="bg--notebook-icon"></div>
         <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
     </div>)
-    // debugger
+    
     return(
         <>
         <article className="NoteShow" >

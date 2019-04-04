@@ -62,7 +62,7 @@ class NoteIndex extends React.Component {
         ];
         const {  note_sort_order } = this.props;
         const chosen = orderTypes.indexOf(note_sort_order);
-        // debugger
+        
         
         switch(chosen){
             case 0:
@@ -114,7 +114,7 @@ class NoteIndex extends React.Component {
     render(){
         //debugger
         if (this.state.notes.length === 0) return null;
-        // debugger
+        
         const { notes, fullscreen, headerText, mostRecentId} = this.props;
         const { sortMenu } = this.state;
         // const activeSignifier = headerText === 'Trash' ? recentTrashId : recentNoteId ;

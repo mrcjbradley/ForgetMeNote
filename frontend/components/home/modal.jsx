@@ -23,7 +23,7 @@ handleButton(btnType){
         case 'continue':
             return e => {
                 e.preventDefault();
-                // debugger
+                
                 return title === 'Delete note' ? patchNote(merge({}, note,{deleted_at: new Date()})).then(()=> closeModal()).then(() => history.push(`/home/notes/${nextId}`) ) : null;
             };
         default:
@@ -77,9 +77,9 @@ const msp = ({ entities: {notes},  ui: { modal } }, { history, match: {path, par
         const notDeleted = notDeletedNotes(allNotes);
         const nextNote = secondMostRecentlyUpdatedNote(notDeleted);
         nextId = nextNote.id;
-        // debugger
+        
     } 
-    // debugger
+    
     return({
         modal,
         // currentNoteId,

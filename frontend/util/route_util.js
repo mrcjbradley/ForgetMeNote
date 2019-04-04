@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 const msp = ({session: {currentUser: {id}}, ui: { recentNotes } }) => {
-    // debugger
+    
     return({
     loggedIn: Boolean(id),
     recentNotes
