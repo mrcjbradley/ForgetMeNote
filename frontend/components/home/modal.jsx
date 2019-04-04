@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { closeModal } from '../../actions/ui_actions';
 import * as noteActions from '../../actions/note_actions';
-import { merge } from 'lodash';
+import { merge, values } from 'lodash';
 import { secondMostRecentlyUpdatedNote, notDeletedNotes } from '../../util/selectors';
 
 class Modal extends React.Component {
@@ -63,10 +63,15 @@ render(){
     }
 };
 
-const msp = ({  entities: {notes}, ui: { currentNote: {currentNoteId} , modal } }, { history } ) => {
-    const note = notes[currentNoteId] ? notes[currentNoteId] : {};
+const msp = ({  entities: {notes}, ui: { recentNotes: {recentNoteId, recentTrashId} , modal } }, { history, match: {path, params} } ) => {
+    let note;
+     if (params.noteId) {
+        note = notes[params.noteId];
+        } else {
+        note = path.includes('notes') ? notes[recentNoteId] : notes[recentTrashId];
+        }
     let nextId = '';
-    if (Object.values(notes).length >= 2) {
+    if (_.values(notes).length >= 2) {
         const allNotes = Object.values(notes);
         const notDeleted = notDeletedNotes(allNotes);
         const nextNote = secondMostRecentlyUpdatedNote(notDeleted);
@@ -74,7 +79,7 @@ const msp = ({  entities: {notes}, ui: { currentNote: {currentNoteId} , modal } 
     } 
     return({
         modal,
-        currentNoteId,
+        // currentNoteId,
         note,
         nextId,
         history

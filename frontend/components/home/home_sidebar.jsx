@@ -20,7 +20,7 @@ class HomeSidebar extends React.Component {
     }
 
     render(){
-        const { fullscreen } = this.props;
+        const { fullscreen, recentNoteId, recentTrashId } = this.props;
         return (
             <aside className={fullscreen ? "HomeSidebar hide-me" : "HomeSidebar"}>
             <UserNav/>
@@ -46,7 +46,7 @@ class HomeSidebar extends React.Component {
                 </ul>
             </nav> */}
             <nav className="HomeSidebar_notes-nav">
-                <NavLink to="/home/notes" className="HomeSidebar_all-notes-button">
+                    <NavLink to={`/home/notes/${recentNoteId}`} className="HomeSidebar_all-notes-button">
                     <div className="bg--note-icon"></div>  All Notes
                 </NavLink>
             </nav>
@@ -68,7 +68,7 @@ class HomeSidebar extends React.Component {
             </nav> */}
                 <nav className="HomeSidebar_Trash-nav">
 
-               <NavLink to="/home/trash" className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
+                    <NavLink to={`/home/trash/${recentTrashId}`} className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
                             <div className="bg--note-icon"></div> Trash
                 </NavLink>
             </nav>
@@ -76,10 +76,12 @@ class HomeSidebar extends React.Component {
     )};
 };
 
-const msp = ({ ui: { editorPreferences: { fullscreen } }, session: {currentUser: {default_notebook_id}} },  {history} ) => ({
+const msp = ({ ui: { editorPreferences: { fullscreen } }, session: {currentUser: {default_notebook_id}}, ui: { recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => ({
     fullscreen,
     history,
-    default_notebook_id
+    default_notebook_id,
+    recentNoteId,
+    recentTrashId
 })
 
 const mdp = dispatch => ({

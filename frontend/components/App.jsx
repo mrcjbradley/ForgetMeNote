@@ -14,7 +14,8 @@ export default () => (
     <div>
         
         <AuthRoute path='/' exact component={Splash} />
-        <ProtectedRoute path='/home' component={Home} />
+        <ProtectedRoute path='/home/notes' component={Home} />
+        <ProtectedRoute path='/home/trash' component={Home} />
         <AuthRoute path='/signup' component={SignupFormContainer} />
         <AuthRoute path='/login' component={LoginFormContainer} />
 

@@ -3,11 +3,13 @@ export const [
     RECEIVE_ALL_NOTES,
     RECEIVE_NOTE,
     REMOVE_NOTE,
+    RECEIVE_DELETED_NOTE,
     RECEIVE_NOTE_ERRORS
 ] = [
     'RECEIVE_ALL_NOTES',
     'RECEIVE_NOTE',
     'REMOVE_NOTE',
+    'RECEIVE_DELETED_NOTE',
     'RECEIVE_NOTE_ERRORS'
 ];
 
@@ -18,6 +20,11 @@ const receiveAllNotes = notes => ({
 
 const receiveNote = note => ({
     type: RECEIVE_NOTE,
+    note
+});
+
+const receiveDeletedNote = note => ({
+    type: RECEIVE_DELETED_NOTE,
     note
 });
 
@@ -39,8 +46,13 @@ export const getAllNotes = () => dispatch => (
 
 export const getNote = noteId => dispatch => (
     NoteApiUtil.getNote(noteId)
-    .then(note => dispatch(receiveNote(note)),
-    errors => dispatch(receiveNoteErrors(errors.responseJSON)))
+          .then(note => {
+        if (typeof note.deleted_at === 'string') {
+            return dispatch(receiveDeletedNote(note)); 
+         } else {
+            return dispatch(receiveNote(note));
+         } 
+    } ,errors => dispatch(receiveNoteErrors(errors.responseJSON)))
 );
 
 export const postNote = note => dispatch => (
@@ -49,11 +61,17 @@ export const postNote = note => dispatch => (
     errors => dispatch(receiveNoteErrors(errors.responseJSON)))
 );
 
-export const patchNote = note => dispatch => (
+export const patchNote = note => dispatch => {
+    return (
     NoteApiUtil.patchNote(note)
-    .then(note => dispatch(receiveNote(note)),
-    errors => dispatch(receiveNoteErrors(errors.responseJSON)))
-);
+    .then(note => {
+        if (typeof note.deleted_at === 'string') {
+            return dispatch(receiveDeletedNote(note)) 
+         } else {
+            return dispatch(receiveNote(note));
+         } 
+    } ,errors => dispatch(receiveNoteErrors(errors.responseJSON)))
+);};
 
 export const deleteNote = noteId => dispatch => (
     NoteApiUtil.deleteNote(noteId)

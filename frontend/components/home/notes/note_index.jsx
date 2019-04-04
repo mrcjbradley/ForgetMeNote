@@ -1,8 +1,8 @@
 import React from 'react';
 import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
-import { Redirect, Route } from 'react-router-dom';
-import NoteDetail from './note_detail';
+import { Redirect, Route, Switch } from 'react-router-dom';
+import NoteDetail from './note_detail_container';
 import { mostRecentlyUpdatedNote } from '../../../util/selectors';
 
 
@@ -16,12 +16,12 @@ class NoteIndex extends React.Component {
             sortMenu: false
         };
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
+    // debugger
     }
 
     componentDidMount(){
-        const { getAllNotes, history, currentNoteId } = this.props;
+        const { getAllNotes } = this.props;
         getAllNotes();
-        
     }
 
     handleMouseEnter(e){
@@ -97,6 +97,9 @@ class NoteIndex extends React.Component {
     }
 
     render(){
+        // debugger
+        if (this.props.notes.length === 0) return null;
+        // debugger
         const { notes, fullscreen, headerText, mostRecentId} = this.props;
         const { sortMenu } = this.state;
         const noteItems = this.orderNoteIndexItems(notes).map(note => {
@@ -110,7 +113,8 @@ class NoteIndex extends React.Component {
                 </ul>
             </nav>
         )
-        const mostRecent = notes.find(note => note.id === mostRecentId);
+        const mostRecent = notes.filter(note => note.id === parseInt(mostRecentId));
+        debugger
         return(
             <>
         <aside className={ fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
@@ -120,7 +124,7 @@ class NoteIndex extends React.Component {
                 </div>
             <div className="NoteIndex_NoteIndexDetails">
                 <span className="NoteIndex_NoteCount">
-                    {notes.length} notes
+                    {/* {notes.length} notes */}
                 </span>
                 <div className="NoteIndex_NoteTagsOptions">
                     <nav className="NoteIndex_NoteOptions">
@@ -135,7 +139,7 @@ class NoteIndex extends React.Component {
                 {noteItems}
             </ul>
         </aside>
-       
+            <NoteDetail note={mostRecent[0]}/>
         </>
         )
     }
@@ -143,3 +147,14 @@ class NoteIndex extends React.Component {
 
 
 export default NoteIndex;
+
+//<Route path='/home/notes/:noteId' component={NoteDetail} />
+
+//<Route path='/home/trash/:noteId' component={NoteDetail} />
+{/* <Route path="/home/trash" exact nnnote={mostRecent} render={props => {
+        return (<NoteDetail {...props} />);
+    }} 
+/>
+<Route path="/home/notes" exact nnnote={mostRecent} render={props => {
+        return (<NoteDetail {...props} />);
+    }}  />*/}

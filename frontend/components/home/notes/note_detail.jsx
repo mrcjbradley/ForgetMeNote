@@ -1,8 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getNote, patchNote } from '../../../actions/note_actions';
-import { toggleFullScreen } from '../../../actions/ui_actions';
-import { openModal } from '../../../actions/ui_actions';
 import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
 
@@ -14,27 +10,28 @@ class NoteDetail extends React.Component {
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
         this.handleDeleteNote = this.handleDeleteNote.bind(this);
         this.handleRestoreNote = this.handleRestoreNote.bind(this);
+        debugger
     }
 
-    componentDidMount(){
-        // if (oldProps.noteId !== newProps.noteId){
+    // componentDidMount(){
+    //     // if (oldProps.noteId !== newProps.noteId){
         
-        const { getNote, noteId } = this.props;
-        if (noteId) {
-        getNote(noteId).then(({note})=> {
-            this.setState(note);
-            // debugger
-        });
-        }
-    }
+    //     const { getNote, note } = this.props;
+    //     // debugger
+    //     if (note) {
+    //     getNote(note.id).then(note => this.setState(note));//then(({note})=> {
+    //         //this.setState(note);
+    //     //});
+    //     }
+    // }
 
     componentDidUpdate(prevProps, prevState){
-        const { getNote, noteId, note } = this.props;
-        if (prevProps.noteId !== noteId){
+        // const { getNote } = this.props;
+        if (prevProps.note.id !== this.props.note.id){
             // debugger
-            getNote(noteId).then(() => this.setState(note));
-            
-        };
+            this.setState(this.props.note);
+            // getNote(this.props.note.id).then((note) => this.setState(note));
+        }
     }
 
     handleChange(field){
@@ -84,6 +81,8 @@ class NoteDetail extends React.Component {
     }
 
 render(){
+    // if (!this.props.note) return null;
+    // // debugger
     const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
@@ -142,28 +141,4 @@ render(){
 }
 }
 
-
-const msp = ({entities: {notes}, ui: { currentNote: {currentNoteId}} }, ownProps) => {
-    let note = {};
-    if (ownProps.recentNote) {
-        note = ownProps.recentNote;
-    } else {
-         note = (typeof ownProps.match.params.noteId === 'undefined') ? (notes[currentNoteId] || { title: '', content: '' }) :( notes[ownProps.match.params.noteId] || { title: '', content: '' });
-    };
-    // debugger
-    return { note, 
-            noteId: ownProps.match.params.noteId ? ownProps.match.params.noteId : note.id,
-            history: ownProps.history 
-             }
-
-};
-
-const mdp = dispatch => ({
-    getNote: noteId => dispatch(getNote(noteId)),
-    patchNote: noteId => dispatch(patchNote(noteId)),
-    toggleFullScreen: () => dispatch(toggleFullScreen()),
-    openModal: modal => dispatch(openModal(modal))
-})
-
-
-export default connect(msp, mdp)(NoteDetail);
+export default NoteDetail;

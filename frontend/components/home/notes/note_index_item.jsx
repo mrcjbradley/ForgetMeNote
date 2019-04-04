@@ -38,8 +38,8 @@ class NoteIndexItem extends React.Component {
     }
 }
 
-const msp = ({ui: {currentNote: {currentNoteId}}}, { note }) => {
-    const active = note.id === currentNoteId ? " active" : "";
+const msp = ({ui: {recentNotes: {recentNoteId, recentTrashId}}}, { note }) => {
+    const active = note.id === recentNoteId || recentTrashId ? " active" : "";
     return ({
         note,
         active

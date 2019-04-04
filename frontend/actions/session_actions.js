@@ -13,9 +13,10 @@ export const [
     'CLEAR_ERRORS'
 ];
 
-const receiveCurrentUser = (user) => ({
+const receiveCurrentUser = ({user, recentNotes}) => ({
     type: RECEIVE_CURRENT_USER,
-    user
+    user,
+    recentNotes
 });
 
 const logoutCurrentUser = () => ({

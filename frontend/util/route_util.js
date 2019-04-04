@@ -8,14 +8,16 @@ import {
     withRouter
 } from 'react-router-dom';
 
-const msp = ({session: {currentUser: {id}}}) => ({
-    loggedIn: Boolean(id)
-});
+const msp = ({session: {currentUser: {id}}, ui: { recentNotes } }) => {
+    // debugger
+    return({
+    loggedIn: Boolean(id),
+    recentNotes
+});};
 
-const Auth = ({component: Component, path, loggedIn, exact}) => ( 
+const Auth = ({component: Component, path, loggedIn, exact, recentNotes}) => ( 
     <Route exact={exact} path={path} render={props => {
-
-        return ( loggedIn ? <Redirect to="/home" /> : <Component {...props}/> )}
+        return ( loggedIn ? <Redirect to={`/home/notes/${recentNotes.recentNoteId}`} /> : <Component {...props}/> ) }
     }/>
 );
 
