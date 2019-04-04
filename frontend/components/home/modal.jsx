@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link , withRouter} from 'react-router-dom';
 import { closeModal } from '../../actions/ui_actions';
 import * as noteActions from '../../actions/note_actions';
 import { merge, values } from 'lodash';
@@ -23,6 +23,7 @@ handleButton(btnType){
         case 'continue':
             return e => {
                 e.preventDefault();
+                debugger
                 return title === 'Delete note' ? patchNote(merge({}, note,{deleted_at: new Date()})).then(()=> closeModal()).then(() => history.push(`/home/notes/${nextId}`) ) : null;
             };
         default:
@@ -63,20 +64,22 @@ render(){
     }
 };
 
-const msp = ({  entities: {notes}, ui: { recentNotes: {recentNoteId, recentTrashId} , modal } }, { history, match: {path, params} } ) => {
-    let note;
-     if (params.noteId) {
-        note = notes[params.noteId];
-        } else {
-        note = path.includes('notes') ? notes[recentNoteId] : notes[recentTrashId];
-        }
+const msp = ({ entities: {notes},  ui: { modal } }, { history, match: {path, params}, note } ) => {
+    // let note;
+    //  if (params.noteId) {
+    //     note = notes[params.noteId];
+    //     } else {
+    //     note = path.includes('notes') ? notes[recentNoteId] : notes[recentTrashId];
+    //     }
     let nextId = '';
     if (_.values(notes).length >= 2) {
-        const allNotes = Object.values(notes);
+        const allNotes = _.values(notes);
         const notDeleted = notDeletedNotes(allNotes);
         const nextNote = secondMostRecentlyUpdatedNote(notDeleted);
         nextId = nextNote.id;
+        debugger
     } 
+    debugger
     return({
         modal,
         // currentNoteId,
@@ -92,4 +95,4 @@ const mdp = dispatch => ({
     patchNote: note => dispatch(noteActions.patchNote(note))
 })
 
-export default connect(msp,mdp)(Modal);
+export default withRouter(connect(msp,mdp)(Modal));

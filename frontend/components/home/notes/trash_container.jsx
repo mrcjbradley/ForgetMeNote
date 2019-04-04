@@ -12,7 +12,7 @@ const msp = (state , ownProps ) => {
     const { session: { currentUser: { note_sort_order } } } = state;
     const { history, match: {params} } = ownProps;
     const mostRecentId = params.noteId ? params.noteId : recentTrashId;
-    debugger
+    // debugger
         return ({
 
             notes: deletedNotes(_.values(notes)),

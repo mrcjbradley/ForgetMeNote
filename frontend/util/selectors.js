@@ -66,7 +66,7 @@
  }; 
 
  export const secondMostRecentlyUpdatedNote = (notes) => {
-    return orderNoteIndexItems(notes, 'Date updated: Most to least recent')[1]; 
+    return orderNoteIndexItems(notes, 'Date updated: Most to least recent')[2]; 
  }; 
 
  export const deletedNotes = (notes) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
+import Modal from '../modal';
 
 class NoteDetail extends React.Component {
     constructor(props){
@@ -13,24 +14,23 @@ class NoteDetail extends React.Component {
         debugger
     }
 
-    // componentDidMount(){
-    //     // if (oldProps.noteId !== newProps.noteId){
+    componentDidMount(){
         
-    //     const { getNote, note } = this.props;
-    //     // debugger
-    //     if (note) {
-    //     getNote(note.id).then(note => this.setState(note));//then(({note})=> {
-    //         //this.setState(note);
-    //     //});
-    //     }
-    // }
+        const { getNote, note } = this.props;
+        // debugger
+        // if (note) {
+        getNote(note.id);//then(({note})=> {
+            //this.setState(note);
+        //});
+        
+    }
 
     componentDidUpdate(prevProps, prevState){
         // const { getNote } = this.props;
-        if (prevProps.note.id !== this.props.note.id){
+        if (prevProps.note !== this.props.note){
             // debugger
             this.setState(this.props.note);
-            // getNote(this.props.note.id).then((note) => this.setState(note));
+            // getNote(this.props.note.id)//.then((note) => this.setState(note));
         }
     }
 
@@ -68,7 +68,7 @@ class NoteDetail extends React.Component {
     handleDeleteNote(e){
         const modal = {
             title: 'Delete note',
-            content: `${this.props.note.title} will be moved to trash.`
+            content: `${this.props.note.title} will be moved to trash.`,
         };
         this.props.openModal(modal);
     }
@@ -76,13 +76,13 @@ class NoteDetail extends React.Component {
     handleRestoreNote(e){
         const { patchNote, note, history, noteId } = this.props;
         const restoredNote = merge({}, note, {deleted_at: null});
-        patchNote(restoredNote).then((note) => history.push(`/home/notes/${noteId}`) );
+        patchNote(restoredNote).then(() => history.push(`/home/notes/`) );
 
     }
 
 render(){
-    // if (!this.props.note) return null;
-    // // debugger
+    if (!this.props.note) return null;
+    // debugger
     const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
@@ -92,6 +92,7 @@ render(){
     </div>)
     // debugger
     return(
+        <>
         <article className="NoteShow" >
             <form className="NoteShow_NoteForm">
                 <div className="NoteDetail_NoteHeader">
@@ -137,8 +138,16 @@ render(){
                 </div>
             </form>
         </article>
+        <Modal note={this.props.note} />
+        </>
     );
 }
 }
 
 export default NoteDetail;
+
+// <Switch>
+//     <Route path="/home/notes/:noteId" exact component={Modal} />
+//     <Route path="/home/notes" component={Modal} />
+//     <Route path="/home/trash" component={Modal} />
+// </Switch>

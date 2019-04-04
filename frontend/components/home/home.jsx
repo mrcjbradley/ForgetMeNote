@@ -5,17 +5,17 @@ import NoteIndex from './notes/note_index_container';
 import Trash from './notes/trash_container';
 import NoteDetail from './notes/note_detail_container';
 import { Route, Switch, Redirect} from 'react-router-dom';
-// import Modal from './modal';
-// import { connect } from 'react-redux';
+import Modal from './modal';
+import { connect } from 'react-redux';
 
-const Home = ({currentNoteId}) => {
-//debugger
+const Home = (props) => {
+// debugger
     
 
         return(
         <div className="HomeScreen">
-            {/* <Route path="/home" component={Modal} /> */}
-                <Route path="/home" component={HomeSidebar} />
+            
+            <Route path="/home" component={HomeSidebar} />
             <Switch>
                 <Route path="/home/notes/:noteId" exact component={NoteIndex} />
                 <Route path="/home/notes" component={NoteIndex} />
@@ -31,10 +31,12 @@ const Home = ({currentNoteId}) => {
         );
 }
 
-// const msp = ({session: { currentNoteId }}) => ({
-//     currentNoteId
-// });
+const msp = (state) => ({
+    state
+    // activeNotes: state.notes.activeNotes.map(id => notes[id]),
+    // trashedNotes: state.notes.trashedNotes.map(id => notes[id]),
+});
 
-export default Home;
+export default connect(msp)(Home);
 
 

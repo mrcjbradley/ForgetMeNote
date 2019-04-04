@@ -13,15 +13,22 @@ class NoteIndex extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            sortMenu: false
+            sortMenu: false,
+            notes: this.props.notes
         };
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
-    // debugger
+    debugger
     }
 
     componentDidMount(){
         const { getAllNotes } = this.props;
         getAllNotes();
+    }
+
+    componentDidUpdate(prevProps){
+        if (prevProps.notes !== this.props.notes){
+            this.setState({notes: this.props.notes});
+        }
     }
 
     handleMouseEnter(e){
@@ -95,14 +102,14 @@ class NoteIndex extends React.Component {
         }
 
     }
-
+    
     render(){
-        // debugger
-        if (this.props.notes.length === 0) return null;
+        debugger
+        if (this.state.notes.length === 0) return null;
         // debugger
         const { notes, fullscreen, headerText, mostRecentId} = this.props;
         const { sortMenu } = this.state;
-        const noteItems = this.orderNoteIndexItems(notes).map(note => {
+        const noteItems = this.orderNoteIndexItems(this.state.notes).map(note => {
            return <NoteIndexItem note={note} key={note.id} />
         });
         const tagsIcon = (
@@ -113,7 +120,7 @@ class NoteIndex extends React.Component {
                 </ul>
             </nav>
         )
-        const mostRecent = notes.filter(note => note.id === parseInt(mostRecentId));
+        const mostRecent = this.state.notes.filter(note => note.id === parseInt(mostRecentId));
         debugger
         return(
             <>
@@ -124,7 +131,7 @@ class NoteIndex extends React.Component {
                 </div>
             <div className="NoteIndex_NoteIndexDetails">
                 <span className="NoteIndex_NoteCount">
-                    {/* {notes.length} notes */}
+                    {notes.length} notes
                 </span>
                 <div className="NoteIndex_NoteTagsOptions">
                     <nav className="NoteIndex_NoteOptions">

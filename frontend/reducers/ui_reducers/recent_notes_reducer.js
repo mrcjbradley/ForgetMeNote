@@ -18,7 +18,8 @@ import {
 
 const _placeHolder = {
     recentNoteId: null,
-    recentTrashId: null
+    recentTrashId: null,
+    // currentNoteId: null
 };
 
 const recentNotesReducer = (oldState = _placeHolder, action) => {

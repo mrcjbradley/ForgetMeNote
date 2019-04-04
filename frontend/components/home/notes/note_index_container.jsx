@@ -11,8 +11,8 @@ const msp = (state , ownProps ) => {
     const { ui: { recentNotes: { recentNoteId, recentTrashId }, editorPreferences: { fullscreen }  } } = state;
     const { session: { currentUser: { note_sort_order } } } = state;
     const { history, match: { params } } = ownProps;
-    const mostRecentId = params.noteId ? params.noteId : recentNoteId;
-    
+    const mostRecentId = params.noteId ? params.noteId : state.ui.recentNotes.recentNoteId;
+    // debugger
     return ({
         notes: notDeletedNotes(_.values(notes)),
         note_sort_order,
