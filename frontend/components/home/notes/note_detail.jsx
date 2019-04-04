@@ -131,7 +131,7 @@ render(){
                     <textarea 
                     className="NoteDetail_NoteContent" 
                     onChange={this.handleChange('content')} 
-                    value={content} 
+                    value={content ? content : ''} 
                     disabled
                     onBlur={this.handleBlur}>
                     </textarea>
