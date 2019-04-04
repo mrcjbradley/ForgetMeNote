@@ -4,7 +4,7 @@ import { Link , withRouter} from 'react-router-dom';
 import { closeModal } from '../../actions/ui_actions';
 import * as noteActions from '../../actions/note_actions';
 import { merge, values } from 'lodash';
-import { secondMostRecentlyUpdatedNote, notDeletedNotes } from '../../util/selectors';
+import { secondMostRecentlyUpdatedNote, notDeletedNotes, mostRecentlyUpdatedNote } from '../../util/selectors';
 
 class Modal extends React.Component {
     constructor(props){
@@ -75,7 +75,7 @@ const msp = ({ entities: {notes},  ui: { modal } }, { history, match: {path, par
     if (_.values(notes).length >= 2) {
         const allNotes = _.values(notes);
         const notDeleted = notDeletedNotes(allNotes);
-        const nextNote = secondMostRecentlyUpdatedNote(notDeleted);
+        const nextNote = secondMostRecentlyUpdatedNote(notDeleted) ? secondMostRecentlyUpdatedNote(notDeleted) : mostRecentlyUpdatedNote(notDeleted);
         nextId = nextNote.id;
         
     } 
