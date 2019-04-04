@@ -7,24 +7,6 @@ import { withRouter } from 'react-router-dom';
 import { deletedNotes, notDeletedNotes } from '../../../util/selectors';
 
 const msp = (state, ownProps) => {
-    // const { entities: { notes }, ui: { recentNotes: { recentNoteId, recentTrashId } } } = state;
-    // const { history, match: { path, params: {noteId} } } = ownProps;
-    // let filtered = Object.values(notes);
-    // let note = {title: '', content: ''};
-    // 
-    // if (path.includes('/home/notes')) {
-    //     filtered = notDeletedNotes(filtered);
-    //     note = filtered[recentNoteId];
-    // }    
-    // if (path.includes('/home/trash')) {
-    //     
-    //     filtered = deletedNotes(filtered);    
-    //     note = filtered[recentTrashId];
-    // }    
-    // // if ( typeof noteId !== undefined ){
-    // //     debugger
-    // //     note = notes[noteId] ;
-    // // }
     
     return ({
         note: ownProps.note,

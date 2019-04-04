@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
 import Modal from '../modal';
+import NoteEditor from './editor';
 
 class NoteDetail extends React.Component {
     constructor(props){
@@ -11,26 +12,18 @@ class NoteDetail extends React.Component {
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
         this.handleDeleteNote = this.handleDeleteNote.bind(this);
         this.handleRestoreNote = this.handleRestoreNote.bind(this);
-        debugger
     }
 
     componentDidMount(){
-        
+        if (this.props.note){
         const { getNote, note } = this.props;
-        
-        // if (note) {
-        getNote(note.id);//then(({note})=> {
-            //this.setState(note);
-        //});
-        
+        getNote(note.id); 
+        }
     }
 
     componentDidUpdate(prevProps, prevState){
-        // const { getNote } = this.props;
         if (prevProps.note !== this.props.note){
-            
             this.setState(this.props.note);
-            // getNote(this.props.note.id)//.then((note) => this.setState(note));
         }
     }
 
@@ -57,7 +50,6 @@ class NoteDetail extends React.Component {
         this.props.toggleFullScreen();
         $('.js-expand-icon').toggleClass('green');
         $('.userNav_toggleMenu').toggle().delay(1000);
-
     }
 
     toggleMoreMenu(e){
@@ -77,7 +69,6 @@ class NoteDetail extends React.Component {
         const { patchNote, note, history, noteId } = this.props;
         const restoredNote = merge({}, note, {deleted_at: null});
         patchNote(restoredNote).then(() => history.push(`/home/notes/`) );
-
     }
 
 render(){
@@ -87,7 +78,7 @@ render(){
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
     const nbQuickLink = (<div className="NoteHeaderNav_NoteBookLinkWrapper">
-        <div className="bg--notebook-icon"></div>
+    <div className="bg--notebook-icon"></div>
         <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
     </div>)
     
@@ -121,13 +112,13 @@ render(){
                         <input type="text" 
                             className="NoteDetail_NoteTitle" 
                             onChange={this.handleChange('title')} 
-                            value={title} 
+                            value={title ? title : ''} 
                             disabled
                             onBlur={this.handleBlur}
                         />
                     </div>
                 </div>
-                <div className="NoteDetail_DisableWrapper" onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteContent")}>
+                {/* <div className="NoteDetail_DisableWrapper" onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteContent")}>
                     <textarea 
                     className="NoteDetail_NoteContent" 
                     onChange={this.handleChange('content')} 
@@ -135,7 +126,12 @@ render(){
                     disabled
                     onBlur={this.handleBlur}>
                     </textarea>
-                </div>
+                </div> */}
+                <NoteEditor 
+                className="NoteDetail_NoteContent" 
+                noteContent={content ? content : ''}
+                
+                         />
             </form>
         </article>
         <Modal note={this.props.note} />
@@ -145,9 +141,3 @@ render(){
 }
 
 export default NoteDetail;
-
-// <Switch>
-//     <Route path="/home/notes/:noteId" exact component={Modal} />
-//     <Route path="/home/notes" component={Modal} />
-//     <Route path="/home/trash" component={Modal} />
-// </Switch>
