@@ -18,11 +18,11 @@ class NoteIndexItem extends React.Component {
     }
 
     render(){
-        const { note, active, getNote } = this.props;
+        const { note, getNote } = this.props;
         const navPath = typeof note.deleted_at === 'string' ? '/home/trash/' : '/home/notes/';
         return(
-            <li className={"NoteItem" + active}>
-            <NavLink to={`${navPath}${note.id}`} >
+            <li className={"NoteItem"}>
+            <NavLink to={`${navPath}${note.id}`}  >
                     <div className="NoteItem_NoteTitle">
                         {note.title}
                     </div>
@@ -38,11 +38,12 @@ class NoteIndexItem extends React.Component {
     }
 }
 
-const msp = ({ui: {recentNotes: {recentNoteId, recentTrashId}}}, { note }) => {
-    const active = note.id === recentNoteId || recentTrashId ? " active" : "";
+const msp = ({ui: {recentNotes: {recentNoteId, recentTrashId}}}, { note, active }) => {
+    // const active = note.id === activeId ? " active" : "";
+    debugger
     return ({
         note,
-        active
+        // active
     });
 };
 

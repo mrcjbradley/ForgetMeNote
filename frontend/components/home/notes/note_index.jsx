@@ -14,7 +14,8 @@ class NoteIndex extends React.Component {
         super(props);
         this.state = {
             sortMenu: false,
-            notes: this.props.notes
+            notes: this.props.notes,
+            mostRecentId: this.props.mostRecentId
         };
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
         this.handleEmptyTrash = this.handleEmptyTrash.bind(this);
@@ -26,8 +27,10 @@ class NoteIndex extends React.Component {
     }
 
     componentDidUpdate(prevProps){
+        $('.NoteItem').removeClass('active');
+        $('.NoteItem a.active').parent().toggleClass('active');
         if (prevProps.notes !== this.props.notes){
-            this.setState({notes: this.props.notes});
+            this.setState({notes: this.props.notes, mostRecentId: this.props.mostRecentId});
         }
     }
 
@@ -109,11 +112,12 @@ class NoteIndex extends React.Component {
     }
     
     render(){
-        debugger
+        //debugger
         if (this.state.notes.length === 0) return null;
         // debugger
         const { notes, fullscreen, headerText, mostRecentId} = this.props;
         const { sortMenu } = this.state;
+        // const activeSignifier = headerText === 'Trash' ? recentTrashId : recentNoteId ;
         const noteItems = this.orderNoteIndexItems(this.state.notes).map(note => {
            return <NoteIndexItem note={note} key={note.id} />
         });

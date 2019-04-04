@@ -456,7 +456,7 @@ $beige: rgb(248, 248, 248);
         color: inherit;
     }
 
-    &:hover, /*&.active*/ {
+    &:hover, &.active {
         background: $dark-beige;
     }
     @include pointer;

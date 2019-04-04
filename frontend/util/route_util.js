@@ -17,7 +17,7 @@ const msp = ({session: {currentUser: {id}}, ui: { recentNotes } }) => {
 
 const Auth = ({component: Component, path, loggedIn, exact, recentNotes}) => ( 
     <Route exact={exact} path={path} render={props => {
-        return ( loggedIn ? <Redirect to={`/home/notes/${recentNotes.recentNoteId}`} /> : <Component {...props}/> ) }
+        return ( loggedIn ? <Redirect to={`/home/notes/`} /> : <Component {...props}/> ) }
     }/>
 );
 
