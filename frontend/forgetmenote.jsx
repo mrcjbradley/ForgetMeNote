@@ -20,11 +20,10 @@ import {
 
 document.addEventListener('DOMContentLoaded', () => {
     let store;
-    if (window.unforgotten.user.user) {
-        const preloadedState = { session: { currentUser: window.unforgotten.user.user }, ui: { recentNotes:  window.unforgotten.user.recentNotes  } }; 
-        
+    if (window.currentUser) {
+        const preloadedState = { session: { currentUser: window.currentUser.user }, ui: { recentNotes:  window.currentUser.recentNotes  } }; 
         store = configureStore(preloadedState);
-        // delete window.currentUser; 
+        delete window.currentUser; 
     } else {
             store = configureStore();
     }
