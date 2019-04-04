@@ -28,9 +28,16 @@ export const postNote = note => (
     })
 );
 
-export const deleteNote = noteId => (
+export const deleteNote = notes => (
     $.ajax({
         method: 'delete',
         url: `/api/notes/${noteId}`
+    })
+);
+
+export const emptyTrash = () => (
+    $.ajax({
+        method: 'delete',
+        url: '/api/trash/empty_trash'
     })
 );

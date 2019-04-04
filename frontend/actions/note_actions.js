@@ -78,3 +78,10 @@ export const deleteNote = noteId => dispatch => (
     .then(({noteId}) => dispatch(removeNote(noteId)),
     errors => dispatch(receiveNoteErrors(errors.responseJSON)))
 );
+
+export const emptyTrash = () => dispatch => (
+    NoteApiUtil.emptyTrash()
+    .then(notes => dispatch(receiveAllNotes(notes))));
+    //,
+   // errors => dispatch(receiveNoteErrors(errors.responseJSON)))
+//);

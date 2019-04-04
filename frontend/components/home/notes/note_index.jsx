@@ -1,7 +1,7 @@
 import React from 'react';
 import NoteIndexItem from './note_index_item';
 import NoteOptionsSortMenu from './note_options_sort_menu';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch, Link } from 'react-router-dom';
 import NoteDetail from './note_detail_container';
 import { mostRecentlyUpdatedNote } from '../../../util/selectors';
 
@@ -17,7 +17,7 @@ class NoteIndex extends React.Component {
             notes: this.props.notes
         };
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
-    debugger
+        this.handleEmptyTrash = this.handleEmptyTrash.bind(this);
     }
 
     componentDidMount(){
@@ -41,6 +41,11 @@ class NoteIndex extends React.Component {
 
     toggleSortDisplay(e){
         this.setState({sortMenu: !this.state.sortMenu});
+    }
+
+    handleEmptyTrash(e){
+        e.preventDefault();
+        this.props.emptyTrash();
     }
 
     orderNoteIndexItems(notes){
@@ -120,14 +125,17 @@ class NoteIndex extends React.Component {
                 </ul>
             </nav>
         )
+        const emptyTrashBtn = (
+            <Link to='#' className='emptyTrashBtn' onClick={this.handleEmptyTrash}>empty trash</Link>
+        )
         const mostRecent = this.state.notes.filter(note => note.id === parseInt(mostRecentId));
-        debugger
         return(
             <>
         <aside className={ fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
             <header className="NoteIndex_NoteIndexHeader">
                 <div className="NoteIndex_NoteIndexTitle">
                     <h1 className="">{headerText}</h1>
+                    {headerText === 'Trash' ? emptyTrashBtn : null}
                 </div>
             <div className="NoteIndex_NoteIndexDetails">
                 <span className="NoteIndex_NoteCount">

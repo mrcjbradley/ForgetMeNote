@@ -1,5 +1,5 @@
 import React from 'react';
-import { getAllNotes, getNote } from '../../../actions/note_actions';
+import { getAllNotes, getNote, emptyTrash } from '../../../actions/note_actions';
 import { connect } from 'react-redux';
 import { deletedNotes, mostRecentlyUpdatedNote  } from '../../../util/selectors';
 import NoteIndex from './note_index';
@@ -27,7 +27,8 @@ const msp = (state , ownProps ) => {
 };
 
 const mdp = dispatch => ({
-    getAllNotes: () => dispatch(getAllNotes())
+    getAllNotes: () => dispatch(getAllNotes()),
+    emptyTrash: () => dispatch(emptyTrash())
 });
 
 

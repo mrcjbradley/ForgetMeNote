@@ -65,6 +65,11 @@ class Api::NotesController < ApplicationController
         render json: { noteId: @note.id }
     end
 
+    def empty_trash
+        @notes = current_user.notes.where.not(deleted_at: nil)
+        @notes.destroy_all
+        render :index
+    end
     def note_params
         params.require(:note).permit(:title, :content, :fav, :deleted_at)
     end
