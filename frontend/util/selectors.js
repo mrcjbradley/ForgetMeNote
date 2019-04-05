@@ -70,7 +70,7 @@
  }; 
 
  export const deletedNotes = (notes) => {
-    //  debugger
+
     return notes.filter(note => note.deleted_at !== null);
  };
 

@@ -48,7 +48,7 @@ class NoteDetail extends React.Component
 
     handleBlur(e)
     {
-        // debugger
+
         const { patchNote } = this.props;
         setTimeout(() => patchNote(this.state), 1000);
     }

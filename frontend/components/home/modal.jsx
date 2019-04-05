@@ -29,7 +29,6 @@ class Modal extends React.Component
                 return e =>
                 {
                     e.preventDefault();
-                    debugger
                     return title === 'Delete note' ? patchNote(merge({}, note, { deleted_at: new Date() })).then(() => closeModal()).then(() => history.push(`/home/notes/${nextId}`)) : null;
                 };
             default:
@@ -88,7 +87,6 @@ const msp = ({ ui: { modal } }, { history, match: { path, params }, note, notes 
         // const notDeleted = notDeletedNotes(notes);
         const nextNote = secondMostRecentlyUpdatedNote(notes) ? secondMostRecentlyUpdatedNote(notes) : mostRecentlyUpdatedNote(notes);
         nextId = nextNote.id;
-debugger
     }
     return ({
         modal,

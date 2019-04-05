@@ -130,7 +130,7 @@ class NoteIndex extends React.Component
 
     render()
     {
-        //debugger
+
         // if (this.state.notes.length === 0) return null;
 
         const { notes, fullscreen, headerText, mostRecentId } = this.props;
@@ -154,7 +154,7 @@ class NoteIndex extends React.Component
         const emptyTrashBtn = (
             <Link to='#' className='emptyTrashBtn' onClick={this.handleEmptyTrash}>empty trash</Link>
         )
-        debugger
+
         let mostRecent;
         if (this.state.notes.length > 0){
          mostRecent = this.state.notes.filter(note => note.id === parseInt(mostRecentId));
