@@ -30,16 +30,20 @@ const recentNotesReducer = (oldState = _placeHolder, action) => {
         case RECEIVE_ALL_NOTES:
             const deleted = deletedNotes(_.values(action.notes));
             const notDeleted = notDeletedNotes(_.values(action.notes));
-            const newRecents = { 
-                recentNoteId: mostRecentlyUpdatedNote(notDeleted).id, 
+            const newRecents = {
+                recentNoteId: notDeleted.length === 0 ? -1 : mostRecentlyUpdatedNote(notDeleted).id,
                 recentTrashId: deleted.length === 0 ? -1 : mostRecentlyUpdatedNote(deleted).id
             };
             return merge({}, oldState, newRecents);
         case RECEIVE_NOTE:
-            const recentNote = {recentNoteId: action.note.id};
+            const recentNote = {
+                recentNoteId: action.note.id
+            };
             return merge({}, oldState, recentNote);
         case RECEIVE_DELETED_NOTE:
-            const recentTrash = {recentTrashId: action.note.id};
+            const recentTrash = {
+                recentTrashId: action.note.id
+            };
             return merge({}, oldState, recentTrash);
         default:
             return oldState;

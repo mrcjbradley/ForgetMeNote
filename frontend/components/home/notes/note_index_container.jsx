@@ -6,10 +6,11 @@ import NoteIndex from './note_index';
 import { values } from 'lodash';
 
 
-const msp = (state , ownProps ) => {
+const msp = (state, ownProps) =>
+{
     const { entities: { notes } } = state;
-    const { ui: { recentNotes: { recentNoteId, recentTrashId }, editorPreferences: { fullscreen }  } } = state;
-    const { session: { currentUser: { note_sort_order } } } = state;
+    const { ui: { recentNotes: { recentNoteId, recentTrashId }, editorPreferences: { fullscreen } } } = state;
+    const { session: { currentUser: { note_sort_order , default_notebook_id} } } = state;
     const { history, match: { params } } = ownProps;
     const mostRecentId = params.noteId ? params.noteId : state.ui.recentNotes.recentNoteId;
     const emptyIndexNote = {
@@ -18,7 +19,7 @@ const msp = (state , ownProps ) => {
         deleted_at: null,
         fav: false,
         id: -1,
-        notebook_id: 547,
+        notebook_id: default_notebook_id,
         title: "You have no notes!",
         updated_at: `${new Date()}`
     };
@@ -28,7 +29,8 @@ const msp = (state , ownProps ) => {
         history,
         fullscreen,
         headerText: 'All Notes',
-        mostRecentId
+        mostRecentId,
+        fillerNote: emptyIndexNote
     });
 }
 
