@@ -8,6 +8,7 @@ import ReactQuill from 'react-quill';
 class NoteDetail extends React.Component {
     constructor(props){
         super(props);
+        
         this.state = this.props.note;
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -89,7 +90,7 @@ class NoteDetail extends React.Component {
 render(){
     if (!this.props.note) return null;
     
-    const { title, content, viewOnly } = this.state;
+    const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
     const nbQuickLink = (
@@ -125,37 +126,39 @@ render(){
                         </nav>
                     </nav>
                     {/* <span className="BlurSave" onBlur={this.handleBlur}> */}
-                        <div className="NoteShow_ToolBar" id="tool" style={ {display: 'none'}}>
-                                <span className="ql-formats">
-                                    <select className="ql-font"></select>
-                                    <select className="ql-size"></select>
-                                    <select className="ql-color"></select>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-strike"></button>
-                                    <select class="ql-background"></select>
-                                    <button class="ql-code-block"></button>
-                                </span>
-                                <span className="ql-formats">
-                                    <button class="ql-list" value="ordered"></button>
-                                    <button class="ql-list" value="bullet"></button>
-                                </span>
-                                <span className="ql-formats"><button class="ql-link"></button></span>
-                                <span className="ql-formats">
-                                    <select class="ql-align"></select>
-                                    <button className="ql-indent" value="-1" />
-                                    <button className="ql-indent" value="+1" />
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-script" value="sub"></button>
-                                    <button class="ql-script" value="super"></button>
-                                </span>
-                                <span class="ql-formats">
-                                    <button class="ql-clean"></button>
-                                </span>
+                        <div className="spacerForToolBar">
+                            <div className="NoteShow_ToolBar" id="tool" style={ {display: 'none'}}>
+                                    <span className="ql-formats">
+                                        <select className="ql-font"></select>
+                                        <select className="ql-size"></select>
+                                        <select className="ql-color"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold"></button>
+                                        <button class="ql-italic"></button>
+                                        <button class="ql-underline"></button>
+                                        <button class="ql-strike"></button>
+                                        <select class="ql-background"></select>
+                                        <button class="ql-code-block"></button>
+                                    </span>
+                                    <span className="ql-formats">
+                                        <button class="ql-list" value="ordered"></button>
+                                        <button class="ql-list" value="bullet"></button>
+                                    </span>
+                                    <span className="ql-formats"><button class="ql-link"></button></span>
+                                    <span className="ql-formats">
+                                        <select class="ql-align"></select>
+                                        <button className="ql-indent" value="-1" />
+                                        <button className="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub"></button>
+                                        <button class="ql-script" value="super"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean"></button>
+                                    </span>
+                            </div>
                         </div>
                         {/* onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteTitle")}  */}
                         <div className="NoteDetail_DisableWrapper" onBlur={this.handleBlur} >

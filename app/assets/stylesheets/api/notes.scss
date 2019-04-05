@@ -500,8 +500,8 @@ $beige: rgb(248, 248, 248);
 }
 
 .NoteShow {
-    min-width: calc(100vw-586px);
-    max-width: 100vw;
+    max-width: calc(100%-586px);
+    // max-width: 100vw;
     width: 100%;
     height: 100%;
     // max-width: 800px;
@@ -627,7 +627,7 @@ $beige: rgb(248, 248, 248);
     width: 100%;
     display: block;
     box-sizing: content-box;
-    height: 24px;
+    height: fit-content;
     padding: 5px 0 10px;
     margin: 0 40px;
 }
@@ -647,13 +647,15 @@ $beige: rgb(248, 248, 248);
 
 .NoteDetail_DisableWrapper {
     height: inherit;
+    display:flex;
+    flex-direction: column;
 }
 
 .NoteDetail_NoteContent {
     border: 0;
-    display: block;
-    // width: 100%;
-    height: 100%;
+    // display: flex;
+    // max-width: 800px;
+    height: 100vh;
     resize:none;
     font-size: 14px;
     font-weight: 300;
@@ -776,4 +778,23 @@ $beige: rgb(248, 248, 248);
             color: white;
             font-weight: 500;
         }
+}
+
+
+div.quill .ql-container.ql-snow {
+    border: none;
+}
+
+.NoteDetail_NoteHeader .ql-toolbar.ql-snow {
+    border-top: none;
+    border-left:none;
+    border-right:none;
+    border-bottom: 1px solid #ededed;
+}
+
+div.ql-editor {
+    padding-left: 0;
+}
+.spacerForToolBar {
+    height: 41.875px;
 }
