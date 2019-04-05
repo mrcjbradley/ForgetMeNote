@@ -499,10 +499,13 @@ $beige: rgb(248, 248, 248);
 }
 
 .NoteShow {
+    min-width: calc(100vw-586px);
+    max-width: 100vw;
     width: 100%;
     height: 100%;
     // max-width: 800px;
     display: flex;
+    flex-direction: column;
 }
 
 .NoteShow_NoteForm {
@@ -522,7 +525,7 @@ $beige: rgb(248, 248, 248);
     justify-content: space-between;
     height: 54px;
     border-bottom: 1px solid #ededed;
-    margin: 0px 20px;
+    // margin: 0px 20px;
 }
 
 .NoteHeaderNav_left {
@@ -648,7 +651,7 @@ $beige: rgb(248, 248, 248);
 .NoteDetail_NoteContent {
     border: 0;
     display: block;
-    width: 100%;
+    // width: 100%;
     height: 100%;
     resize:none;
     font-size: 14px;

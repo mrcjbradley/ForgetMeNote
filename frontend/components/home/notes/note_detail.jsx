@@ -2,13 +2,16 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
 import Modal from '../modal';
-import NoteEditor from './editor';
+import ReactQuill from 'react-quill';
+
 
 class NoteDetail extends React.Component {
     constructor(props){
         super(props);
         this.state = this.props.note;
         this.handleBlur = this.handleBlur.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleEditorChange = this.handleEditorChange.bind(this);
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
         this.handleDeleteNote = this.handleDeleteNote.bind(this);
         this.handleRestoreNote = this.handleRestoreNote.bind(this);
@@ -28,6 +31,7 @@ class NoteDetail extends React.Component {
     }
 
     handleChange(field){
+        debugger
         return e => {
             this.setState({[field]: e.target.value});
         };
@@ -57,6 +61,10 @@ class NoteDetail extends React.Component {
         $('.js-more-menu').toggle();
     }
 
+    handleEditorChange(value){
+        this.setState({content: value});
+    }
+
     handleDeleteNote(e){
         const modal = {
             title: 'Delete note',
@@ -77,11 +85,26 @@ render(){
     const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
-    const nbQuickLink = (<div className="NoteHeaderNav_NoteBookLinkWrapper">
-    <div className="bg--notebook-icon"></div>
+    const nbQuickLink = (
+    <div className="NoteHeaderNav_NoteBookLinkWrapper">
+        <div className="bg--notebook-icon"></div>
         <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
-    </div>)
+    </div>
+    )
     
+    const toolbar = [
+        [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }, {'color': []}],
+        ['bold', 'italic', 'underline','strike',{'background':[]}, 'code-block'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+        ['link'], //add attachments to this block in the future
+        //grid and horizon
+        [{ 'align': [] }, { 'indent': '-1' }, { 'indent': '+1' }], 
+        [{ 'script': 'sub' }, { 'script': 'super' }],  
+        ['clean']
+
+
+    ]
+
     return(
         <>
         <article className="NoteShow" >
@@ -127,11 +150,12 @@ render(){
                     onBlur={this.handleBlur}>
                     </textarea>
                 </div> */}
-                <NoteEditor 
+                <ReactQuill 
+                modules={{toolbar}}
                 className="NoteDetail_NoteContent" 
-                noteContent={content ? content : ''}
-                
-                         />
+                value={this.state.content || ''}
+                onBlur={this.handleBlur}
+                onChange={this.handleEditorChange} />
             </form>
         </article>
         <Modal note={this.props.note} />
