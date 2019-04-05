@@ -2,54 +2,58 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
 import Modal from '../modal';
+import ReactQuill from 'react-quill';
+
 
 class NoteDetail extends React.Component {
     constructor(props){
         super(props);
+        
         this.state = this.props.note;
         this.handleBlur = this.handleBlur.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleEditorChange = this.handleEditorChange.bind(this);
         this.toggleFullScreen = this.toggleFullScreen.bind(this);
         this.handleDeleteNote = this.handleDeleteNote.bind(this);
         this.handleRestoreNote = this.handleRestoreNote.bind(this);
-        debugger
     }
 
     componentDidMount(){
-        
+        if (this.props.note){
         const { getNote, note } = this.props;
-        
-        // if (note) {
-        getNote(note.id);//then(({note})=> {
-            //this.setState(note);
-        //});
-        
+        getNote(note.id); 
+        }
     }
 
     componentDidUpdate(prevProps, prevState){
-        // const { getNote } = this.props;
         if (prevProps.note !== this.props.note){
-            
             this.setState(this.props.note);
-            // getNote(this.props.note.id)//.then((note) => this.setState(note));
         }
     }
 
     handleChange(field){
+
         return e => {
             this.setState({[field]: e.target.value});
         };
     }
 
     handleBlur(e){
+        // debugger
         const { patchNote } = this.props;
-        patchNote(this.state);
+        setTimeout( () => patchNote(this.state) , 1000);
     }
 
-    toggleDisabled(klass){
-        return e => {
-       $(`.${klass}`).removeAttr('disabled').focus();
-        };
-    } 
+    // toggleDisabled(klass){
+    //     return e => {
+    //    $(`.${klass}`).removeAttr('disabled').focus();
+        
+    //     };
+    // } 
+
+    displayTools(e){
+        $('#tool').css("display", "inherit");
+    }
 
     toggleFullScreen(e){
         
@@ -57,12 +61,16 @@ class NoteDetail extends React.Component {
         this.props.toggleFullScreen();
         $('.js-expand-icon').toggleClass('green');
         $('.userNav_toggleMenu').toggle().delay(1000);
-
     }
 
     toggleMoreMenu(e){
         e.preventDefault();
         $('.js-more-menu').toggle();
+    }
+
+    handleEditorChange(value, delta, source, editor){
+        this.setState({content: value, plain_text: editor.getText()});
+
     }
 
     handleDeleteNote(e){
@@ -77,7 +85,6 @@ class NoteDetail extends React.Component {
         const { patchNote, note, history, noteId } = this.props;
         const restoredNote = merge({}, note, {deleted_at: null});
         patchNote(restoredNote).then(() => history.push(`/home/notes/`) );
-
     }
 
 render(){
@@ -86,11 +93,13 @@ render(){
     const { title, content } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
-    const nbQuickLink = (<div className="NoteHeaderNav_NoteBookLinkWrapper">
+    const nbQuickLink = (
+    <div className="NoteHeaderNav_NoteBookLinkWrapper">
         <div className="bg--notebook-icon"></div>
         <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
-    </div>)
-    
+    </div>
+    )
+
     return(
         <>
         <article className="NoteShow" >
@@ -116,26 +125,66 @@ render(){
                             </div>
                         </nav>
                     </nav>
-                    <div className="NoteShow_ToolBar"></div>
-                    <div className="NoteDetail_DisableWrapper" onClick={ isDeleted ?  null : this.toggleDisabled("NoteDetail_NoteTitle")}>
-                        <input type="text" 
-                            className="NoteDetail_NoteTitle" 
-                            onChange={this.handleChange('title')} 
-                            value={title} 
-                            disabled
-                            onBlur={this.handleBlur}
-                        />
+                    {/* <span className="BlurSave" onBlur={this.handleBlur}> */}
+                        <div className="spacerForToolBar">
+                            <div className="NoteShow_ToolBar" id="tool" style={ {display: 'none'}}>
+                                    <span className="ql-formats">
+                                        <select className="ql-font"></select>
+                                        <select className="ql-size"></select>
+                                        <select className="ql-color"></select>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold"></button>
+                                        <button class="ql-italic"></button>
+                                        <button class="ql-underline"></button>
+                                        <button class="ql-strike"></button>
+                                        <select class="ql-background"></select>
+                                        <button class="ql-code-block"></button>
+                                    </span>
+                                    <span className="ql-formats">
+                                        <button class="ql-list" value="ordered"></button>
+                                        <button class="ql-list" value="bullet"></button>
+                                    </span>
+                                    <span className="ql-formats"><button class="ql-link"></button></span>
+                                    <span className="ql-formats">
+                                        <select class="ql-align"></select>
+                                        <button className="ql-indent" value="-1" />
+                                        <button className="ql-indent" value="+1" />
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-script" value="sub"></button>
+                                        <button class="ql-script" value="super"></button>
+                                    </span>
+                                    <span class="ql-formats">
+                                        <button class="ql-clean"></button>
+                                    </span>
+                            </div>
+                        </div>
+                        {/* onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteTitle")}  */}
+                        <div className="NoteDetail_DisableWrapper" onBlur={this.handleBlur} >
+                            <input type="text" 
+                                className="NoteDetail_NoteTitle" 
+                                onChange={this.handleChange('title')} 
+                                value={title ? title : ''} 
+                                disabled={ isDeleted ? true : false}
+                                onFocus={() => $('#tool').css("display", "none")}
+                                />
+                            <div onClick={isDeleted ? null : this.displayTools}>
+                                    <ReactQuill 
+                                    modules={ { toolbar: {container: '#tool'} }}
+                                    // hideToolBar={viewOnly}
+                                    className="NoteDetail_NoteContent" 
+                                    value={content || ''}
+                                    readOnly={ isDeleted }
+                                    // onBlur={this.handleBlur}
+                                    onChange={this.handleEditorChange} 
+                                    />
+                                </div>
+                        </div>
+                    {/* </span> */}
                     </div>
-                </div>
-                <div className="NoteDetail_DisableWrapper" onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteContent")}>
-                    <textarea 
-                    className="NoteDetail_NoteContent" 
-                    onChange={this.handleChange('content')} 
-                    value={content ? content : ''} 
-                    disabled
-                    onBlur={this.handleBlur}>
-                    </textarea>
-                </div>
+                        
+     
             </form>
         </article>
         <Modal note={this.props.note} />
@@ -145,9 +194,3 @@ render(){
 }
 
 export default NoteDetail;
-
-// <Switch>
-//     <Route path="/home/notes/:noteId" exact component={Modal} />
-//     <Route path="/home/notes" component={Modal} />
-//     <Route path="/home/trash" component={Modal} />
-// </Switch>

@@ -3,7 +3,7 @@ class Api::UsersController < ApplicationController
         @user = User.new(user_params)
         if @user.save
             @user.update(default_notebook: @user.notebooks.create(title: 'First Notebook'))
-            @user.default_notebook.notes.create(title: 'Tips for getting started')
+            @user.default_notebook.notes.create(title: 'Your first note!')
             log_in!(@user)
             render :show
         else

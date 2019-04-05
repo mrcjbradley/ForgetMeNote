@@ -118,7 +118,7 @@ class NoteIndex extends React.Component {
         const { notes, fullscreen, headerText, mostRecentId} = this.props;
         const { sortMenu } = this.state;
         // const activeSignifier = headerText === 'Trash' ? recentTrashId : recentNoteId ;
-        const noteItems = this.orderNoteIndexItems(this.state.notes).map(note => {
+        const noteItems = this.orderNoteIndexItems(this.props.notes).map(note => {
             
             return note.id === -1 ? null : <NoteIndexItem note={note} key={note.id} />
         });

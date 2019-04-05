@@ -27,7 +27,7 @@ class NoteIndexItem extends React.Component {
                         {note.title}
                     </div>
                     <div className="NoteItem_NoteContent">
-                        {this.previewGenerator(note.content)}
+                        {this.previewGenerator(note.plain_text)}
                     </div>
                     <div className="NoteItem_NoteUpdated">
                         <TimeAgo date={note.updated_at} />
@@ -39,11 +39,8 @@ class NoteIndexItem extends React.Component {
 }
 
 const msp = ({ui: {recentNotes: {recentNoteId, recentTrashId}}}, { note, active }) => {
-    // const active = note.id === activeId ? " active" : "";
-    debugger
     return ({
-        note,
-        // active
+        note
     });
 };
 

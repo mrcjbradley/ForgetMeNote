@@ -18,6 +18,7 @@ class Note < ApplicationRecord
     validates :fav, inclusion: { in: [true, false]}
 
     after_initialize :ensure_title, :ensure_fav
+    before_save :ensure_plain_text
 
     def ensure_title
         self.title = self.title || "untitled"
@@ -25,6 +26,12 @@ class Note < ApplicationRecord
     
     def ensure_fav
         self.fav = self.fav || "false"
+    end
+
+    def ensure_plain_text
+        if self.content
+            self.plain_text = self.plain_text ? self.plain_text : self.content
+        end
     end
 
     belongs_to :notebook

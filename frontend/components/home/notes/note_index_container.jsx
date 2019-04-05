@@ -12,9 +12,18 @@ const msp = (state , ownProps ) => {
     const { session: { currentUser: { note_sort_order } } } = state;
     const { history, match: { params } } = ownProps;
     const mostRecentId = params.noteId ? params.noteId : state.ui.recentNotes.recentNoteId;
-    
+    const emptyIndexNote = {
+        content: "",
+        created_at: `${new Date()}`,
+        deleted_at: null,
+        fav: false,
+        id: -1,
+        notebook_id: 547,
+        title: "You have no notes!",
+        updated_at: `${new Date()}`
+    };
     return ({
-        notes: notDeletedNotes(_.values(notes)),
+        notes: recentNoteId === -1 ? [emptyIndexNote] : notDeletedNotes(_.values(notes)),
         note_sort_order,
         history,
         fullscreen,
