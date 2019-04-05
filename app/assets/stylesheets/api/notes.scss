@@ -62,7 +62,7 @@ $beige: rgb(248, 248, 248);
         width: 0px;
         min-width: 0px;
         opacity: 0;
-        z-index: 0;
+        z-index: -500;
     }
 }
 
@@ -287,6 +287,7 @@ $beige: rgb(248, 248, 248);
         width: 0px;
         min-width: 0px;
         opacity: 0;
+        z-index: -1;
     }
 
 }

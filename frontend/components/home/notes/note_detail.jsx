@@ -31,22 +31,28 @@ class NoteDetail extends React.Component {
     }
 
     handleChange(field){
-        debugger
+
         return e => {
             this.setState({[field]: e.target.value});
         };
     }
 
     handleBlur(e){
+        // debugger
         const { patchNote } = this.props;
-        patchNote(this.state);
+        setTimeout( () => patchNote(this.state) , 1000);
     }
 
-    toggleDisabled(klass){
-        return e => {
-       $(`.${klass}`).removeAttr('disabled').focus();
-        };
-    } 
+    // toggleDisabled(klass){
+    //     return e => {
+    //    $(`.${klass}`).removeAttr('disabled').focus();
+        
+    //     };
+    // } 
+
+    displayTools(e){
+        $('#tool').css("display", "inherit");
+    }
 
     toggleFullScreen(e){
         
@@ -61,8 +67,9 @@ class NoteDetail extends React.Component {
         $('.js-more-menu').toggle();
     }
 
-    handleEditorChange(value){
-        this.setState({content: value});
+    handleEditorChange(value, delta, source, editor){
+        this.setState({content: value, plain_text: editor.getText()});
+
     }
 
     handleDeleteNote(e){
@@ -82,7 +89,7 @@ class NoteDetail extends React.Component {
 render(){
     if (!this.props.note) return null;
     
-    const { title, content } = this.state;
+    const { title, content, viewOnly } = this.state;
     const { deleted_at } = this.props.note;
     const isDeleted = Boolean(typeof deleted_at === 'string');
     const nbQuickLink = (
@@ -91,19 +98,6 @@ render(){
         <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
     </div>
     )
-    
-    const toolbar = [
-        [{ 'font': [] }, { 'size': ['small', false, 'large', 'huge'] }, {'color': []}],
-        ['bold', 'italic', 'underline','strike',{'background':[]}, 'code-block'],
-        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-        ['link'], //add attachments to this block in the future
-        //grid and horizon
-        [{ 'align': [] }, { 'indent': '-1' }, { 'indent': '+1' }], 
-        [{ 'script': 'sub' }, { 'script': 'super' }],  
-        ['clean']
-
-
-    ]
 
     return(
         <>
@@ -130,32 +124,64 @@ render(){
                             </div>
                         </nav>
                     </nav>
-                    <div className="NoteShow_ToolBar"></div>
-                    <div className="NoteDetail_DisableWrapper" onClick={ isDeleted ?  null : this.toggleDisabled("NoteDetail_NoteTitle")}>
-                        <input type="text" 
-                            className="NoteDetail_NoteTitle" 
-                            onChange={this.handleChange('title')} 
-                            value={title ? title : ''} 
-                            disabled
-                            onBlur={this.handleBlur}
-                        />
+                    {/* <span className="BlurSave" onBlur={this.handleBlur}> */}
+                        <div className="NoteShow_ToolBar" id="tool" style={ {display: 'none'}}>
+                                <span className="ql-formats">
+                                    <select className="ql-font"></select>
+                                    <select className="ql-size"></select>
+                                    <select className="ql-color"></select>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-strike"></button>
+                                    <select class="ql-background"></select>
+                                    <button class="ql-code-block"></button>
+                                </span>
+                                <span className="ql-formats">
+                                    <button class="ql-list" value="ordered"></button>
+                                    <button class="ql-list" value="bullet"></button>
+                                </span>
+                                <span className="ql-formats"><button class="ql-link"></button></span>
+                                <span className="ql-formats">
+                                    <select class="ql-align"></select>
+                                    <button className="ql-indent" value="-1" />
+                                    <button className="ql-indent" value="+1" />
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-script" value="sub"></button>
+                                    <button class="ql-script" value="super"></button>
+                                </span>
+                                <span class="ql-formats">
+                                    <button class="ql-clean"></button>
+                                </span>
+                        </div>
+                        {/* onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteTitle")}  */}
+                        <div className="NoteDetail_DisableWrapper" onBlur={this.handleBlur} >
+                            <input type="text" 
+                                className="NoteDetail_NoteTitle" 
+                                onChange={this.handleChange('title')} 
+                                value={title ? title : ''} 
+                                disabled={ isDeleted ? true : false}
+                                onFocus={() => $('#tool').css("display", "none")}
+                                />
+                            <div onClick={isDeleted ? null : this.displayTools}>
+                                    <ReactQuill 
+                                    modules={ { toolbar: {container: '#tool'} }}
+                                    // hideToolBar={viewOnly}
+                                    className="NoteDetail_NoteContent" 
+                                    value={content || ''}
+                                    readOnly={ isDeleted }
+                                    // onBlur={this.handleBlur}
+                                    onChange={this.handleEditorChange} 
+                                    />
+                                </div>
+                        </div>
+                    {/* </span> */}
                     </div>
-                </div>
-                {/* <div className="NoteDetail_DisableWrapper" onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteContent")}>
-                    <textarea 
-                    className="NoteDetail_NoteContent" 
-                    onChange={this.handleChange('content')} 
-                    value={content ? content : ''} 
-                    disabled
-                    onBlur={this.handleBlur}>
-                    </textarea>
-                </div> */}
-                <ReactQuill 
-                modules={{toolbar}}
-                className="NoteDetail_NoteContent" 
-                value={this.state.content || ''}
-                onBlur={this.handleBlur}
-                onChange={this.handleEditorChange} />
+                        
+     
             </form>
         </article>
         <Modal note={this.props.note} />
