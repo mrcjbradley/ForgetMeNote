@@ -1,24 +1,28 @@
-# README
+# ForgetMeNote
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+[ForgetMeNote](https://forgetmenote.herokuapp.com/) is a clone of [Evernote](https://evernote.com/), a cloud-based note-taking app.
 
-Things you may want to cover:
+ForgetMeNote is built using React, Redux, and a combination of ES6 and jquery on the frontend, and Ruby on Rails on the backend. 
 
-* Ruby version
+## Features
 
-* System dependencies
+UX was a key consideration in cloning Evernote, which comprises a number of subtle transitions to signify successful validations or entrance into a new mode (e.g. editing vs. reading of a note, active vs. trashed notes) to the user.
 
-* Configuration
+### Dynamic Login UX
 
-* Database creation
+The login form utilizes a two-step validation to (1) confirm that a user with the entered email address exists in the database and (2) check that the correct password was provided. Only if a user provides a valid email address does the password field appear and the 'continue' button becomes a 'sign in' button.
 
-* Database initialization
+![login demo](https://github.com/mrcjbradley/ForgetMeNote/blob/master/app/assets/images/login.gif?raw=true "Login Demo")
 
-* How to run the test suite
+### Additional Features
 
-* Services (job queues, cache servers, search engines, etc.)
+#### Notes
+ Users can add, update and move notes to trash, as well as empty the trash of all existing notes. 
 
-* Deployment instructions
+ ### Rich Text Editor
+ForgetMeNote uses [React-Quill](https://github.com/zenoamaro/react-quill) to provide a rich text editor for notes. The rich text editor is toggled on or off depending on whether or not the user is in active notes view or in trashed notes view, and where the user's focus is (on the note or on another component). Notes are updated onBlur.
 
-* ...
+### Future Additions
+#### Notebooks
+Users will be able to add, update, and remove notebooks (in addition to the default notebook that is created when a new user is registered).
+#### Tags
