@@ -230,12 +230,16 @@ $beige: rgb(248, 248, 248);
     padding: 18px 0 0;
 }
 
+.HomeSidebar_Tags-nav {
+    @include home-sidebar-nav();
+}
+
 .HomeSidebar_Trash-nav {
     @include home-sidebar-nav();
 
 }
 
-@mixin sidear-nav-link-style {
+@mixin sidebar-nav-link-style {
         display: flex;
         text-decoration: inherit;
         align-items: center;
@@ -256,11 +260,15 @@ $beige: rgb(248, 248, 248);
 }
 
 .HomeSidebar_all-notes-button {
-  @include sidear-nav-link-style();
+  @include sidebar-nav-link-style();
+}
+
+.HomeSidebar_all-Tags-button {
+    @include sidebar-nav-link-style();
 }
 
 .HomeSidebar_all-Trash-button {
-@include sidear-nav-link-style();
+@include sidebar-nav-link-style();
 }
 
 .bg--note-icon {
@@ -276,6 +284,17 @@ $beige: rgb(248, 248, 248);
 
 .bg--trash-icon {
     background-image: image_url("trash_icon");
+    background-size: 17px 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 16px;
+    display: block;
+    padding: 0px;
+}
+
+.bg--tag-sb-icon {
+    background-image: image_url("tags_sidebar");
     background-size: 17px 17px;
     background-repeat: no-repeat;
     background-position: center;

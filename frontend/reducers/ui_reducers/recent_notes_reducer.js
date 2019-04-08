@@ -28,7 +28,6 @@ const recentNotesReducer = (oldState = _placeHolder, action) => {
         case RECEIVE_CURRENT_USER:
             return action.recentNotes;
         case RECEIVE_ALL_NOTES:
-        debugger
             const deleted = deletedNotes(_.values(action.notes));
             const notDeleted = notDeletedNotes(_.values(action.notes));
             const newRecents = {

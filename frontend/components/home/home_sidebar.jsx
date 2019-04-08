@@ -62,11 +62,11 @@ class HomeSidebar extends React.Component {
                     </li>
                 </ul>
             </nav> */}
-            {/* <nav className="HomeSidebar_Tags-nav">
-                <h3 className="HomeSidebar_all-Tags-button">
-                    Tags
-                </h3>
-            </nav> */}
+            <nav className="HomeSidebar_Tags-nav">
+                <NavLink to={`/home/notes/tags`} className="HomeSidebar_all-Tags-button">
+                    <div className="bg--tag-sb-icon"></div>  Tags
+                </NavLink>
+            </nav>
                 <nav className="HomeSidebar_Trash-nav">
 
                     <NavLink to={`/home/trash/`} className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
