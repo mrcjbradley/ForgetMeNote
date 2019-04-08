@@ -274,6 +274,17 @@ $beige: rgb(248, 248, 248);
     padding: 0px;
 }
 
+.bg--trash-icon {
+    background-image: image_url("trash_icon");
+    background-size: 17px 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 16px;
+    display: block;
+    padding: 0px;
+}
+
 .NoteIndex {
     width: 345px;
     min-width: 345px;

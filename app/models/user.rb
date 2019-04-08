@@ -59,18 +59,10 @@ class User < ApplicationRecord
     has_many :notebooks, foreign_key: :author_id, class_name: :Notebook
     has_many :notes, through: :notebooks
     belongs_to :default_notebook, foreign_key: :default_notebook_id, class_name: :Notebook, optional: true, inverse_of: :default_for_author
-       
-    # def ensure_default_notebook
-    #     self.default_notebook ||= User.first_notebook
-    # end
+    has_many :tags, through: :notebooks    
 
     def first_notebook
-
         self.default_notebook ||= self.notebooks.create(title: 'First Notebook')
-  
     end
-
-
-    # has_many :tags, foreign_key: :author_id
     # has_many :reminders
 end

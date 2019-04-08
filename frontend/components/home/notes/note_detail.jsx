@@ -5,12 +5,9 @@ import Modal from '../modal';
 import ReactQuill from 'react-quill';
 
 
-class NoteDetail extends React.Component
-{
-    constructor(props)
-    {
+class NoteDetail extends React.Component {
+    constructor(props){
         super(props);
-
         this.state = this.props.note;
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -20,74 +17,51 @@ class NoteDetail extends React.Component
         this.handleRestoreNote = this.handleRestoreNote.bind(this);
     }
 
-    componentDidMount()
-    {
-        if (this.props.note)
-        {
+    componentDidMount(){
+        if (this.props.note) {
             const { getNote, note } = this.props;
             getNote(note.id);
         }
     }
 
-    componentDidUpdate(prevProps, prevState)
-    {
-        if (prevProps.note !== this.props.note)
-        {
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps.note !== this.props.note){
             this.setState(this.props.note);
         }
     }
 
-    handleChange(field)
-    {
-
-        return e =>
-        {
+    handleChange(field){
+        return e => {
             this.setState({ [field]: e.target.value });
         };
     }
 
-    handleBlur(e)
-    {
-
+    handleBlur(e){
         const { patchNote } = this.props;
         setTimeout(() => patchNote(this.state), 1000);
     }
 
-    // toggleDisabled(klass){
-    //     return e => {
-    //    $(`.${klass}`).removeAttr('disabled').focus();
-
-    //     };
-    // } 
-
-    displayTools(e)
-    {
+    displayTools(e) {
         $('#tool').css("display", "inherit");
     }
 
-    toggleFullScreen(e)
-    {
-
+    toggleFullScreen(e) {
         e.preventDefault();
         this.props.toggleFullScreen();
         $('.js-expand-icon').toggleClass('green');
         $('.userNav_toggleMenu').toggle().delay(1000);
     }
 
-    toggleMoreMenu(e)
-    {
+    toggleMoreMenu(e){
         e.preventDefault();
         $('.js-more-menu').toggle();
     }
 
-    handleEditorChange(value, delta, source, editor)
-    {
+    handleEditorChange(value, delta, source, editor) {
         this.setState({ content: value, plain_text: editor.getText() });
-
     }
 
-    handleDeleteNote(e)
-    {
+    handleDeleteNote(e){
         const modal = {
             title: 'Delete note',
             content: `${this.props.note.title} will be moved to trash.`,
@@ -102,10 +76,8 @@ class NoteDetail extends React.Component
         patchNote(restoredNote).then(() => history.push(`/home/notes/${note.id}`));
     }
 
-    render()
-    {
+    render(){
         if (!this.props.note) return null;
-
         const { title, content } = this.state;
         const { deleted_at } = this.props.note;
         const isDeleted = Boolean(typeof deleted_at === 'string');
@@ -115,7 +87,6 @@ class NoteDetail extends React.Component
                 <Link to="#" className="NoteHeaderNav_NoteBookLink">First Notebook</Link>
             </div>
         )
-
         return (
             <>
                 <article className="NoteShow" >
@@ -141,7 +112,6 @@ class NoteDetail extends React.Component
                                     </div>
                                 </nav>
                             </nav>
-                            {/* <span className="BlurSave" onBlur={this.handleBlur}> */}
                             <div className="spacerForToolBar">
                                 <div className="NoteShow_ToolBar" id="tool" style={{ display: 'none' }}>
                                     <span className="ql-formats">
@@ -176,7 +146,6 @@ class NoteDetail extends React.Component
                                     </span>
                                 </div>
                             </div>
-                            {/* onClick={isDeleted ? null : this.toggleDisabled("NoteDetail_NoteTitle")}  */}
                             <div className="NoteDetail_DisableWrapper" onBlur={this.handleBlur} >
                                 <input type="text"
                                     className="NoteDetail_NoteTitle"
@@ -197,11 +166,8 @@ class NoteDetail extends React.Component
                                     />
                                 </div>
                             </div>
-                            {/* </span> */}
                         </div>
-
-
-                    </form>
+                        </form>
                 </article>
                 <Modal note={this.props.note} notes={this.props.notes} />
             </>

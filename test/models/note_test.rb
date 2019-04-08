@@ -7,9 +7,10 @@
 #  content     :text
 #  deleted_at  :datetime
 #  fav         :boolean
+#  notebook_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  notebook_id :integer          not null
+#  plain_text  :string
 #
 
 require 'test_helper'

@@ -69,7 +69,7 @@ class HomeSidebar extends React.Component {
                 <nav className="HomeSidebar_Trash-nav">
 
                     <NavLink to={`/home/trash/`} className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
-                            <div className="bg--note-icon"></div> Trash
+                            <div className="bg--trash-icon"></div> Trash
                 </NavLink>
             </nav>
         </aside>

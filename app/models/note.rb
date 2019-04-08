@@ -7,11 +7,11 @@
 #  content     :text
 #  deleted_at  :datetime
 #  fav         :boolean
+#  notebook_id :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  notebook_id :integer          not null
+#  plain_text  :string
 #
-
 
 class Note < ApplicationRecord
     validates :title, presence: true
@@ -36,8 +36,8 @@ class Note < ApplicationRecord
 
     belongs_to :notebook
     has_one :author, through: :notebook
+    has_many :taggings
+    has_many :tags, through: :taggings
     
     # has_one :reminder
-    # has_many :taggings
-    # has_many :tags, through: taggings
 end
