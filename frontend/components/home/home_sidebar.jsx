@@ -3,6 +3,7 @@ import UserNav from './user_nav';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { postNote } from '../../actions/note_actions';
+import { values } from 'lodash';
 
 class HomeSidebar extends React.Component {
     constructor(props){
@@ -14,8 +15,8 @@ class HomeSidebar extends React.Component {
         e.preventDefault();
         const { postNote, history, default_notebook_id } = this.props;
         const blankNote = {notebook_id: default_notebook_id};
-        postNote(blankNote).then(({note}) => {
-            history.push(`/home/notes/${note.id}`);
+        postNote(blankNote).then(({notes}) => {
+            history.push(`/home/notes/${_.values(notes)[0].id}`);
         }); 
     }
 

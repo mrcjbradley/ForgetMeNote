@@ -8,3 +8,4 @@ json.extract! note,
     :updated_at, 
     :deleted_at, 
     :fav
+json.tag_ids note.tags.pluck(:id)

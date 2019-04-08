@@ -1,4 +1,6 @@
 import * as NoteApiUtil from '../util/note_api_util';
+import { values } from 'lodash';
+
 export const [
     RECEIVE_ALL_NOTES,
     RECEIVE_NOTE,
@@ -13,19 +15,22 @@ export const [
     'RECEIVE_NOTE_ERRORS'
 ];
 
-const receiveAllNotes = notes => ({
+const receiveAllNotes = ({notes, tags}) => ({
     type: RECEIVE_ALL_NOTES,
-    notes
+    notes,
+    tags
 });
 
-const receiveNote = note => ({
+const receiveNote = ({notes, tags}) => ({
     type: RECEIVE_NOTE,
-    note
+    notes,
+    tags
 });
 
-const receiveDeletedNote = note => ({
+const receiveDeletedNote = ({notes, tags}) => ({
     type: RECEIVE_DELETED_NOTE,
-    note
+    notes, 
+    tags
 });
 
 const removeNote = noteId => ({
@@ -65,8 +70,8 @@ export const patchNote = note => dispatch => {
     return (
     NoteApiUtil.patchNote(note)
     .then(note => {
-        if (typeof note.deleted_at === 'string') {
-            return dispatch(receiveDeletedNote(note)) 
+        if (typeof _.values(note.notes)[0].deleted_at === 'string') {
+            return dispatch(receiveDeletedNote(note)); 
          } else {
             return dispatch(receiveNote(note));
          } 
