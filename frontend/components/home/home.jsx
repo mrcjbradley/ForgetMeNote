@@ -1,21 +1,14 @@
 import React from 'react';
-import { logOut } from '../../actions/session_actions';
 import HomeSidebar from './home_sidebar';
 import NoteIndex from './notes/note_index_container';
 import Trash from './notes/trash_container';
-import NoteDetail from './notes/note_detail_container';
 import { Route, Switch, Redirect} from 'react-router-dom';
-import Modal from './modal';
-import { connect } from 'react-redux';
+import TagsIndex from './tags_index_container';
 
-const Home = (props) => {
-
-    
-
-        return(
+const Home = () => (
         <div className="HomeScreen">
-            
-            <Route path="/home" component={HomeSidebar} />
+           <Route path="/home" component={HomeSidebar} />
+           <Route path="/home/tags" component={TagsIndex}/>
             <Switch>
                 <Route path="/home/notes/:noteId" exact component={NoteIndex} />
                 <Route path="/home/notes" component={NoteIndex} />
@@ -24,19 +17,12 @@ const Home = (props) => {
                 <Route path="/home/trash/:noteId" exact component={Trash} />
                 <Route path="/home/trash" component={Trash} />
             </Switch>
-            {/* <Route path="/home/trash/:noteId" exact component={NoteDetail} /> 
-            <Route path="/home/notes/:noteId" exact component={NoteDetail} /> */}
-           
         </div>
         );
-}
 
-const msp = (state) => ({
-    state
-    // activeNotes: state.notes.activeNotes.map(id => notes[id]),
-    // trashedNotes: state.notes.trashedNotes.map(id => notes[id]),
-});
 
-export default connect(msp)(Home);
+
+
+export default Home;
 
 

@@ -63,13 +63,13 @@ class HomeSidebar extends React.Component {
                 </ul>
             </nav> */}
             <nav className="HomeSidebar_Tags-nav">
-                <NavLink to={`/home/notes/tags`} className="HomeSidebar_all-Tags-button">
+                <NavLink to={`/home/tags`} className="HomeSidebar_all-Tags-button">
                     <div className="bg--tag-sb-icon"></div>  Tags
                 </NavLink>
             </nav>
                 <nav className="HomeSidebar_Trash-nav">
 
-                    <NavLink to={`/home/trash/`} className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
+                <NavLink to={`/home/trash/`} className="HomeSidebar_all-Trash-button HomeSidebar_all-notes-button">
                             <div className="bg--trash-icon"></div> Trash
                 </NavLink>
             </nav>
@@ -77,13 +77,15 @@ class HomeSidebar extends React.Component {
     )};
 };
 
-const msp = ({ ui: { editorPreferences: { fullscreen } }, session: {currentUser: {default_notebook_id}}, ui: { recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => ({
+const msp = ({ ui: { editorPreferences: { fullscreen } }, session: {currentUser: {default_notebook_id}}, ui: { recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => {
+    // debugger
+    return({
     fullscreen,
     history,
     default_notebook_id,
     recentNoteId,
     recentTrashId
-})
+})}
 
 const mdp = dispatch => ({
     postNote: note => dispatch(postNote(note))

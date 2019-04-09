@@ -23,6 +23,10 @@ class Api::TagsController < ApplicationController
         end
     end
 
+    def index 
+        @tags = current_user.tags.all 
+    end
+
     def tag_params 
         params.require(:tag).permit(:title, :fav)
     end
