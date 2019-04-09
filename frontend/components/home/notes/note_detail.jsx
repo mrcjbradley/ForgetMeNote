@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
-import Modal from '../modal';
+import Modal from '../modal_container';
 import ReactQuill from 'react-quill';
 
 

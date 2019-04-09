@@ -9,7 +9,7 @@ export const postTag = tag => (
     $.ajax({
         method: 'post',
         url: '/api/tags',
-        data: tag
+        data: {tag}
     })
 );
 

@@ -16,7 +16,7 @@ const receiveAllTags = ({tags}) => ({
     tags
 });
 
-const receiveTag = ({tag}) => ({
+const receiveTag = (tag) => ({
     type: RECEIVE_TAG,
     tag
 });

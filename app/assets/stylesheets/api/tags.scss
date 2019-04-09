@@ -1,3 +1,91 @@
 // Place all the styles related to the api/Tags controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+$tags-font: -apple-system,
+BlinkMacSystemFont,
+'Segoe UI',
+'Roboto',
+'Oxygen',
+'Ubuntu',
+'Cantarell',
+'Fira Sans',
+'Droid Sans',
+'Helvetica Neue',
+sans-serif;
+
+.TagsIndex {
+    font-family: $tags-font;
+    padding: 0 30px;
+    width: 100%;
+    
+
+}
+
+.TagsIndex_TagHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1
+    
+}
+
+.TagsHeader_TagsTitle {
+    font-size: 20px;
+}
+
+.TagsHeader_NewTagButton {
+    font-size: 14px;
+    line-height: 24px;
+    color: #00a82d;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.bg--new-tag-icon {
+    background-image: image_url("new_tag");
+    background-size: 17px 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 16px;
+    display: block;
+    padding: 0px;
+}
+
+.TagsIndex_Body {
+    border-top: 2px solid #5b6b70;
+    width: 100%;
+    height: 100%;
+    padding: 25px 0;
+}
+
+.LetterList {
+    // height: 119px;
+    // display: block;
+    padding-bottom: 36px;
+}
+
+.LetterList_Header {
+    margin-bottom: 9px;
+    font-size: 15px;
+    color: #333;
+}
+
+.LetterListItem {
+    line-height: 24px;
+    font-size: 13px;
+    color: #333;
+    white-space: nowrap;
+    font-weight: 400;
+    display: flex;
+}
+
+.NoteCount {
+    margin: 0 5px;
+    opacity: 0.5;
+}

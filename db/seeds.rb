@@ -19,12 +19,11 @@ ActiveRecord::Base.transaction do
 
     seed_users.each do |user| 
         user.update(default_notebook: user.notebooks.create(title: 'First Notebook'))
-        tags = []
-        3.times { tags << Tag.create(title: Faker::Superhero.name ) }
+        3.times { user.tags.create(title: Faker::Superhero.name ) }
         5.times do 
             nb = user.default_notebook
             n = nb.notes.create(title: Faker::TvShows::DrWho.catch_phrase , content: Faker::TvShows::DrWho.quote ) 
-            Tagging.create(note_id: n.id, tag_id: tags.sample.id)
+            Tagging.create(note_id: n.id, tag_id: user.tags.sample.id)
         end
     end
 

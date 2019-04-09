@@ -12,6 +12,8 @@
 class Tag < ApplicationRecord
     validates :title, presence: true
     validates :fav, inclusion: { in: [true, false]}
+    validates :user_id, presence: true
+    validates :user_id, uniqueness: {scope: [:title]}
 
     after_initialize :ensure_fav
 
@@ -22,5 +24,5 @@ class Tag < ApplicationRecord
     has_many :taggings
     has_many :notes, through: :taggings
     has_many :notebooks, through: :notes
-    has_many :author, through: :notebooks
+    belongs_to :user
 end
