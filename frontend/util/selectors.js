@@ -77,3 +77,12 @@
  export const notDeletedNotes = (notes) => {
     return notes.filter(note => note.deleted_at === null);
  };
+
+ export const tagsFilter = (notes, tagIds) => {
+    //  debugger
+    if (tagIds.length === 0){
+        return notes;
+    } else {
+        return notes.filter(note => note.tag_ids.filter(tag_id => tagIds.indexOf(tag_id) !== -1).length > 0);
+    }
+ };

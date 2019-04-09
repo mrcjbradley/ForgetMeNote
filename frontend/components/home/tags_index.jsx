@@ -10,11 +10,20 @@ class TagsIndex extends React.Component {
         this.state = { name: ''};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTagClick = this.handleTagClick.bind(this);
     }
 
     componentDidMount(){
         const { fetchAllTags } = this.props;
         fetchAllTags();
+    }
+
+    handleTagClick(tagId){
+        const { receiveFilter } = this.props;
+        return e => {
+            e.preventDefault();
+            receiveFilter({tags: [tagId]});
+        };
     }
 
     handleChange(e){
@@ -49,7 +58,7 @@ class TagsIndex extends React.Component {
             if(this.props.tags[key].length > 0){
                 const tagItems = this.props.tags[key].map((tag, tidx) => {
                     return(
-                        <li className="LetterListItem" key={tidx}>{tag.title} <div className="NoteCount">
+                        <li className="LetterListItem" key={tidx} onClick={this.handleTagClick(tag.id)}>{tag.title}  <div className="NoteCount">
                             ({tag.note_count})
                         </div></li>
                     )

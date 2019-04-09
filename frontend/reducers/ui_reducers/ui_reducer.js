@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import editorPreferences from './editor_preferences_reducer';
 import recentNotes from './recent_notes_reducer';
 import modal from './modal_reducer';
+import filters from './filters_reducer';
 
 
 
@@ -10,5 +11,6 @@ export default combineReducers({
     // currentNote,
     recentNotes,
     editorPreferences,
-    modal
+    modal,
+    filters
 });
