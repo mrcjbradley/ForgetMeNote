@@ -13,6 +13,7 @@ const msp = (state, ownProps) => {
     const { session: { currentUser: { note_sort_order , default_notebook_id} } } = state;
     const { history, match: { params } } = ownProps;
     const mostRecentId = params.noteId ? params.noteId : state.ui.recentNotes.recentNoteId;
+
     const emptyIndexNote = {
         content: "",
         created_at: `${new Date()}`,
@@ -22,10 +23,9 @@ const msp = (state, ownProps) => {
         notebook_id: default_notebook_id,
         title: "You have no notes!",
         updated_at: `${new Date()}`
-    };
+    }; 
     // debugger
-    const noteIds = filters.tags.map(tagId => tags[tagId].note_ids);
-    const filteredNotes = filters.tags.length === 0 ? _.values(notes) : noteIds.flatten().map(noteId => notes[noteId]); 
+    const filteredNotes = filters.tags < 0 ? _.values(notes) : tags[filters.tags].note_ids.map(noteId => notes[noteId]); 
 
     return ({
         notes: recentNoteId === -1 ? [emptyIndexNote] : notDeletedNotes(filteredNotes),
@@ -35,6 +35,7 @@ const msp = (state, ownProps) => {
         headerText: 'All Notes',
         mostRecentId,
         fillerNote: emptyIndexNote,
+        filterTags: tags[filters.tags]
     });
 };
 

@@ -4,7 +4,8 @@ export const [
     OPEN_MODAL,
     CLOSE_MODAL,
     RECEIVE_FILTER,
-    REMOVE_FILTER,
+    REMOVE_TAG_FILTER,
+    REMOVE_NOTEBOOK_FILTER,
     CLEAR_FILTERS
 
 ] = 
@@ -14,7 +15,8 @@ export const [
     'OPEN_MODAL',
     'CLOSE_MODAL',
     'RECEIVE_FILTER',
-    'REMOVE_FILTER',
+    'REMOVE_TAG_FILTER',
+    'REMOVE_NOTEBOOK_FILTER',
     'CLEAR_FILTERS'
 
 ];
@@ -42,9 +44,12 @@ export const receiveFilter = filters => ({
     filters
 });
 
-export const removeFilter = filters => ({
-    type: REMOVE_FILTER,
-    filters
+export const removeTagFilter = filters => ({
+    type: REMOVE_TAG_FILTER,
+});
+
+export const removeNotebookFilter = filters => ({
+    type: REMOVE_NOTEBOOK_FILTER,
 });
 
 export const clearFilters = () => ({

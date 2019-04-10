@@ -1,24 +1,26 @@
 import { merge } from 'lodash';
 import {
     RECEIVE_FILTER,
-    REMOVE_FILTER,
+    REMOVE_TAG_FILTER,
+    REMOVE_NOTEBOOK_FILTER,
     CLEAR_FILTERS
 } from '../../actions/ui_actions';
 
-const _placeHolder =  {tags: [], notebook: []};
+const _placeHolder =  {tags: -1, notebook: -1};
 
 const filtersReducer = ( oldState = _placeHolder, action ) => {
     Object.freeze(oldState);
     let nextState = merge({}, oldState);
     switch(action.type){
         case RECEIVE_FILTER:
-        debugger
-            nextState.tags = nextState.tags.concat(action.filters.tags);
-            nextState.notebook = nextState.notebook.concat(action.filters.notebook);
+            nextState.tags = action.filters.tags ? action.filters.tags : nextState.tags;
+            nextState.notebook = action.filters.notebook ? action.filters.notebook : nextState.notebook;
             return nextState;
-        case REMOVE_FILTER:
-            nextState.tags = nextState.tags.filter(tag => !action.filters.tags.includes(tag));
-            nextState.notebook = nextState.notebook.filter(notebook => !action.filters.notebook.includes(notebook));
+        case REMOVE_TAG_FILTER:
+            nextState.tags = -1;
+            return nextState;
+        case REMOVE_NOTEBOOK_FILTER:
+            nextState.notebook = -1;
             return nextState;
         case CLEAR_FILTERS:
             return _placeHolder;

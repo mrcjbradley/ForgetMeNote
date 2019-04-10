@@ -72,39 +72,33 @@ class NoteIndex extends React.Component
         const chosen = orderTypes.indexOf(note_sort_order);
 
 
-        switch (chosen)
-        {
+        switch (chosen) {
             case 0:
-                return notes.sort((n1, n2) =>
-                {
+                return notes.sort((n1, n2) => {
                     const d1 = new Date(n1.created_at);
                     const d2 = new Date(n2.created_at);
                     return d2 - d1;
                 });
             case 1:
-                return notes.sort((n1, n2) =>
-                {
+                return notes.sort((n1, n2) => {
                     const d1 = new Date(n1.created_at);
                     const d2 = new Date(n2.created_at);
                     return d1 - d2;
                 });
             case 2:
-                return notes.sort((n1, n2) =>
-                {
+                return notes.sort((n1, n2) => {
                     const d1 = new Date(n1.updated_at);
                     const d2 = new Date(n2.updated_at);
                     return d2 - d1;
                 });
             case 3:
-                return notes.sort((n1, n2) =>
-                {
+                return notes.sort((n1, n2) => {
                     const d1 = new Date(n1.updated_at);
                     const d2 = new Date(n2.updated_at);
                     return d1 - d2;
                 });
             case 4:
-                return notes.sort((n1, n2) =>
-                {
+                return notes.sort((n1, n2) => {
                     const t1 = n1.title.toLowerCase();
                     const t2 = n2.title.toLowerCase();
                     if (t1 < t2) return -1;
@@ -112,8 +106,7 @@ class NoteIndex extends React.Component
                     return 0;
                 });
             case 5:
-                return notes.sort((n1, n2) =>
-                {
+                return notes.sort((n1, n2) => {
                     const t1 = n1.title.toLowerCase();
                     const t2 = n2.title.toLowerCase();
                     if (t1 < t2) return 1;
@@ -126,8 +119,7 @@ class NoteIndex extends React.Component
 
     }
 
-    render()
-    {
+    render() {
 
         // if (this.state.notes.length === 0) return null;
 
@@ -137,7 +129,7 @@ class NoteIndex extends React.Component
         let noteItems;
         if ( this.state.notes.length > 0 ) {
              noteItems = this.orderNoteIndexItems(this.props.notes).map(note => {
-                return note.id === -1 ? null : <NoteIndexItem note={note} key={note.id} />
+                return note.id === -1 ? null : <NoteIndexItem note={note} key={note.id} /> 
             }); } else {
                 noteItems = [];
             }
@@ -179,6 +171,13 @@ class NoteIndex extends React.Component
                                 {headerText === 'Trash' ? null : tagsIcon}
                             </div>
                         </div>
+                        { this.props.filterTags ? <div className="NoteIndex_FiltersTags">
+                           
+                                <div className="FiltersTags_CurrentTag">
+                                    { this.props.filterTags.title }
+                                </div>
+                        
+                        </div> : null }
                     </header>
                     <ul className="NoteIndex_NoteRoll">
                         {noteItems}
@@ -190,13 +189,3 @@ class NoteIndex extends React.Component
     }
 }
 export default NoteIndex;
-//<Route path='/home/notes/:noteId' component={NoteDetail} />
-
-//<Route path='/home/trash/:noteId' component={NoteDetail} />
-{/* <Route path="/home/trash" exact nnnote={mostRecent} render={props => {
-        return (<NoteDetail {...props} />);
-    }} 
-/>
-<Route path="/home/notes" exact nnnote={mostRecent} render={props => {
-        return (<NoteDetail {...props} />);
-    }}  />*/}

@@ -22,7 +22,7 @@ class TagsIndex extends React.Component {
         const { receiveFilter } = this.props;
         return e => {
             e.preventDefault();
-            receiveFilter({tags: [tagId]});
+            receiveFilter({tags: tagId});
         };
     }
 
