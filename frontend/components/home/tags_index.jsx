@@ -19,10 +19,10 @@ class TagsIndex extends React.Component {
     }
 
     handleTagClick(tagId){
-        const { receiveFilter } = this.props;
+        const { receiveFilter, history } = this.props;
         return e => {
             e.preventDefault();
-            receiveFilter({tags: tagId});
+            receiveFilter({tags: tagId}).then(history.push('/home/notes'));
         };
     }
 

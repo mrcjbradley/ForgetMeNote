@@ -21,6 +21,7 @@ class NoteIndex extends React.Component
         };
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
         this.handleEmptyTrash = this.handleEmptyTrash.bind(this);
+        this.clearFilter = this.clearFilter.bind(this);
     }
 
     componentDidMount(){
@@ -35,6 +36,11 @@ class NoteIndex extends React.Component
         if (prevProps.notes !== this.props.notes){
             this.setState({ notes: this.props.notes, mostRecentId: this.props.mostRecentId });
         }
+    }
+
+    clearFilter(){
+        const { removeTagFilter } = this.props;
+        removeTagFilter();
     }
 
     handleMouseEnter(e)
@@ -145,6 +151,18 @@ class NoteIndex extends React.Component
             <Link to='#' className='emptyTrashBtn' onClick={this.handleEmptyTrash}>empty trash</Link>
         )
 
+        const currentTagDiv = () => {
+            if (this.props.filterTags === null) return null;
+            // debugger
+            return(
+                <div className="NoteIndex_FiltersTags">
+                    <div className="FiltersTags_CurrentTag">
+                        {this.props.filterTags ?  this.props.filterTags.title : ''} <span className="removeTagBtn" onClick={this.clearFilter}>X</span>
+                    </div>
+
+                </div>
+            )}
+
         let mostRecent;
         if (this.state.notes.length > 0){
          mostRecent = this.state.notes.filter(note => note.id === parseInt(mostRecentId));
@@ -171,13 +189,7 @@ class NoteIndex extends React.Component
                                 {headerText === 'Trash' ? null : tagsIcon}
                             </div>
                         </div>
-                        { this.props.filterTags ? <div className="NoteIndex_FiltersTags">
-                           
-                                <div className="FiltersTags_CurrentTag">
-                                    { this.props.filterTags.title }
-                                </div>
-                        
-                        </div> : null }
+                        {currentTagDiv()}
                     </header>
                     <ul className="NoteIndex_NoteRoll">
                         {noteItems}

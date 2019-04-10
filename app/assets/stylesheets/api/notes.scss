@@ -477,6 +477,32 @@ $beige: rgb(248, 248, 248);
     padding: 2px;
 }
 
+.FiltersTags_CurrentTag {
+    display: flex;
+    align-items: center;
+    max-width: 100%;
+    padding: 0 5px 0 10px;
+    border-radius: 1em;
+    font-size: 12px;
+    background-color: #00a82d;
+    color: #fff;
+    font-weight: 500;
+    width: fit-content;
+    padding: 0px 10px;
+}
+
+.removeTagBtn {
+    height: 17px;
+    margin-left: 5px;
+    text-transform: lowercase;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.NoteIndex_FiltersTags {
+    padding: 7px 0px;
+}
+
 .NoteItem {
     padding: 15px 25px;
     border: 1px solid rgb(242, 242, 242);
