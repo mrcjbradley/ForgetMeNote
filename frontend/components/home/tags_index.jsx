@@ -2,20 +2,26 @@ import React from 'react';
 import { keys } from 'lodash';
 import { Link } from 'react-router-dom';
 import Modal from './modal_container';
+import TagOptionsMenu from './tag_options';
 
 class TagsIndex extends React.Component {
     constructor(props){
         super(props);
         this.handleNewTag = this.handleNewTag.bind(this);
-        this.state = { name: ''};
+        this.state = { name: '', tagOptionMenu: false};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
+        this.toggleTagOptionsDisplay = this.toggleTagOptionsDisplay.bind(this);
     }
 
     componentDidMount(){
         const { fetchAllTags } = this.props;
         fetchAllTags();
+    }
+
+    toggleTagOptionsDisplay(e) {
+        this.setState({ tagOptionMenu: !this.state.tagOptionMenu });
     }
 
     handleTagClick(tagId){
@@ -58,9 +64,17 @@ class TagsIndex extends React.Component {
             if(this.props.tags[key].length > 0){
                 const tagItems = this.props.tags[key].map((tag, tidx) => {
                     return(
-                        <li className="LetterListItem" key={tidx} onClick={this.handleTagClick(tag.id)}>{tag.title}  <div className="NoteCount">
-                            ({tag.note_ids.length})
-                        </div></li>
+                        <li className="LetterListItem" key={tidx} ><div onClick={this.handleTagClick(tag.id)}>
+                            {tag.title}  <div className="NoteCount">
+                                ({tag.note_ids.length}) </div>
+                        </div>
+                            <div className="NoteIndex_NoteTagsOptions">
+                                <nav className="NoteIndex_NoteOptions">
+                                    <div onClick={this.toggleTagOptionsDisplay} className="bg--option-dd-icon"></div>
+                                    {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay} /> : null}
+                                </nav>
+                            </div>
+                        </li>
                     )
                 });
                 return(
