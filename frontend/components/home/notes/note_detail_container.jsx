@@ -11,7 +11,8 @@ const msp = (state, ownProps) => {
     return ({
         note: ownProps.note,
         history: ownProps.history,
-        path: ownProps.match.path
+        path: ownProps.match.path,
+        open: state.ui.modal.open
     });
 };
 
@@ -20,7 +21,7 @@ const mdp = dispatch => ({
     patchNote: noteId => dispatch(patchNote(noteId)),
     toggleFullScreen: () => dispatch(toggleFullScreen()),
     openModal: modal => dispatch(openModal(modal))
-})
+});
 
 
 const connectedComponent = connect(msp, mdp)(NoteDetail);

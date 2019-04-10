@@ -169,7 +169,7 @@ class NoteDetail extends React.Component {
                         </div>
                         </form>
                 </article>
-                <Modal note={this.props.note} notes={this.props.notes} />
+                {this.props.open ? <Modal note={this.props.note} notes={this.props.notes} modalType={'delete_note'}/> : null }
             </>
         );
     }

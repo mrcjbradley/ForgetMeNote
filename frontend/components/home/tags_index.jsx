@@ -59,7 +59,7 @@ class TagsIndex extends React.Component {
                 const tagItems = this.props.tags[key].map((tag, tidx) => {
                     return(
                         <li className="LetterListItem" key={tidx} onClick={this.handleTagClick(tag.id)}>{tag.title}  <div className="NoteCount">
-                            ({tag.note_count})
+                            ({tag.note_ids.length})
                         </div></li>
                     )
                 });

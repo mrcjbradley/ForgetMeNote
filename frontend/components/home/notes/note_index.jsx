@@ -23,8 +23,7 @@ class NoteIndex extends React.Component
         this.handleEmptyTrash = this.handleEmptyTrash.bind(this);
     }
 
-    componentDidMount()
-    {
+    componentDidMount(){
         const { getAllNotes } = this.props;
         getAllNotes();
     }
@@ -33,8 +32,7 @@ class NoteIndex extends React.Component
     {
         $('.NoteItem').removeClass('active');
         $('.NoteItem a.active').parent().toggleClass('active');
-        if (prevProps.notes !== this.props.notes)
-        {
+        if (prevProps.notes !== this.props.notes){
             this.setState({ notes: this.props.notes, mostRecentId: this.props.mostRecentId });
         }
     }

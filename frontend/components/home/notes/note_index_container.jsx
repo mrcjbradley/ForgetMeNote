@@ -1,13 +1,14 @@
 import React from 'react';
 import { getAllNotes, getNote } from '../../../actions/note_actions';
 import { connect } from 'react-redux';
-import { notDeletedNotes, mostRecentlyUpdatedNote, tagsFilter } from '../../../util/selectors';
+import { notDeletedNotes, mostRecentlyUpdatedNote } from '../../../util/selectors';
 import NoteIndex from './note_index';
 import { values } from 'lodash';
 
 
+
 const msp = (state, ownProps) => {
-    const { entities: { notes } } = state;
+    const { entities: { notes, tags } } = state;
     const { ui: { filters, recentNotes: { recentNoteId, recentTrashId }, editorPreferences: { fullscreen } } } = state;
     const { session: { currentUser: { note_sort_order , default_notebook_id} } } = state;
     const { history, match: { params } } = ownProps;
@@ -22,14 +23,18 @@ const msp = (state, ownProps) => {
         title: "You have no notes!",
         updated_at: `${new Date()}`
     };
+    // debugger
+    const noteIds = filters.tags.map(tagId => tags[tagId].note_ids);
+    const filteredNotes = filters.tags.length === 0 ? _.values(notes) : noteIds.flatten().map(noteId => notes[noteId]); 
+
     return ({
-        notes: recentNoteId === -1 ? [emptyIndexNote] : tagsFilter(notDeletedNotes(_.values(notes)), filters.tags),
+        notes: recentNoteId === -1 ? [emptyIndexNote] : notDeletedNotes(filteredNotes),
         note_sort_order,
         history,
         fullscreen,
         headerText: 'All Notes',
         mostRecentId,
-        fillerNote: emptyIndexNote
+        fillerNote: emptyIndexNote,
     });
 };
 

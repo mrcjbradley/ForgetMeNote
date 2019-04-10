@@ -1,3 +1,4 @@
+ import { intersection } from 'lodash';
  export const orderNoteIndexItems = (notes, note_sort_order) => {
 
      const orderTypes = [
@@ -83,6 +84,18 @@
     if (tagIds.length === 0){
         return notes;
     } else {
-        return notes.filter(note => note.tag_ids.filter(tag_id => tagIds.indexOf(tag_id) !== -1).length > 0);
+        // const filterNotes = [];
+        // for (let i = 0; i < notes.length; i++) {
+        //     const note = notes[i];
+        //         for (let idx = 0; idx < note.tag_ids.length; idx++) {
+        //             const tag_id = note.tag_ids[idx];
+        //             if (tagIds.includes(tag_id)){
+        //             filterNotes.push(note);
+        //         }
+        //     }
+        // }
+        // return filterNotes;
+
+        return notes.filter( note => _.intersection(note.tag_ids, tagIds).length > 0 );
     }
  };

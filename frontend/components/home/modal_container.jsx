@@ -7,20 +7,20 @@ import { secondMostRecentlyUpdatedNote, notDeletedNotes, mostRecentlyUpdatedNote
 import Modal from './modal';
 import { postTag } from '../../actions/tag_action';
 
-const msp = ({ ui: { modal } }, { handleSubmit, history, match: { path, params }, note, notes }) => {
-    // debugger
-    if (modal.title === 'Delete note'){
+const msp = ({ ui: { modal } }, { handleSubmit, history, match: { path, params }, note, notes, modalType }) => {
+
+    if (modalType === 'delete_note'){
         let nextId = '';
         if (notes && notes.length >= 2) {
             const nextNote = secondMostRecentlyUpdatedNote(notes) ? secondMostRecentlyUpdatedNote(notes) : mostRecentlyUpdatedNote(notes);
             nextId = nextNote.id;
         }
+
         return ({
             modal,
             note,
             nextId,
             history,
-            name: ''
         });
     }
 
