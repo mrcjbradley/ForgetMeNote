@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { patchTag, deleteTag } from '../../actions/tag_action';
+import {withRouter} from 'react-router-dom';
 
 
 class TagOptionsMenu extends React.Component {
@@ -9,6 +10,7 @@ class TagOptionsMenu extends React.Component {
         super(props);
         // this.handleOptionClick = this.handleOptionClick.bind(this);
         // debugger
+        this.handleDeletion = this.handleDeletion.bind(this);
     }
 
     componentDidMount(){
@@ -20,11 +22,20 @@ class TagOptionsMenu extends React.Component {
     }
 
     handleMouseLeave(e) {
-        // $(e.target).removeClass('grey');
+        $(e.target).removeClass('grey');
+    }
+
+    handleDeletion(){
+        const {tag, deleteTag, toggleTagOptionsDisplay, history} = this.props;
+        return (e) => {
+        deleteTag(tag.id);
+        toggleTagOptionsDisplay(e);
+    }
+
     }
 
     componentWillUnmount(){
-        $('.tag-'+this.props.tag.id).removeClass('selected');
+        // $('.tag-'+this.props.tag.id).removeClass('selected');
     }
     // handleOptionClick(e) {
     //     // $(e.target).siblings().removeClass('active');
@@ -49,7 +60,7 @@ render() {
             <ul className="TagOptions" style={styleObj}>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
-                    onClick={this.handleOptionClick}
+                    onClick={this.handleDeletion()}
                     onMouseLeave={this.handleMouseLeave}
                     >
                    Delete tag...
@@ -75,15 +86,16 @@ render() {
 }
 };
 
-const msp = (state, { tag, toggleTagOptionsDisplay }) => ({
+const msp = (state, { tag, toggleTagOptionsDisplay, history }) => ({
     tag,
-    toggleTagOptionsDisplay
+    toggleTagOptionsDisplay,
+    history
 })
 
 const mdp = dispatch => ({
     patchTag: tag => dispatch(patchTag(tag)), 
     deleteTag: tagId => dispatch(deleteTag(tagId))
 })
-
-export default connect(msp, mdp)(TagOptionsMenu);
+const connectedComp = connect(msp, mdp)(TagOptionsMenu);
+export default withRouter(connectedComp);
 

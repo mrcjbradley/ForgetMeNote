@@ -5,7 +5,8 @@ import {
  } from '../actions/note_actions';
  import {
      RECEIVE_ALL_TAGS,
-     RECEIVE_TAG
+     RECEIVE_TAG,
+     REMOVE_TAG
  } from '../actions/tag_action';
 
 export default (oldState = {}, action) => {
@@ -17,6 +18,10 @@ export default (oldState = {}, action) => {
         case RECEIVE_TAG:
             const newTagObj = { [action.tag.id]: action.tag };
             return Object.assign({}, oldState, newTagObj);
+        case REMOVE_TAG:
+            const nextState = Object.assign({}, oldState);
+            delete nextState[action.tagId];
+            return nextState;
         case RECEIVE_DELETED_NOTE: 
         case RECEIVE_NOTE: 
             return Object.assign({}, oldState, action.tags);

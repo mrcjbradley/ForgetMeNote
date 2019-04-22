@@ -24,8 +24,9 @@ class TagsIndex extends React.Component {
     toggleTagOptionsDisplay(tag){
         return (e) => {
         this.setState({ tagOptionMenu: !this.state.tagOptionMenu });
-        this.optionsPos = [e.clientX, e.clientY];
-        this.selectedTag = tag;
+        // debugger
+        if (e.clientX && e.clientY){this.optionsPos = [e.clientX, e.clientY];}
+        if (tag){this.selectedTag = tag;}
         // debugger
         };
     }
