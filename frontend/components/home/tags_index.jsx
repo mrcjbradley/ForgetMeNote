@@ -21,11 +21,13 @@ class TagsIndex extends React.Component {
         fetchAllTags();
     }
 
-    toggleTagOptionsDisplay(e) {
+    toggleTagOptionsDisplay(tag){
+        return (e) => {
         this.setState({ tagOptionMenu: !this.state.tagOptionMenu });
         this.optionsPos = [e.clientX, e.clientY];
-        debugger
-
+        this.selectedTag = tag;
+        // debugger
+        };
     }
 
     handleTagClick(tagId){
@@ -68,13 +70,13 @@ class TagsIndex extends React.Component {
             if(this.props.tags[key].length > 0){
                 const tagItems = this.props.tags[key].map((tag, tidx) => {
                     return(
-                        <li className="LetterListItem" key={tidx} ><div onClick={this.handleTagClick(tag.id)} className="TagDetailWrapper">
+                        <li className={`LetterListItem tag-${tag.id}`} key={tidx} ><div onClick={this.handleTagClick(tag.id)} className="TagDetailWrapper">
                             {tag.title}  <div className="NoteCount">
                                 ({tag.note_ids.length}) </div>
                         </div>
                             <div className="NoteIndex_NoteTagsOptions">
                                 <nav className="NoteIndex_NoteOptions">
-                                    <div onClick={this.toggleTagOptionsDisplay} className="bg--tag-dd-options">^</div>
+                                    <div onClick={this.toggleTagOptionsDisplay(tag)} className="bg--tag-dd-options">^</div>
                                     
                                 </nav>
                             </div>
@@ -108,8 +110,8 @@ class TagsIndex extends React.Component {
                     </ul>
                 </div>
             </section>
-                {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay} pos={this.optionsPos} /> : null}
-            {this.props.open ? <Modal handleSubmit={this.handleSubmit}/> : null} 
+                {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay(null)} tag={this.selectedTag} pos={this.optionsPos} /> : null}
+                {this.props.open ? <Modal handleSubmit={this.handleSubmit}/> : null} 
             </>
         );
     }

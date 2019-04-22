@@ -115,7 +115,7 @@ sans-serif;
         margin-left: -10px;
         cursor: pointer;
 
-        &:hover{
+        &:hover, &.selected{
             background-color: #f0f1f1;
             border-radius: 12px;
 
@@ -135,12 +135,12 @@ sans-serif;
     z-index: 1000;
 
     top: var(--tag-options-y);
-    left: var(--tag-options-x);
+    right: var(--tag-options-x);
     position: absolute;
     font-family: sans-serif;
     line-height: 1.5;
-    width: 303.203px;
-    height: 264px;
+    // width: 303.203px;
+    // height: 264px;
     background: white;
     border-radius: 3px;
     color: #666;
