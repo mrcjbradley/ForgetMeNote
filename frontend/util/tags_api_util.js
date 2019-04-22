@@ -17,7 +17,7 @@ export const patchTag = tag => (
     $.ajax({
         method: 'patch',
         url: `/api/tags/${tag.id}`,
-        data: tag
+        data: {tag}
     })
 );
 

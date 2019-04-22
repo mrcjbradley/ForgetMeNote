@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import TagsIndex from './tags_index';
 import { 
     fetchAllTags,
-    postTag
+    postTag,
+    patchTag,
+    deleteTag
  } from '../../actions/tag_action';
  import { openModal, receiveFilter } from '../../actions/ui_actions';
 import { values } from 'lodash';
@@ -14,7 +16,7 @@ const msp = ({entities: {tags}, ui:{modal:{open}}}) => {
         const letter = String.fromCharCode(97+n);
         alphaTags[letter] = _.values(tags).filter(tag => tag.title[0].toLowerCase() === letter);
     }
-    debugger
+    // debugger
     return({
     // tagCount: _.values.tags ? _values.tags.length : 0,
     tags: alphaTags,
@@ -25,7 +27,9 @@ const mdp = dispatch => ({
     fetchAllTags: () => dispatch(fetchAllTags()),
     openModal: modal => dispatch(openModal(modal)),     
     postTag: tag => dispatch(postTag(tag)),
-    receiveFilter: filters => dispatch(receiveFilter(filters))
+    receiveFilter: filters => dispatch(receiveFilter(filters)),
+    patchTag: tag => dispatch(patchTag(tag)),
+    deleteTag: tagId => dispatch(deleteTag(tagId))
 });
 
 export default connect(msp,mdp)(TagsIndex);

@@ -35,7 +35,9 @@ class Modal extends React.Component {
                     return title === 'Delete note' ? patchNote(merge({}, note, { deleted_at: new Date() })).then(() => closeModal()).then(() => history.push(`/home/notes/${nextId}`)) : null;
                 };
             case 'done':
-                return e => handleSubmit(e).then(() => closeModal());
+                return e => handleSubmit(title)(e).then(() => closeModal());
+            case 'delete':
+                return e => handleSubmit(title)(e).then(() => closeModal());
             default:
                 return null;
         }

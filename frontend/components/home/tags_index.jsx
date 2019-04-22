@@ -8,6 +8,8 @@ class TagsIndex extends React.Component {
     constructor(props){
         super(props);
         this.handleNewTag = this.handleNewTag.bind(this);
+        this.handleUpdateTag = this.handleUpdateTag.bind(this);
+        this.handleDeleteTag = this.handleDeleteTag.bind(this);
         this.state = { name: '', tagOptionMenu: false};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,10 +45,33 @@ class TagsIndex extends React.Component {
         this.setState({name: e.target.value});
     }
 
-    handleSubmit(e){
-        e.preventDefault();
-        const { postTag } = this.props;
-        return postTag({title: this.state.name});
+    handleSubmit(formType){
+        const { postTag, patchTag, deleteTag } = this.props;
+        let submitAction;
+        let payLoad;
+        switch (formType) {
+            case "Create new tag":
+                submitAction = postTag;
+                payLoad = { title: this.state.name };
+                break;
+            case "Rename tag":
+                submitAction = patchTag;
+                payLoad = Object.assign({}, this.selectedTag, { title: this.state.name });
+                break;
+            case "Delete tag":
+                submitAction = deleteTag;
+                payLoad = this.selectedTag.id;
+                break;
+            default: 
+                break;
+        };
+        // const submitAction = formType ===  ? postTag : patchTag;
+        // const payLoad = formType === "Create new tag" ? { title: this.state.name } : Object.assign({}, this.selectedTag, { title: this.state.name });
+        return e => {
+            e.preventDefault();
+            // debugger
+            return submitAction(payLoad);
+        };
     }
 
     handleNewTag(){
@@ -54,7 +79,7 @@ class TagsIndex extends React.Component {
         const modal = {
             title: 'Create new tag',
             content: (
-                <label> Name
+                <label key={"createTagName"}> Name
                 <form className="NewTagForm">
                     <input type="text" className="NewTagForm_TagName" id='js-nameField'  onChange={this.handleChange}/>
                 </form>
@@ -63,6 +88,43 @@ class TagsIndex extends React.Component {
             buttonType: 'cancel done'
         };
         openModal(modal);
+    }
+
+
+    handleUpdateTag(){
+        const { openModal } = this.props;
+        const modal = {
+            title: 'Rename tag',
+            content: (
+                <label key={new Date()}> Name
+                <form className="RenameTagForm">
+                    <input type="text" className="RenameTagForm_TagName" id='js-nameField'  onChange={this.handleChange}/>
+                </form>
+                </label>
+            ),
+            buttonType: 'cancel done'
+        };
+        // console.log(this.state.tagOptionMenu);
+        // debugger
+        this.setState({ tagOptionMenu: false });//.then(() => 
+        openModal(modal);
+        // console.log(this.state.tagOptionMenu);
+    }
+
+    handleDeleteTag(){
+        const { openModal } = this.props;
+        const modal = {
+            title: 'Delete tag',
+            content: (
+                `${this.selectedTag.title} tag will be deleted and removed from all notes. This action can not be undone.`
+            ),
+            buttonType: 'cancel delete'
+        };
+        // console.log(this.state.tagOptionMenu);
+        // debugger
+        this.setState({ tagOptionMenu: false });//.then(() => 
+        openModal(modal);
+        // console.log(this.state.tagOptionMenu);
     }
 
     render(){
@@ -111,7 +173,7 @@ class TagsIndex extends React.Component {
                     </ul>
                 </div>
             </section>
-                {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay(null)} tag={this.selectedTag} pos={this.optionsPos} /> : null}
+                {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay(null)} tag={this.selectedTag} pos={this.optionsPos} handleUpdateTag={this.handleUpdateTag} handleDeleteTag={this.handleDeleteTag} /> : null}
                 {this.props.open ? <Modal handleSubmit={this.handleSubmit}/> : null} 
             </>
         );

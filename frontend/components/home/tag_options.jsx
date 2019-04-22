@@ -11,6 +11,8 @@ class TagOptionsMenu extends React.Component {
         // this.handleOptionClick = this.handleOptionClick.bind(this);
         // debugger
         this.handleDeletion = this.handleDeletion.bind(this);
+        this.handleUpdateTag = this.props.handleUpdateTag.bind(this);
+        this.handleDeleteTag = this.props.handleDeleteTag.bind(this);
     }
 
     componentDidMount(){
@@ -49,7 +51,7 @@ class TagOptionsMenu extends React.Component {
 render() {
     // $('.tag-'+this.props.tag.id).addClass('selected');
     // debugger
-    const { toggleTagOptionsDisplay, pos } = this.props;
+    const { toggleTagOptionsDisplay, pos, handleUpdateTag, tag, handleDeleteTag } = this.props;
     const top = window.innerHeight - pos[1] > 150 ? `${pos[1] + 13}px` : `${pos[1] - 150}px`;
     const left = `${window.innerWidth - pos[0] - 8}px`;
     const styleObj = {'--tag-options-x': left, '--tag-options-y': top };
@@ -60,7 +62,7 @@ render() {
             <ul className="TagOptions" style={styleObj}>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
-                    onClick={this.handleDeletion()}
+                    onClick={handleDeleteTag}
                     onMouseLeave={this.handleMouseLeave}
                     >
                    Delete tag...
@@ -68,7 +70,7 @@ render() {
                 </li>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
-                    onClick={this.handleOptionClick}
+                    onClick={handleUpdateTag}
                     onMouseLeave={this.handleMouseLeave}>
                     Rename tag...
             
@@ -86,9 +88,11 @@ render() {
 }
 };
 
-const msp = (state, { tag, toggleTagOptionsDisplay, history }) => ({
+const msp = (state, { tag, toggleTagOptionsDisplay, history, handleUpdateTag, handleDeleteTag }) => ({
     tag,
     toggleTagOptionsDisplay,
+    handleUpdateTag,
+    handleDeleteTag,
     history
 })
 
