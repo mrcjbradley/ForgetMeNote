@@ -32,34 +32,34 @@ class TagOptionsMenu extends React.Component {
     // }
 
 render() {
-    const { toggleTagOptionsDisplay } = this.props;
+    const { toggleTagOptionsDisplay, pos } = this.props;
+    const styleObj = {'--tag-options-x': `${pos[0]}px`, '--tag-options-y': `${pos[1]}px` };
     return (
         <>
         <div className="clickOutWrapper" onClick={toggleTagOptionsDisplay}>
         </div>
-            <ul className="NoteOptions_SortMenu">
-                <h2 className="SortByTitle">Sort by...</h2>
+            <ul className="TagOptions" style={styleObj}>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
                     onClick={this.handleOptionClick}
                     onMouseLeave={this.handleMouseLeave}
                     >
                    Delete tag...
-            <span className="bg--check-icon"></span>
+            
                 </li>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
                     onClick={this.handleOptionClick}
                     onMouseLeave={this.handleMouseLeave}>
                     Rename tag...
-            <span className="bg--check-icon"></span>
+            
                 </li>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
                     onClick={this.handleOptionClick}
                     onMouseLeave={this.handleMouseLeave}>
                     Remove tag from all notes...
-            <span className="bg--check-icon"></span>
+            
                 </li>
             </ul>
         </>

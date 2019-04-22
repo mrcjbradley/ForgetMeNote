@@ -88,9 +88,22 @@ sans-serif;
     display: flex;
 }
 
+.TagDetailWrapper {
+    display: flex;
+}
+
 .NoteCount {
     margin: 0 5px;
     opacity: 0.5;
+}
+
+.bg--tag-dd-options {
+    transform: rotateX(180deg) scaleX(1.5);
+    opacity: 0.5;
+    font-weight: 100;
+    margin: 0px 5px;
+    visibility: none;
+    opacity: 0;
 }
 
 .LetterList ul {
@@ -105,6 +118,35 @@ sans-serif;
         &:hover{
             background-color: #f0f1f1;
             border-radius: 12px;
+
+            .bg--tag-dd-options {
+                visibility: visible; 
+                opacity: 0.5;
+            }
         }
     }
+}
+
+:root{
+--tag-options-x: 515px;
+--tag-options-y: 127.594px;
+}
+.TagOptions {
+    z-index: 1000;
+
+    top: var(--tag-options-y);
+    left: var(--tag-options-x);
+    position: absolute;
+    font-family: sans-serif;
+    line-height: 1.5;
+    width: 303.203px;
+    height: 264px;
+    background: white;
+    border-radius: 3px;
+    color: #666;
+    font-size: 14px;
+    box-shadow: 0 0 0 1px rgba(99, 114, 130, .16),
+    0 4px 12px rgba(27, 39, 51, .08);
+    margin: 6px 0;
+    padding: 12px 0;
 }

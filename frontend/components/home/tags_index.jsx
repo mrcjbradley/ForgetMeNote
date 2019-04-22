@@ -13,6 +13,7 @@ class TagsIndex extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
         this.toggleTagOptionsDisplay = this.toggleTagOptionsDisplay.bind(this);
+        this.optionsPos = [0,0];
     }
 
     componentDidMount(){
@@ -22,6 +23,9 @@ class TagsIndex extends React.Component {
 
     toggleTagOptionsDisplay(e) {
         this.setState({ tagOptionMenu: !this.state.tagOptionMenu });
+        this.optionsPos = [e.clientX, e.clientY];
+        debugger
+
     }
 
     handleTagClick(tagId){
@@ -64,19 +68,20 @@ class TagsIndex extends React.Component {
             if(this.props.tags[key].length > 0){
                 const tagItems = this.props.tags[key].map((tag, tidx) => {
                     return(
-                        <li className="LetterListItem" key={tidx} ><div onClick={this.handleTagClick(tag.id)}>
+                        <li className="LetterListItem" key={tidx} ><div onClick={this.handleTagClick(tag.id)} className="TagDetailWrapper">
                             {tag.title}  <div className="NoteCount">
                                 ({tag.note_ids.length}) </div>
                         </div>
                             <div className="NoteIndex_NoteTagsOptions">
                                 <nav className="NoteIndex_NoteOptions">
-                                    <div onClick={this.toggleTagOptionsDisplay} className="bg--option-dd-icon"></div>
-                                    {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay} /> : null}
+                                    <div onClick={this.toggleTagOptionsDisplay} className="bg--tag-dd-options">^</div>
+                                    
                                 </nav>
                             </div>
                         </li>
                     )
                 });
+            
                 return(
                 <li key={idx} className={"LetterList "+ key}> 
                 <div className="LetterList_Header">
@@ -103,6 +108,7 @@ class TagsIndex extends React.Component {
                     </ul>
                 </div>
             </section>
+                {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay} pos={this.optionsPos} /> : null}
             {this.props.open ? <Modal handleSubmit={this.handleSubmit}/> : null} 
             </>
         );
