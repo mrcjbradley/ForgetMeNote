@@ -1,5 +1,9 @@
 # ForgetMeNote
 
+- [TL;DR](/#TL;DR)
+
+## TL;DR
+
 [ForgetMeNote](https://forgetmenote.herokuapp.com/) is a clone of [Evernote](https://evernote.com/), a cloud-based note-taking app.
 
 ForgetMeNote is built using React, Redux, and a combination of ES6 and jquery on the frontend, and Ruby on Rails on the backend. 
