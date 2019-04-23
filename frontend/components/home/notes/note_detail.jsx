@@ -20,7 +20,7 @@ class NoteDetail extends React.Component {
 
     componentDidMount(){
         const { getNote, note } = this.props;
-        if (this.props.note) {
+        if (this.props.note && this.props.noteId > 0) {
             getNote(note.id);
         } 
     }

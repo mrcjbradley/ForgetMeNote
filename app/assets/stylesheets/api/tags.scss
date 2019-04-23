@@ -104,6 +104,11 @@ sans-serif;
     margin: 0px 5px;
     visibility: none;
     opacity: 0;
+
+    &.note-detail {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 .LetterList ul {
@@ -180,4 +185,28 @@ sans-serif;
     padding: 0px 10px 0px 15px;
     // opacity: 0.5;
     
+}
+
+.tag-search-results {
+    --search-offset: 0px;
+    position: absolute;
+    bottom: 50px;
+    left: var(--search-offset);
+    background: white;
+    border-radius: 3px;
+    // color: #666;
+    font-size: 14px;
+    box-shadow: 0 0 0 1px rgba(99, 114, 130, .16),
+    0 4px 12px rgba(27, 39, 51, .08);
+    margin: 6px 0;
+    padding: 12px 0;
+}
+
+.tagSearchOption {
+    padding: 6px 30px 6px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    &:hover {
+        background-color: #f5f5f5;
+    }
 }
