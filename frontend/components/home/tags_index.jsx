@@ -3,6 +3,7 @@ import { keys } from 'lodash';
 import { Link } from 'react-router-dom';
 import Modal from './modal_container';
 import TagOptionsMenu from './tag_options';
+import { removeAllNotesFromTag } from '../../actions/tagging_actions';
 
 class TagsIndex extends React.Component {
     constructor(props){
@@ -10,6 +11,7 @@ class TagsIndex extends React.Component {
         this.handleNewTag = this.handleNewTag.bind(this);
         this.handleUpdateTag = this.handleUpdateTag.bind(this);
         this.handleDeleteTag = this.handleDeleteTag.bind(this);
+        this.handleRemoveAllNotesFromTag = this.handleRemoveAllNotesFromTag.bind(this);
         this.state = { name: '', tagOptionMenu: false};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -46,7 +48,7 @@ class TagsIndex extends React.Component {
     }
 
     handleSubmit(formType){
-        const { postTag, patchTag, deleteTag } = this.props;
+        const { postTag, patchTag, deleteTag, RemoveAllNotesFromTag } = this.props;
         let submitAction;
         let payLoad;
         switch (formType) {
@@ -60,6 +62,10 @@ class TagsIndex extends React.Component {
                 break;
             case "Delete tag":
                 submitAction = deleteTag;
+                payLoad = this.selectedTag.id;
+                break;
+            case "Remove tag from all notes":
+                submitAction = removeAllNotesFromTag;
                 payLoad = this.selectedTag.id;
                 break;
             default: 
@@ -127,6 +133,22 @@ class TagsIndex extends React.Component {
         // console.log(this.state.tagOptionMenu);
     }
 
+    handleRemoveAllNotesFromTag(){
+        const { openModal } = this.props;
+        const modal = {
+            title: 'Remove tag from all notes',
+            content: (
+                `${this.selectedTag.title} tag will be removed from all notes. This action can not be undone.`
+            ),
+            buttonType: 'cancel remove'
+        };
+        // console.log(this.state.tagOptionMenu);
+        // debugger
+        this.setState({ tagOptionMenu: false });//.then(() => 
+        openModal(modal);
+        // console.log(this.state.tagOptionMenu);
+    }
+
     render(){
         const tagKeys = _.keys(this.props.tags);
         const tagList = tagKeys.map((key,idx) => {
@@ -173,7 +195,12 @@ class TagsIndex extends React.Component {
                     </ul>
                 </div>
             </section>
-                {this.state.tagOptionMenu ? <TagOptionsMenu toggleTagOptionsDisplay={this.toggleTagOptionsDisplay(null)} tag={this.selectedTag} pos={this.optionsPos} handleUpdateTag={this.handleUpdateTag} handleDeleteTag={this.handleDeleteTag} /> : null}
+                {this.state.tagOptionMenu ? <TagOptionsMenu 
+                toggleTagOptionsDisplay={this.toggleTagOptionsDisplay(null)} 
+                tag={this.selectedTag} pos={this.optionsPos} 
+                handleUpdateTag={this.handleUpdateTag} 
+                handleDeleteTag={this.handleDeleteTag} 
+                handleRemoveAllNotesFromTag={this.handleRemoveAllNotesFromTag}/> : null}
                 {this.props.open ? <Modal handleSubmit={this.handleSubmit}/> : null} 
             </>
         );

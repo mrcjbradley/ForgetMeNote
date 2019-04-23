@@ -7,6 +7,7 @@ import {
     patchTag,
     deleteTag
  } from '../../actions/tag_action';
+ import { removeAllNotesFromTag } from '../../actions/tagging_actions';
  import { openModal, receiveFilter } from '../../actions/ui_actions';
 import { values } from 'lodash';
 
@@ -29,7 +30,8 @@ const mdp = dispatch => ({
     postTag: tag => dispatch(postTag(tag)),
     receiveFilter: filters => dispatch(receiveFilter(filters)),
     patchTag: tag => dispatch(patchTag(tag)),
-    deleteTag: tagId => dispatch(deleteTag(tagId))
+    deleteTag: tagId => dispatch(deleteTag(tagId)),
+    removeAllNotesFromTag: tadId => dispatch(removeAllNotesFromTag(tagId))
 });
 
 export default connect(msp,mdp)(TagsIndex);

@@ -13,6 +13,7 @@ class TagOptionsMenu extends React.Component {
         this.handleDeletion = this.handleDeletion.bind(this);
         this.handleUpdateTag = this.props.handleUpdateTag.bind(this);
         this.handleDeleteTag = this.props.handleDeleteTag.bind(this);
+        this.handleRemoveAllNotesFromTag = this.props.handleRemoveAllNotesFromTag.bind(this);
     }
 
     componentDidMount(){
@@ -51,7 +52,7 @@ class TagOptionsMenu extends React.Component {
 render() {
     // $('.tag-'+this.props.tag.id).addClass('selected');
     // debugger
-    const { toggleTagOptionsDisplay, pos, handleUpdateTag, tag, handleDeleteTag } = this.props;
+    const { toggleTagOptionsDisplay, pos, handleUpdateTag, tag, handleDeleteTag, handleRemoveAllNotesFromTag } = this.props;
     const top = window.innerHeight - pos[1] > 150 ? `${pos[1] + 13}px` : `${pos[1] - 150}px`;
     const left = `${window.innerWidth - pos[0] - 8}px`;
     const styleObj = {'--tag-options-x': left, '--tag-options-y': top };
@@ -77,7 +78,7 @@ render() {
                 </li>
                 <li className="SortByOption"
                     onMouseEnter={this.handleMouseEnter}
-                    onClick={this.handleOptionClick}
+                    onClick={handleRemoveAllNotesFromTag}
                     onMouseLeave={this.handleMouseLeave}>
                     Remove tag from all notes...
             
