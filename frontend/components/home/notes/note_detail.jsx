@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { merge } from 'lodash';
 import Modal from '../modal_container';
 import ReactQuill from 'react-quill';
+import NoteFooter from './note_footer';
 
 
 class NoteDetail extends React.Component {
@@ -168,6 +169,7 @@ class NoteDetail extends React.Component {
                             </div>
                         </div>
                         </form>
+                <NoteFooter/>
                 </article>
                 {this.props.open ? <Modal note={this.props.note} notes={this.props.notes} modalType={'delete_note'}/> : null }
             </>

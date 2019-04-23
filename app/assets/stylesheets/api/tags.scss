@@ -150,3 +150,34 @@ sans-serif;
     margin: 6px 0;
     padding: 12px 0;
 }
+
+.NoteFooterContainer {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    font-family: $tags-font;
+    border-top: 1px solid #ececec;
+    height: 50px;
+    width: 100%;
+    bottom: 0;
+}
+
+.NoteFooter {
+    display: flex;
+}
+
+.NoteTagsContainer {
+    display: flex;
+}
+
+.bg--newnote-grey-icon {
+    background-image: image_url("new_tag_grey");
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 46px;
+    height: 23px;
+    display: block;
+    padding: 0px 10px 0px 15px;
+    opacity: 0.5;
+    
+}
