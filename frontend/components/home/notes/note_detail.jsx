@@ -176,7 +176,7 @@ class NoteDetail extends React.Component {
                             </div>
                         </div>
                         </form>
-                <NoteFooter currentNoteTagIds={this.state.tag_ids}/>
+                <NoteFooter currentNoteTagIds={this.state.tag_ids} displayedNote={this.props.note}/>
                 </article>
                 {this.props.open ? <Modal note={this.props.note} notes={this.props.notes} modalType={'delete_note'}/> : null }
             </>

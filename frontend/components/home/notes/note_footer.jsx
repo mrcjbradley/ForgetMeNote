@@ -1,12 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { values } from 'lodash';
+import {
+    removeAllNotesFromTag,
+    removeExistingTagging,
+    postNewTagging
+} from '../../../actions/tagging_actions';
 
 class NoteFooter extends React.Component {
     constructor(props){
         super(props);
         this.state = {title: "", tagSearchMatches:[]};
         this.handleChange = this.handleChange.bind(this);
+        this.handleNewTagging = this.handleNewTagging.bind(this);
     }
 
     componentDidUpdate(){
@@ -14,6 +20,12 @@ class NoteFooter extends React.Component {
         if (this.state.tagSearchMatches.length > 1 ) {
             document.querySelector('.tag-search-results').style.left = `${searchOffset}px`;
         }
+    }
+
+    handleNewTagging(e){
+        e.preventDefault();
+        const { postNewTagging } = this.props;
+        postNewTagging({note_id: this.props.displayedNote.id, tag_id: e.target.value});
     }
     
     handleChange(e){
@@ -31,7 +43,7 @@ class NoteFooter extends React.Component {
     const { currentNoteTags } = this.props;
     const { tagSearchMatches } = this.state;
     const tagList = currentNoteTags.map((tag,idx) => (
-                        <li className={`LetterListItem tag-${tag.id}`} key={idx} ><div className="TagDetailWrapper">
+        <li className={`NoteFooter-TagListItem tag-${tag.id}`} key={idx} ><div className="TagDetailWrapper">
                             {tag.title}
                         </div>
                             <div className="NoteIndex_NoteTagsOptions">
@@ -43,7 +55,7 @@ class NoteFooter extends React.Component {
                 ))
         
         const tagSearchResults = tagSearchMatches.map((tag,idx) => (
-            <li value={tag.id} key={idx} className="tagSearchOption">
+            <li value={tag.id} key={idx} onClick={this.handleNewTagging} className="tagSearchOption">
                 {tag.title}
             </li>
         ));
@@ -62,7 +74,7 @@ class NoteFooter extends React.Component {
                         		{tagList}
                         	</ul>
                         </div>
-                        <input type="text" value={this.state.title} onChange={this.handleChange}/>
+                        <input type="text" value={this.state.title} onChange={this.handleChange} placeholder={this.props.currentNoteTags.length > 0 ? "" : "Add tag" }/>
                        {tagSearchMatches.length > 0 ? tagSelectElement : null }
                     </div>
                 </div>            
@@ -75,17 +87,20 @@ class NoteFooter extends React.Component {
 
 const msp = ( state, ownProps) => {
     const { entities: { tags } } = state;
-    const { currentNoteTagIds } = ownProps;
+    const { currentNoteTagIds, displayedNote } = ownProps;
     // debugger
     const currentNoteTags = currentNoteTagIds.map(tag_id => tags[tag_id]);
     return ({
         currentNoteTags,
-        tags: _.values(tags) 
+        tags: _.values(tags) ,
+        displayedNote
     })
 }
 
 const mdp = dispatch => ({
-
+    postNewTagging: tagging => dispatch(postNewTagging(tagging)),
+    removeExistingTagging: tagging => dispatch(removeExistingTagging(tagging)),
+    removeAllNotesFromTag: tagId => dispatch(removeAllNotesFromTag(tagId))
 });
 
 export default connect(msp, mdp)(NoteFooter);

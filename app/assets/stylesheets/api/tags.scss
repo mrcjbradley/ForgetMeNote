@@ -79,7 +79,7 @@ sans-serif;
     color: #333;
 }
 
-.LetterListItem {
+.LetterListItem, .NoteFooter-TagListItem {
     line-height: 24px;
     font-size: 13px;
     color: #333;
@@ -173,6 +173,11 @@ sans-serif;
 
 .NoteTagsContainer {
     display: flex;
+
+    input[type='text']{
+        border: none;
+        outline: none;
+    }
 }
 
 .bg--newnote-grey-icon {
@@ -200,6 +205,13 @@ sans-serif;
     0 4px 12px rgba(27, 39, 51, .08);
     margin: 6px 0;
     padding: 12px 0;
+}
+
+.NoteFooter-TagListItem {
+    background-color: #f0f1f1;
+    border-radius: 12px;
+    padding: 0px 12px;
+    margin-right: 5px;
 }
 
 .tagSearchOption {
