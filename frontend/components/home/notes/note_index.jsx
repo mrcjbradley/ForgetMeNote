@@ -29,6 +29,12 @@ class NoteIndex extends React.Component
         getAllNotes();
     }
 
+    componentWillReceiveProps(prevProps){
+        if (prevProps.notes !== this.props.notes){
+            this.setState({ notes: this.props.notes, mostRecentId: this.props.mostRecentId });
+        }
+    }
+
     componentDidUpdate(prevProps)
     {
         $('.NoteItem').removeClass('active');

@@ -39,7 +39,8 @@ class TagsIndex extends React.Component {
         const { receiveFilter, history } = this.props;
         return e => {
             e.preventDefault();
-            receiveFilter({tags: tagId}).then(history.push('/home/notes'));
+            receiveFilter({tags: tagId});
+            history.push('/home/notes');
         };
     }
 

@@ -9,7 +9,7 @@ import NoteFooter from './note_footer';
 class NoteDetail extends React.Component {
     constructor(props){
         super(props);
-        this.state = this.props.note;
+        this.state = this.props.note ? this.props.note : this.props.notes[0];
         this.handleBlur = this.handleBlur.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleEditorChange = this.handleEditorChange.bind(this);
@@ -19,9 +19,15 @@ class NoteDetail extends React.Component {
     }
 
     componentDidMount(){
+        const { getNote, note } = this.props;
         if (this.props.note) {
-            const { getNote, note } = this.props;
             getNote(note.id);
+        } 
+    }
+
+    componentWillReceiveProps(prevProps, newProps){
+         if (prevProps.note !== this.props.note || prevProps.notes || this.props.notes){
+            this.setState(this.props.note ? this.props.note : this.props.notes[0]);
         }
     }
 
@@ -79,6 +85,7 @@ class NoteDetail extends React.Component {
 
     render(){
         if (!this.props.note) return null;
+        // debugger
         const { title, content } = this.state;
         const { deleted_at } = this.props.note;
         const isDeleted = Boolean(typeof deleted_at === 'string');
@@ -169,7 +176,7 @@ class NoteDetail extends React.Component {
                             </div>
                         </div>
                         </form>
-                <NoteFooter/>
+                <NoteFooter currentNoteTagIds={this.state.tag_ids}/>
                 </article>
                 {this.props.open ? <Modal note={this.props.note} notes={this.props.notes} modalType={'delete_note'}/> : null }
             </>

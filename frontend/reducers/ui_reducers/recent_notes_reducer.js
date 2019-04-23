@@ -12,6 +12,9 @@ import {
     notDeletedNotes
 } from '../../util/selectors';
 import {
+    RECEIVE_FILTER
+} from '../../actions/ui_actions';
+import {
     merge,
     values
 } from 'lodash';

@@ -7,9 +7,10 @@ import { withRouter } from 'react-router-dom';
 import { deletedNotes, notDeletedNotes } from '../../../util/selectors';
 
 const msp = (state, ownProps) => {
-    
+    const noteId = ownProps.match.params.noteId ? ownProps.match.params.noteId : state.ui.recentNotes.currentNoteId;
+    const note = ownProps.note ? ownProps.note : ownProps.notes.filter(note => note.id === noteId )[0];
     return ({
-        note: ownProps.note,
+        note,
         history: ownProps.history,
         path: ownProps.match.path,
         open: state.ui.modal.open
