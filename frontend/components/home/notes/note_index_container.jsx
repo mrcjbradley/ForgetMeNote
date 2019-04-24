@@ -1,6 +1,6 @@
 import React from 'react';
 import { getAllNotes, getNote } from '../../../actions/note_actions';
-import { removeTagFilter } from '../../../actions/ui_actions';
+import { removeTagFilter, receiveFilter } from '../../../actions/ui_actions';
 import { connect } from 'react-redux';
 import { notDeletedNotes, mostRecentlyUpdatedNote } from '../../../util/selectors';
 import NoteIndex from './note_index';
@@ -32,6 +32,7 @@ const msp = (state, ownProps) => {
     return ({
         notes: recentNoteId === -1 ? [emptyIndexNote] : notDeletedNotes(filteredNotes),
         note_sort_order,
+        tags: _.values(tags),
         history,
         fullscreen,
         headerText: 'All Notes',
@@ -43,7 +44,8 @@ const msp = (state, ownProps) => {
 
 const mdp = dispatch => ({
     getAllNotes: () => dispatch(getAllNotes()),
-    removeTagFilter: () => dispatch(removeTagFilter())
+    removeTagFilter: () => dispatch(removeTagFilter()),
+    receiveFilter: filter => dispatch(receiveFilter(filter))
 });
 
 

@@ -17,11 +17,13 @@ class NoteIndex extends React.Component
         this.state = {
             sortMenu: false,
             notes: this.props.notes,
-            mostRecentId: this.props.mostRecentId
+            mostRecentId: this.props.mostRecentId,
+            tagsVisibile: false
         };
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
         this.handleEmptyTrash = this.handleEmptyTrash.bind(this);
         this.clearFilter = this.clearFilter.bind(this);
+        this.toggleTagOptionsVisible = this.toggleTagOptionsVisible.bind(this);
     }
 
     componentDidMount(){
@@ -62,6 +64,12 @@ class NoteIndex extends React.Component
     toggleSortDisplay(e)
     {
         this.setState({ sortMenu: !this.state.sortMenu });
+    }
+
+     toggleTagOptionsVisible(e){
+        //  debugger
+         $('.tagFilterSearch').toggle();
+        //  this.setState({ tagsVisible: !this.state.tagsVisibile});
     }
 
     handleEmptyTrash(e)
@@ -131,6 +139,8 @@ class NoteIndex extends React.Component
 
     }
 
+   
+
     render() {
 
         // if (this.state.notes.length === 0) return null;
@@ -145,14 +155,7 @@ class NoteIndex extends React.Component
             }); } else {
                 noteItems = [];
             }
-        const tagsIcon = (
-            <nav className="NoteIndex_NoteTags">
-                <div className="bg--tag-icon"></div>
-                <ul>
-                    <li></li>
-                </ul>
-            </nav>
-        )
+        
         const emptyTrashBtn = (
             <Link to='#' className='emptyTrashBtn' onClick={this.handleEmptyTrash}>empty trash</Link>
         )
@@ -175,6 +178,29 @@ class NoteIndex extends React.Component
         }else {
          mostRecent = null;
         }
+        
+        const tagList = this.props.tags.map((tag,idx) => {
+      
+        
+        return(
+        <li className={`NoteIndex-TagListItem tag-${tag.id}`} key={idx} onClick={(e) => {
+            this.toggleTagOptionsVisible();
+            this.props.receiveFilter({tags: tag.id});
+            }}>
+                            {tag.title}
+                        
+                        </li>
+                )})
+
+        const tagsIcon = (
+            <nav className="NoteIndex_NoteTags">
+                <div className="bg--tag-icon" onClick={this.toggleTagOptionsVisible}></div>
+                <ul className="tagFilterSearch" style={{display: this.state.tagsVisibile ? "inherit" : "none"}}>
+                    {tagList}
+                </ul>
+            </nav>
+        )
+        // debugger
         return (
             <>
                 <aside className={fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
