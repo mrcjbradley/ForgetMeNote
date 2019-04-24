@@ -21,7 +21,7 @@ class Tag < ApplicationRecord
         self.fav = self.fav || "false"
     end
 
-    has_many :taggings
+    has_many :taggings, dependent: :destroy
     has_many :notes, through: :taggings
     has_many :notebooks, through: :notes
     belongs_to :user

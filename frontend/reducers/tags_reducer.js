@@ -19,6 +19,7 @@ export default (oldState = {}, action) => {
             const newTagObj = { [action.tag.id]: action.tag };
             return Object.assign({}, oldState, newTagObj);
         case REMOVE_TAG:
+            // debugger
             const nextState = Object.assign({}, oldState);
             delete nextState[action.tagId];
             return nextState;

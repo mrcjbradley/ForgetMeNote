@@ -1,4 +1,5 @@
 import { merge } from 'lodash';
+import { REMOVE_TAG } from '../../actions/tag_action';
 import {
     RECEIVE_FILTER,
     REMOVE_TAG_FILTER,
@@ -16,6 +17,13 @@ const filtersReducer = ( oldState = _placeHolder, action ) => {
             nextState.tags = action.filters.tags ? action.filters.tags : nextState.tags;
             nextState.notebook = action.filters.notebook ? action.filters.notebook : nextState.notebook;
             return nextState;
+        case REMOVE_TAG:
+            if (oldState.tags > -1 && action.tags == oldState.tags){
+                return nextState;
+            } else {
+                nextState.tags = -1;
+                return nextState;
+            }
         case REMOVE_TAG_FILTER:
             nextState.tags = -1;
             return nextState;

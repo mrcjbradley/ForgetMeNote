@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { postNote } from '../../actions/note_actions';
 import { postNewTagging } from '../../actions/tagging_actions';
 import { values } from 'lodash';
+// import { postNewTagging } from '../../actions/tagging_actions';
 
 class HomeSidebar extends React.Component {
     constructor(props){
@@ -14,11 +15,19 @@ class HomeSidebar extends React.Component {
 
     newNote(e){
         e.preventDefault();
-        const { postNote, history, default_notebook_id , postNewTagging} = this.props;
+        const { postNote, history, tags, default_notebook_id , postNewTagging} = this.props;
         const blankNote = {notebook_id: default_notebook_id};
-        postNote(blankNote).then(({notes}) => {
+        if (tags > 0){
+        postNote(blankNote).then(res => {
+            // debugger
+            postNewTagging({note_id:_.values(res.notes)[0].id,tag_id: tags});
+        }).then(({notes}) => {
             history.push(`/home/notes/${_.values(notes)[0].id}`);
         }); 
+        }else {
+        postNote(blankNote).then(({notes}) => {
+            history.push(`/home/notes/${_.values(notes)[0].id}`);
+        }); }
     }
 
     render(){
@@ -78,7 +87,7 @@ class HomeSidebar extends React.Component {
     )};
 };
 
-const msp = ({ ui: { editorPreferences: { fullscreen }, filters: {tags} }, session: {currentUser: {default_notebook_id}}, ui: { recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => {
+const msp = ({ ui: { editorPreferences: { fullscreen }, filters: {tags} }, session: {currentUser: {default_notebook_id}}, ui: {  recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => {
     // debugger
     return({
     fullscreen,

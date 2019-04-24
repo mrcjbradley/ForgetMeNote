@@ -89,7 +89,9 @@ class NoteFooter extends React.Component {
     
     const { currentNoteTags , displayedNote} = this.props;
     const { tagSearchMatches, tagOptionsVisible } = this.state;
-    const tagList = currentNoteTags.map((tag,idx) => (
+    const tagList = currentNoteTags.map((tag,idx) => {
+        if (tag){
+        return(
         <li className={`NoteFooter-TagListItem tag-${tag.id}`} key={idx} ><div className="TagDetailWrapper">
                             {tag.title}
                         </div>
@@ -99,7 +101,7 @@ class NoteFooter extends React.Component {
                                 </nav>
                             </div>
                         </li>
-                ))
+                )}})
         
         const tagSearchResults = tagSearchMatches.map((tag,idx) => (
             <li value={tag.id} key={idx} onClick={this.handleNewTagging} className="tagSearchOption">
@@ -146,7 +148,8 @@ const msp = ( state, ownProps) => {
     const { entities: { tags } } = state;
     const { currentNoteTagIds, displayedNote, history } = ownProps;
     // debugger
-    const currentNoteTags = currentNoteTagIds.map(tag_id => tags[tag_id]);
+    const currentNoteTags = ownProps.currentNoteTagIds.map(tag_id => tags[tag_id]).filter(el => el !== undefined);
+    debugger
     return ({
         currentNoteTags,
         tags: _.values(tags) ,

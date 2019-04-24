@@ -21,7 +21,7 @@ const receiveTag = (tag) => ({
     tag
 });
 
-const removeTag = tagId => ({
+const removeTag = ({tagId}) => ({
     type: REMOVE_TAG,
     tagId
 });
@@ -51,6 +51,6 @@ export const patchTag = tag => dispatch => (
 
 export const deleteTag = tagId => dispatch => (
     TagsAPIUtil.deleteTag(tagId)
-     .then(({tagId}) => dispatch(removeTag(tagId)),
+     .then((tagId) => dispatch(removeTag(tagId)),
          errors => dispatch(receiveTagErrors(errors.responseJSON)))
 );
