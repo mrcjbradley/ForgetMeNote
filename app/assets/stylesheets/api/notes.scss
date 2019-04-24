@@ -99,6 +99,7 @@ $beige: rgb(248, 248, 248);
 }
 
 .bg--user-icon {
+    background-image: url("https://raw.githubusercontent.com/mrcjbradley/CSS-Transitions/master/apple-touch-icon.png");
     background-blend-mode: overlay;
     display: block;
     box-sizing: content-box;
@@ -699,6 +700,8 @@ $beige: rgb(248, 248, 248);
     outline: none;
     z-index: 1;
     cursor: text;
+    background: transparent;
+    font-weight: 300;
 }
 
 .NoteDetail_DisableWrapper {
@@ -853,4 +856,21 @@ div.ql-editor {
 }
 .spacerForToolBar {
     height: 41.875px;
+    z-index: 100;
+}
+
+.fillerTitle{
+    position: absolute;
+    top: 113px;
+    width: 100%;
+    left: 625px;
+    font-weight: 300;
+    display: block;
+    font-size: 34px;
+    color: #a6a6a6;
+}
+
+.NoteShow_ToolBar {
+    position: absolute;
+    width: 100%;
 }

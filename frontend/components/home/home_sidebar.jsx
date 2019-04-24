@@ -19,7 +19,7 @@ class HomeSidebar extends React.Component {
         const blankNote = {notebook_id: default_notebook_id};
         if (tags > 0){
         postNote(blankNote).then(res => {
-            // debugger
+
             postNewTagging({note_id:_.values(res.notes)[0].id,tag_id: tags});
         }).then(({notes}) => {
             history.push(`/home/notes/${_.values(notes)[0].id}`);
@@ -88,7 +88,7 @@ class HomeSidebar extends React.Component {
 };
 
 const msp = ({ ui: { editorPreferences: { fullscreen }, filters: {tags} }, session: {currentUser: {default_notebook_id}}, ui: {  recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => {
-    // debugger
+   
     return({
     fullscreen,
     history,

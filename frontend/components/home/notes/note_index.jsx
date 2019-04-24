@@ -159,7 +159,7 @@ class NoteIndex extends React.Component
 
         const currentTagDiv = () => {
             if (this.props.filterTags === null || headerText === 'Trash') return null;
-            // debugger
+            
             return(
                 <div className="NoteIndex_FiltersTags">
                     <div className="FiltersTags_CurrentTag">

@@ -23,9 +23,9 @@ class NoteFooter extends React.Component {
     }
 
     toggleTagOptionsVisible(tag){
-        // debugger
+       
         return (e) => {
-        // debugger
+       
             this.setState({ tagOptionsVisible: !this.state.tagOptionsVisible });
         if (e.clientX && e.clientY){this.optionsPos = [e.clientX, e.clientY];}
         if (tag){
@@ -37,14 +37,14 @@ class NoteFooter extends React.Component {
 
     componentDidUpdate(){
         const searchOffset = document.querySelector('.NoteTagsContainer input') ? document.querySelector('.NoteTagsContainer input').offsetLeft : 0;         
-        // debugger
+       
         if (this.state.tagSearchMatches.length > 0 ) {
             document.querySelector('.tag-search-results').style.left = `${searchOffset}px`;
         }
     }
 
     handleNewTagging(e){
-        // debugger
+       
         e.preventDefault();
         const { postNewTagging } = this.props;
         const tag_id = e.target.tagName === "INPUT" ? this.props.tags.filter(tag => tag.title === e.target.value)[0].id : e.target.value;
@@ -55,11 +55,10 @@ class NoteFooter extends React.Component {
     
     handleChange(e){
         e.preventDefault();
-        console.log(e.target.value);
         const titleLength = this.state.title.length;
-        // debugger
+       
         const tagSearchMatches = titleLength > 0 ? this.props.tags.filter(tag => !this.props.currentNoteTags.includes(tag) && tag.title.slice(0, titleLength + 1) === e.target.value) : [];
-        console.log(tagSearchMatches);
+       
         this.setState({title: e.target.value, tagSearchMatches});
     }
 
@@ -71,11 +70,10 @@ class NoteFooter extends React.Component {
         return (e) => {
             e.preventDefault();
         if (tagSearchTitles.includes(e.target.value)) {
-            debugger
             this.handleNewTagging(e);
         } else if (!currentTagTitles.includes(e.target.value)) {
             this.props.postTag({title: e.target.value, note_id: note.id}). then(res => {
-                // debugger
+               
                 // this.props.history.push(`/home/notes/${res.tag.note_ids[0]}`);
                 this.setState({ title: "", tagSearchMatches: []});
                 this.props.getNote(res.tag.note_ids[0]);
@@ -147,9 +145,9 @@ class NoteFooter extends React.Component {
 const msp = ( state, ownProps) => {
     const { entities: { tags } } = state;
     const { currentNoteTagIds, displayedNote, history } = ownProps;
-    // debugger
+   
     const currentNoteTags = ownProps.currentNoteTagIds.map(tag_id => tags[tag_id]).filter(el => el !== undefined);
-    debugger
+    
     return ({
         currentNoteTags,
         tags: _.values(tags) ,

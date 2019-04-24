@@ -24,7 +24,7 @@ class NoteIndexItem extends React.Component {
             <li className={"NoteItem"}>
             <NavLink to={`${navPath}${note.id}`}  >
                     <div className="NoteItem_NoteTitle">
-                        {note.title}
+                        {note.title ? note.title : "untitled"}
                     </div>
                     <div className="NoteItem_NoteContent">
                         {this.previewGenerator(note.plain_text)}

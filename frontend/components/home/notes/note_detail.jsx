@@ -47,7 +47,7 @@ class NoteDetail extends React.Component {
         const displayStyle = e.relatedTarget && e.relatedTarget.className.includes("ql") ? "inherit" : "none";
         $('#tool').css("display", displayStyle);
         const { patchNote } = this.props;
-        setTimeout(() => patchNote(this.state), 1000);
+        setTimeout(() => patchNote(this.state), 0);
     }
 
     displayTools(e) {
@@ -87,7 +87,7 @@ class NoteDetail extends React.Component {
 
     render(){
         if (!this.props.note) return null;
-        // debugger
+       
         const { title, content } = this.state;
         const { deleted_at } = this.props.note;
         const isDeleted = Boolean(typeof deleted_at === 'string');
@@ -160,10 +160,12 @@ class NoteDetail extends React.Component {
                                 <input type="text"
                                     className="NoteDetail_NoteTitle"
                                     onChange={this.handleChange('title')}
-                                    value={title ? title : ''}
+                                    // defaultValue={"test"}
+                                    value={title ? title : ""}
                                     disabled={isDeleted ? true : false}
                                     onFocus={() => $('#tool').css("display", "none")}
                                 />
+                                <span className="fillerTitle"  style={title ? {display: "none"} : null}>Title</span>
                                 <div onClick={isDeleted ? null : this.displayTools}>
                                     <ReactQuill
                                         modules={{ toolbar: { container: '#tool' } }}

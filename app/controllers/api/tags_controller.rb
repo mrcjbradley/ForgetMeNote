@@ -1,6 +1,5 @@
 class Api::TagsController < ApplicationController
     def create
-        # debugger
     	tag_base = {title: tag_params[:title], fav: tag_params[:fav]}
     	@note = tag_params[:note_id] ? Note.find(tag_params[:note_id]) : nil 
         @tag = current_user.tags.new(tag_base)

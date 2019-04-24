@@ -26,9 +26,9 @@ const msp = (state, ownProps) => {
         updated_at: `${new Date()}`,
         tag_ids: []
     }; 
-    // debugger
+    // 
     const filteredNotes = filters.tags < 0 ? _.values(notes) : tags[filters.tags].note_ids.map(noteId => notes[noteId]); 
-// debugger
+// 
     return ({
         notes: recentNoteId === -1 ? [emptyIndexNote] : notDeletedNotes(filteredNotes),
         note_sort_order,

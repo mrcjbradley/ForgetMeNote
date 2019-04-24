@@ -17,7 +17,7 @@ const msp = ({entities: {tags}, ui:{modal:{open}}}) => {
         const letter = String.fromCharCode(97+n);
         alphaTags[letter] = _.values(tags).filter(tag => tag.title[0].toLowerCase() === letter);
     }
-    // debugger
+    
     return({
     // tagCount: _.values.tags ? _values.tags.length : 0,
     tags: alphaTags,

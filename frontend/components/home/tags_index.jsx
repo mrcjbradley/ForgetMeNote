@@ -12,7 +12,7 @@ class TagsIndex extends React.Component {
         this.handleUpdateTag = this.handleUpdateTag.bind(this);
         this.handleDeleteTag = this.handleDeleteTag.bind(this);
         this.handleRemoveAllNotesFromTag = this.handleRemoveAllNotesFromTag.bind(this);
-        // debugger
+        
         this.state = { name:'', tagOptionMenu: false};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,13 +29,13 @@ class TagsIndex extends React.Component {
     toggleTagOptionsDisplay(tag){
         return (e) => {
         this.setState({ tagOptionMenu: !this.state.tagOptionMenu });
-        // debugger
+        
         if (e.clientX && e.clientY){this.optionsPos = [e.clientX, e.clientY];}
         if (tag){
             this.selectedTag = tag;
             this.setState({name: tag.title});
         }
-        // debugger
+        
         };
     }
 
@@ -80,7 +80,7 @@ class TagsIndex extends React.Component {
         // const payLoad = formType === "Create new tag" ? { title: this.state.name } : Object.assign({}, this.selectedTag, { title: this.state.name });
         return e => {
             e.preventDefault();
-            // debugger
+            
             return submitAction(payLoad);
         };
     }
@@ -116,11 +116,11 @@ class TagsIndex extends React.Component {
             ),
             buttonType: 'cancel done'
         };
-        // console.log(this.state.tagOptionMenu);
-        // debugger
+       
+        
         this.setState({ tagOptionMenu: false });//.then(() => 
         openModal(modal);
-        // console.log(this.state.tagOptionMenu);
+       
     }
 
     handleDeleteTag(){
@@ -132,11 +132,11 @@ class TagsIndex extends React.Component {
             ),
             buttonType: 'cancel delete'
         };
-        // console.log(this.state.tagOptionMenu);
-        // debugger
+       
+        
         this.setState({ tagOptionMenu: false });//.then(() => 
         openModal(modal);
-        // console.log(this.state.tagOptionMenu);
+       
     }
 
     handleRemoveAllNotesFromTag(){
@@ -148,11 +148,11 @@ class TagsIndex extends React.Component {
             ),
             buttonType: 'cancel remove'
         };
-        // console.log(this.state.tagOptionMenu);
-        // debugger
+       
+        
         this.setState({ tagOptionMenu: false });//.then(() => 
         openModal(modal);
-        // console.log(this.state.tagOptionMenu);
+       
     }
 
     render(){

@@ -3,7 +3,7 @@
 # Table name: notes
 #
 #  id          :bigint(8)        not null, primary key
-#  title       :string           not null
+#  title       :string
 #  content     :text
 #  deleted_at  :datetime
 #  fav         :boolean
@@ -14,15 +14,15 @@
 #
 
 class Note < ApplicationRecord
-    validates :title, presence: true
+    # validates :title, presence: true
     validates :fav, inclusion: { in: [true, false]}
 
-    after_initialize :ensure_title, :ensure_fav
+    after_initialize  :ensure_fav
     before_save :ensure_plain_text
 
-    def ensure_title
-        self.title = self.title || "untitled"
-    end
+    # def ensure_title
+    #     self.title = self.title || "Title"
+    # end
     
     def ensure_fav
         self.fav = self.fav || "false"

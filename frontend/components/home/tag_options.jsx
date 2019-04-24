@@ -6,7 +6,7 @@ class TagOptionsMenu extends React.Component {
     constructor(props){
         super(props);
         // this.handleOptionClick = this.handleOptionClick.bind(this);
-        // debugger
+        
         this.handleDeletion = this.handleDeletion.bind(this);
         this.handleUpdateTag = this.props.handleUpdateTag.bind(this);
         this.handleDeleteTag = this.props.handleDeleteTag.bind(this);
@@ -48,7 +48,7 @@ class TagOptionsMenu extends React.Component {
 
 render() {
     // $('.tag-'+this.props.tag.id).addClass('selected');
-    // debugger
+    
     const { toggleTagOptionsDisplay, pos, handleUpdateTag, tag, handleDeleteTag, handleRemoveAllNotesFromTag } = this.props;
     const top = window.innerHeight - pos[1] > 150 ? `${pos[1] + 13}px` : `${pos[1] - 150}px`;
     const left = `${window.innerWidth - pos[0] - 8}px`;

@@ -9,7 +9,6 @@ class Api::TaggingsController < ApplicationController
     end
 
     def create 
-        # debugger
         @tagging = Tagging.create(tagging_params)
         if @tagging
         	@notes = current_user.notes

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_203305) do
+ActiveRecord::Schema.define(version: 2019_04_24_174838) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2019_04_09_203305) do
   end
 
   create_table "notes", force: :cascade do |t|
-    t.string "title", null: false
+    t.string "title"
     t.text "content"
     t.datetime "deleted_at"
     t.boolean "fav"

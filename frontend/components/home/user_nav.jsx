@@ -25,12 +25,14 @@ class UserNav extends React.Component
 
     render(){
         const { currentUser } = this.props;
-        const bgImg = { backgroundImage: `url(${currentUser.image_url})`};
+        // const bgImg = { backgroundImage: `url(${currentUser.image_url})`};
+        const bgImg = {};
         return (
             <nav className="userNav">
                 <div className="currentUserInfo">
                     <Link to="#" className="userNav_toggleMenu" onClick={this.toggleSessionMenu}>
-                        <div className="bg--user-icon" style={bgImg}></div>
+                        {/* <div className="bg--user-icon" style={bgImg}></div> */}
+                        <div className="bg--user-icon" ></div>
                         <span className="CurrentUserEmail">{currentUser.email}</span>
                     </Link>
                 </div>
@@ -38,7 +40,8 @@ class UserNav extends React.Component
                     <ul className="userNav_sessionOptions ">
                         <li className="accountTitle">Account</li>
                         <li className='userNav_toggleMenu'>
-                            <div className="bg--user-icon inner" style={bgImg}></div>
+                            {/* <div className="bg--user-icon inner" style={bgImg}></div> */}
+                            <div className="bg--user-icon inner" ></div>
                             <span className="CurrentUserEmail inner">{currentUser.email}</span><span className="bg--check-icon blue"></span>
                         </li>
                         <li className="spacerRow"></li>

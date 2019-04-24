@@ -80,7 +80,6 @@
  };
 
  export const tagsFilter = (notes, tagIds) => {
-    //  debugger
     if (tagIds.length === 0){
         return notes;
     } else {

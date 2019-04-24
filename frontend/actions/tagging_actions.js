@@ -19,18 +19,18 @@ const receiveNote = ({notes, tags}) => ({
 
 export const removeAllNotesFromTag = tagId => (
     removeAllNotes(tagId)
-    .then(notes => dispatch(receiveAllNotes(notes)),
-        errors => { console.log('tissue for your issue?');})
-);
+    .then(notes => dispatch(receiveAllNotes(notes))));//,
+        // errors => {})
+// );
 
 export const postNewTagging = tagging => (
     postTagging({tagging})
-    .then(notes => dispatch(receiveAllNotes(notes)),
-      errors => { console.log('tissue for your issue?');})
-);
+    .then(notes => dispatch(receiveAllNotes(notes))));//,
+    //   errors => {})
+// );
 
 export const removeExistingTagging = tagging => (
     removeTagging({tagging})
-    .then(notes => dispatch(receiveAllNotes(notes)),
-      errors => { console.log('tissue for your issue?');})
-);
+    .then(notes => dispatch(receiveAllNotes(notes))));//,
+    //   errors => {})
+// );
