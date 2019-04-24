@@ -44,6 +44,8 @@ class NoteDetail extends React.Component {
     }
 
     handleBlur(e){
+        const displayStyle = e.relatedTarget && e.relatedTarget.className.includes("ql") ? "inherit" : "none";
+        $('#tool').css("display", displayStyle);
         const { patchNote } = this.props;
         setTimeout(() => patchNote(this.state), 1000);
     }
@@ -176,7 +178,7 @@ class NoteDetail extends React.Component {
                             </div>
                         </div>
                         </form>
-                    {isDeleted ? null :  <NoteFooter currentNoteTagIds={this.state.tag_ids} displayedNote={this.props.note}/> }
+                    {isDeleted ? null :  <NoteFooter currentNoteTagIds={this.state.tag_ids} displayedNote={this.props.note} getNote={ this.props.getNote } history={this.props.history}/> }
                 </article>
                 {this.props.open ? <Modal note={this.props.note} notes={this.props.notes} modalType={'delete_note'}/> : null }
             </>

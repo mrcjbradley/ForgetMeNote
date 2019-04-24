@@ -6,9 +6,9 @@ import {
     removeExistingTagging,
     postNewTagging
 } from '../../../actions/tagging_actions';
+import { postTag } from '../../../actions/tag_action';
 import FooterTagOptionsMenu from '../footer_tag_options';
 import { openModal } from '../../../actions/ui_actions';
-import { timingSafeEqual } from 'crypto';
 
 class NoteFooter extends React.Component {
     constructor(props){
@@ -18,6 +18,7 @@ class NoteFooter extends React.Component {
         this.handleNewTagging = this.handleNewTagging.bind(this);
         this.toggleTagOptionsVisible = this.toggleTagOptionsVisible.bind(this);
         // this.handleRemoveAllNotesFromTag = this.handleRemoveAllNotesFromTag.bind(this);
+        this.handleNewTagAndTagging = this.handleNewTagAndTagging.bind(this);
         this.optionsPos = [0,0];
     }
 
@@ -36,7 +37,8 @@ class NoteFooter extends React.Component {
 
     componentDidUpdate(){
         const searchOffset = document.querySelector('.NoteTagsContainer input') ? document.querySelector('.NoteTagsContainer input').offsetLeft : 0;         
-        if (this.state.tagSearchMatches.length > 1 ) {
+        // debugger
+        if (this.state.tagSearchMatches.length > 0 ) {
             document.querySelector('.tag-search-results').style.left = `${searchOffset}px`;
         }
     }
@@ -58,6 +60,26 @@ class NoteFooter extends React.Component {
         console.log(tagSearchMatches);
         this.setState({title: e.target.value, tagSearchMatches});
     }
+
+    handleNewTagAndTagging(){
+
+        const note = this.props.displayedNote;
+        const currentTagTitles = this.props.currentNoteTags.map(tag => tag.title);
+        return (e) => {
+            e.preventDefault();
+        if (this.state.tagSearchMatches.includes(e.target.value)) {
+            this.postNewTagging(e);
+        } else if (!currentTagTitles.includes(e.target.value)) {
+            this.props.postTag({title: e.target.value, note_id: note.id}). then(res => {
+                // debugger
+                // this.props.history.push(`/home/notes/${res.tag.note_ids[0]}`);
+                this.setState({ title: "", tagSearchMatches: [] });
+                this.props.getNote(res.tag.note_ids[0]);
+            });
+        }
+
+    };}
+
 
     render(){
     
@@ -95,7 +117,11 @@ class NoteFooter extends React.Component {
                         		{tagList}
                         	</ul>
                         </div>
-                        <input type="text" value={this.state.title} onChange={this.handleChange} placeholder={this.props.currentNoteTags.length > 0 ? "" : "Add tag" }/>
+                        <input type="text" 
+                            value={this.state.title} 
+                            onChange={this.handleChange} 
+                            onBlur={this.handleNewTagAndTagging()}
+                            placeholder={this.props.currentNoteTags.length > 0 ? "" : "Add tag" }/>
                        {tagSearchMatches.length > 0 ? tagSelectElement : null }
                        { tagOptionsVisible ? <FooterTagOptionsMenu 
                             toggleTagOptionsVisible={this.toggleTagOptionsVisible}
@@ -114,21 +140,22 @@ class NoteFooter extends React.Component {
 
 const msp = ( state, ownProps) => {
     const { entities: { tags } } = state;
-    const { currentNoteTagIds, displayedNote } = ownProps;
+    const { currentNoteTagIds, displayedNote, history } = ownProps;
     // debugger
     const currentNoteTags = currentNoteTagIds.map(tag_id => tags[tag_id]);
     return ({
         currentNoteTags,
         tags: _.values(tags) ,
-        displayedNote
+        displayedNote,
+        history
     })
 }
 
 const mdp = dispatch => ({
     postNewTagging: tagging => dispatch(postNewTagging(tagging)),
     removeExistingTagging: tagging => dispatch(removeExistingTagging(tagging)),
-    // removeAllNotesFromTag: tagId => dispatch(removeAllNotesFromTag(tagId)),
-    openModal: modal => dispatch(openModal(modal))
+    openModal: modal => dispatch(openModal(modal)),
+    postTag: tag => dispatch(postTag(tag))
 });
 
 export default connect(msp, mdp)(NoteFooter);

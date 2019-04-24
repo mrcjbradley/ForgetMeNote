@@ -3,6 +3,7 @@ import UserNav from './user_nav';
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { postNote } from '../../actions/note_actions';
+import { postNewTagging } from '../../actions/tagging_actions';
 import { values } from 'lodash';
 
 class HomeSidebar extends React.Component {
@@ -13,7 +14,7 @@ class HomeSidebar extends React.Component {
 
     newNote(e){
         e.preventDefault();
-        const { postNote, history, default_notebook_id } = this.props;
+        const { postNote, history, default_notebook_id , postNewTagging} = this.props;
         const blankNote = {notebook_id: default_notebook_id};
         postNote(blankNote).then(({notes}) => {
             history.push(`/home/notes/${_.values(notes)[0].id}`);
@@ -77,18 +78,20 @@ class HomeSidebar extends React.Component {
     )};
 };
 
-const msp = ({ ui: { editorPreferences: { fullscreen } }, session: {currentUser: {default_notebook_id}}, ui: { recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => {
+const msp = ({ ui: { editorPreferences: { fullscreen }, filters: {tags} }, session: {currentUser: {default_notebook_id}}, ui: { recentNotes: { recentNoteId, recentTrashId }}},  {history} ) => {
     // debugger
     return({
     fullscreen,
     history,
     default_notebook_id,
     recentNoteId,
-    recentTrashId
+    recentTrashId,
+    tags
 })}
 
 const mdp = dispatch => ({
-    postNote: note => dispatch(postNote(note))
+    postNote: note => dispatch(postNote(note)),
+    postNewTagging: tagging => dispatch(postNewTagging(tagging))
 })
 
 

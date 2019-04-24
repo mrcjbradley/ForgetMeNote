@@ -1,8 +1,16 @@
 class Api::TagsController < ApplicationController
     def create
-        @tag = current_user.tags.new(tag_params)
+        # debugger
+    	tag_base = {title: tag_params[:title], fav: tag_params[:fav]}
+    	@note = tag_params[:note_id] ? Note.find(tag_params[:note_id]) : nil 
+        @tag = current_user.tags.new(tag_base)
         if @tag.save
-            render :show
+            if @note 
+                Tagging.create(tag_id: @tag.id, note_id: @note.id)
+                # render 'api/notes/show'
+            # else    
+        end
+        render :show
         else
            render json: { errors: @tag.errors.full_messages }, status: 404 
         end
@@ -28,6 +36,6 @@ class Api::TagsController < ApplicationController
     end
 
     def tag_params 
-        params.require(:tag).permit(:title, :fav)
+        params.require(:tag).permit(:title, :fav, :note_id)
     end
 end
