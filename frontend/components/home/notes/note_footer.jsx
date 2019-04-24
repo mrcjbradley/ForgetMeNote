@@ -44,9 +44,11 @@ class NoteFooter extends React.Component {
     }
 
     handleNewTagging(e){
+        // debugger
         e.preventDefault();
         const { postNewTagging } = this.props;
-        const tagging = { note_id: this.props.displayedNote.id, tag_id: e.target.value };
+        const tag_id = e.target.tagName === "INPUT" ? this.props.tags.filter(tag => tag.title === e.target.value)[0].id : e.target.value;
+        const tagging = { note_id: this.props.displayedNote.id, tag_id: tag_id };
         this.setState({ title: "", tagSearchMatches: []});
         postNewTagging(tagging);
     }
@@ -65,15 +67,17 @@ class NoteFooter extends React.Component {
 
         const note = this.props.displayedNote;
         const currentTagTitles = this.props.currentNoteTags.map(tag => tag.title);
+        const tagSearchTitles = this.state.tagSearchMatches.map (tag => tag.title);
         return (e) => {
             e.preventDefault();
-        if (this.state.tagSearchMatches.includes(e.target.value)) {
-            this.postNewTagging(e);
+        if (tagSearchTitles.includes(e.target.value)) {
+            debugger
+            this.handleNewTagging(e);
         } else if (!currentTagTitles.includes(e.target.value)) {
             this.props.postTag({title: e.target.value, note_id: note.id}). then(res => {
                 // debugger
                 // this.props.history.push(`/home/notes/${res.tag.note_ids[0]}`);
-                this.setState({ title: "", tagSearchMatches: [] });
+                this.setState({ title: "", tagSearchMatches: []});
                 this.props.getNote(res.tag.note_ids[0]);
             });
         }
