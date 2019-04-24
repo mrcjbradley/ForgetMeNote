@@ -8,7 +8,8 @@ import { deletedNotes, notDeletedNotes } from '../../../util/selectors';
 
 const msp = (state, ownProps) => {
     const noteId = ownProps.match.params.noteId ? ownProps.match.params.noteId : state.ui.recentNotes.currentNoteId;
-    const note = ownProps.note ? ownProps.note : ownProps.notes.filter(note => note.id === noteId )[0];
+    const note = ownProps.note ? ownProps.note : ownProps.notes.filter(note => note.id === noteId )[0] || ownProps.notes[0];
+    // debugger
     return ({
         note,
         history: ownProps.history,

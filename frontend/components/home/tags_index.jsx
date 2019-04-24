@@ -2,7 +2,7 @@ import React from 'react';
 import { keys } from 'lodash';
 import { Link } from 'react-router-dom';
 import Modal from './modal_container';
-import TagOptionsMenu from './tag_options';
+import TagOptionsMenu from './tag_options_container';
 import { removeAllNotesFromTag } from '../../actions/tagging_actions';
 
 class TagsIndex extends React.Component {
@@ -12,7 +12,8 @@ class TagsIndex extends React.Component {
         this.handleUpdateTag = this.handleUpdateTag.bind(this);
         this.handleDeleteTag = this.handleDeleteTag.bind(this);
         this.handleRemoveAllNotesFromTag = this.handleRemoveAllNotesFromTag.bind(this);
-        this.state = { name: '', tagOptionMenu: false};
+        // debugger
+        this.state = { name:'', tagOptionMenu: false};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleTagClick = this.handleTagClick.bind(this);
@@ -30,7 +31,10 @@ class TagsIndex extends React.Component {
         this.setState({ tagOptionMenu: !this.state.tagOptionMenu });
         // debugger
         if (e.clientX && e.clientY){this.optionsPos = [e.clientX, e.clientY];}
-        if (tag){this.selectedTag = tag;}
+        if (tag){
+            this.selectedTag = tag;
+            this.setState({name: tag.title});
+        }
         // debugger
         };
     }
@@ -99,13 +103,14 @@ class TagsIndex extends React.Component {
 
 
     handleUpdateTag(){
+        const { name } = this.state;
         const { openModal } = this.props;
         const modal = {
             title: 'Rename tag',
             content: (
-                <label key={new Date()}> Name
+                <label key={new Date().getUTCSeconds()*23}> Name
                 <form className="RenameTagForm">
-                    <input type="text" className="RenameTagForm_TagName" id='js-nameField'  onChange={this.handleChange}/>
+                    <input type="text" className="RenameTagForm_TagName" id='js-nameField' defaultValue={name ? name : ''} onChange={this.handleChange}/>
                 </form>
                 </label>
             ),

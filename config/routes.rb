@@ -10,7 +10,8 @@ Rails.application.routes.draw do
     resources :tags, only: [:create, :update, :destroy, :index] do
       delete '/taggings', to: 'taggings#remove_all_notes'
     end
-    resources :taggings, only: [:create, :destroy]
+    resources :taggings, only: [:create]
+     delete '/taggings', to: 'taggings#destroy'
     delete '/trash/empty_trash', to: 'notes#empty_trash'
 
   end
