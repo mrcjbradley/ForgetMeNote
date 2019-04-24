@@ -114,7 +114,7 @@ class NoteFooter extends React.Component {
         return(
             <div className="NoteFooterContainer">
                 <div className="NoteFooter">
-                    <div className="bg--newnote-grey-icon"></div>
+                    <div className="bg--newnote-grey-icon" onClick={(e) => document.querySelector('.NoteTagsContainer input').focus()}></div>
                     <div className="NoteTagsContainer">
                         <div className="NoteTags">
                         	<ul>
