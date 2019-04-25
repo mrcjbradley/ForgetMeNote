@@ -875,34 +875,3 @@ div.ql-editor {
     width: 100%;
 }
 
-
-.tagFilterSearch{
-    left: 390px;
-    position: absolute;
-    z-index: 100;
-    background: white;
-    font-family: sans-serif;
-    line-height: 1.5;
-    background: white;
-    border-radius: 3px;
-    color: #666;
-    font-size: 14px;
-    box-shadow: 0 0 0 1px rgba(99, 114, 130, 0.16),
-    0 4px 12px rgba(27, 39, 51, 0.08);
-    margin: 6px 0;
-    padding: 12px 0;
-}
-
-.NoteIndex-TagListItem {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 24px;
-    padding: 6px 30px 6px 20px;
-    transition-duration: 0.1s;
-    -webkit-transition-timing-function: ease-in-out;
-    transition-timing-function: ease-in-out;
-}

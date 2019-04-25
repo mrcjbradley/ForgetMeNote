@@ -18,12 +18,15 @@ class NoteIndex extends React.Component
             sortMenu: false,
             notes: this.props.notes,
             mostRecentId: this.props.mostRecentId,
-            tagsVisibile: false
+            tagsVisibile: false,
+            searchString: ''
         };
+        
         this.toggleSortDisplay = this.toggleSortDisplay.bind(this);
         this.handleEmptyTrash = this.handleEmptyTrash.bind(this);
         this.clearFilter = this.clearFilter.bind(this);
         this.toggleTagOptionsVisible = this.toggleTagOptionsVisible.bind(this);
+        this.handleTagSearchChange = this.handleTagSearchChange.bind(this);
     }
 
     componentDidMount(){
@@ -67,8 +70,9 @@ class NoteIndex extends React.Component
     }
 
      toggleTagOptionsVisible(e){
-        //  debugger
          $('.tagFilterSearch').toggle();
+         $('.clickOutWrapper.tagOptions').toggle();
+         $('.tagSearch input').focus();
         //  this.setState({ tagsVisible: !this.state.tagsVisibile});
     }
 
@@ -139,6 +143,9 @@ class NoteIndex extends React.Component
 
     }
 
+    handleTagSearchChange(e){
+        this.setState({searchString: e.target.value});
+    }
    
 
     render() {
@@ -179,13 +186,22 @@ class NoteIndex extends React.Component
          mostRecent = null;
         }
         
-        const tagList = () => {if (headerText === 'Trash') {
-            return null;
-        } else {
-        return this.props.tags.map((tag,idx) => {
+        const tagList = () => {
+            
+            if (headerText === 'Trash') {
+                return null;
+            } else {
+            const searchString = this.state.searchString;
+            const { tags } = this.props;
+            const titleLength = searchString.length;
+            const searchTagResults = titleLength > 0 ? this.props.tags.filter(tag => tag.title.slice(0, titleLength).toLowerCase() === searchString.toLowerCase()) : [];
+            const tagsToUse = searchTagResults.length === 0 ? this.props.tags : searchTagResults;
+        return tagsToUse.map((tag,idx) => {
         return(
         <li className={`NoteIndex-TagListItem tag-${tag.id}`} key={idx} onClick={(e) => {
             this.toggleTagOptionsVisible();
+            this.setState({searchString: ''});
+            $('.tagSearch input').val('');
             this.props.receiveFilter({tags: tag.id});
         }}>
         {tag.title}
@@ -196,7 +212,9 @@ class NoteIndex extends React.Component
         const tagsIcon = (
             <nav className="NoteIndex_NoteTags">
                 <div className="bg--tag-icon" onClick={this.toggleTagOptionsVisible}></div>
+                <div className="clickOutWrapper tagOptions" style={{display:"none"}} onClick={this.toggleTagOptionsVisible}></div>
                 <ul className="tagFilterSearch" style={{display: this.state.tagsVisibile ? "inherit" : "none"}}>
+                    <li className="NoteIndex-TagListItem tagSearch"><input type="text" onChange={this.handleTagSearchChange}/></li>
                     {tagList()}
                 </ul>
             </nav>
