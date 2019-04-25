@@ -219,7 +219,6 @@ class NoteIndex extends React.Component
                 </ul>
             </nav>
         )
-        // debugger
         return (
             <>
                 <aside className={fullscreen ? "NoteIndex hide-me" : "NoteIndex"}>
