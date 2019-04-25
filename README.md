@@ -33,10 +33,6 @@ ForgetMeNote uses [React-Quill](https://github.com/zenoamaro/react-quill) to pro
 ### Future Additions
 #### Notebooks
 Users will be able to add, update, and remove notebooks (in addition to the default notebook that is created when a new user is registered).
-<<<<<<< HEAD
-#### Tags
-=======
 
 #### Tags
 Users will be able to create new tags, tag notes, and update/delete existing tags.
->>>>>>> ceb447628b577babc6d224bd013c143500f8fa9d

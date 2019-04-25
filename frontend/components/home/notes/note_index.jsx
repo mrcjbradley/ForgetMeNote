@@ -179,24 +179,25 @@ class NoteIndex extends React.Component
          mostRecent = null;
         }
         
-        const tagList = this.props.tags.map((tag,idx) => {
-      
-        
+        const tagList = () => {if (headerText === 'Trash') {
+            return null;
+        } else {
+        return this.props.tags.map((tag,idx) => {
         return(
         <li className={`NoteIndex-TagListItem tag-${tag.id}`} key={idx} onClick={(e) => {
             this.toggleTagOptionsVisible();
             this.props.receiveFilter({tags: tag.id});
-            }}>
-                            {tag.title}
+        }}>
+        {tag.title}
                         
-                        </li>
-                )})
+        </li>
+        )})}}
 
         const tagsIcon = (
             <nav className="NoteIndex_NoteTags">
                 <div className="bg--tag-icon" onClick={this.toggleTagOptionsVisible}></div>
                 <ul className="tagFilterSearch" style={{display: this.state.tagsVisibile ? "inherit" : "none"}}>
-                    {tagList}
+                    {tagList()}
                 </ul>
             </nav>
         )
