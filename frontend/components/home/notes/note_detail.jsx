@@ -44,10 +44,15 @@ class NoteDetail extends React.Component {
     }
 
     handleBlur(e){
+        // console.log(e.relatedTarget);
+        // debugger
         const displayStyle = e.relatedTarget && e.relatedTarget.className.includes("ql") ? "inherit" : "none";
         $('#tool').css("display", displayStyle);
         const { patchNote } = this.props;
-        setTimeout(() => patchNote(this.state), 0);
+        if (e.relatedTarget && e.relatedTarget.className.includes("ql")){
+         return null;
+        }else{
+        setTimeout(() => patchNote(this.state), 0);}
     }
 
     displayTools(e) {
@@ -156,7 +161,7 @@ class NoteDetail extends React.Component {
                                     </span>
                                 </div>
                             </div>
-                            <div className="NoteDetail_DisableWrapper" onBlur={this.handleBlur} >
+                            <div className="NoteDetail_DisableWrapper"  >
                                 <input type="text"
                                     className="NoteDetail_NoteTitle"
                                     onChange={this.handleChange('title')}
@@ -166,8 +171,9 @@ class NoteDetail extends React.Component {
                                     onFocus={() => $('#tool').css("display", "none")}
                                 />
                                 <span className="fillerTitle"  style={title ? {display: "none"} : null}>Title</span>
-                                <div onClick={isDeleted ? null : this.displayTools}>
+                                <div onBlur={this.handleBlur}  onClick={isDeleted ? null : this.displayTools}>
                                     <ReactQuill
+                                        
                                         modules={{ toolbar: { container: '#tool' } }}
                                         // hideToolBar={viewOnly}
                                         className="NoteDetail_NoteContent"
