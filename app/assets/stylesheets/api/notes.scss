@@ -226,18 +226,22 @@ $beige: rgb(248, 248, 248);
     transition: all 0.2s ease-in-out;
 }
 
+ 
 .HomeSidebar_notes-nav {
-    @include home-sidebar-nav();
     padding: 18px 0 0;
 }
 
-.HomeSidebar_Tags-nav {
+.HomeSidebar_notes-nav,
+.HomeSidebar_Notebooks-nav, 
+.HomeSidebar_Tags-nav, 
+.HomeSidebar_Trash-nav {
     @include home-sidebar-nav();
 }
 
-.HomeSidebar_Trash-nav {
-    @include home-sidebar-nav();
-
+.HomeSidebar_Notebooks-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: start;
 }
 
 @mixin sidebar-nav-link-style {
@@ -247,8 +251,6 @@ $beige: rgb(248, 248, 248);
         width: 100%;
         padding: 9px 0px 9px 22px;
         color: #ccc;
-
-
         
         &:hover {
             background-color: #333;
@@ -260,20 +262,25 @@ $beige: rgb(248, 248, 248);
         }
 }
 
-.HomeSidebar_all-notes-button {
-  @include sidebar-nav-link-style();
-}
-
-.HomeSidebar_all-Tags-button {
-    @include sidebar-nav-link-style();
-}
-
+.HomeSidebar_all-notes-button,
+.HomeSidebar_all-notebooks-button,
+.HomeSidebar_all-Tags-button,
 .HomeSidebar_all-Trash-button {
 @include sidebar-nav-link-style();
 }
 
 .bg--note-icon {
     background-image: image_url("note_icon");
+    background-size: 17px 17px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 16px;
+    display: block;
+    padding: 0px;
+}
+.bg--notebook-icon--sidebar {
+    background-image: image_url("notebook_sidebar");
     background-size: 17px 17px;
     background-repeat: no-repeat;
     background-position: center;
@@ -303,6 +310,32 @@ $beige: rgb(248, 248, 248);
     height: 16px;
     display: block;
     padding: 0px;
+}
+
+.HomeSidebar_Notebooks-List {
+    &--hidden {
+        display:none;
+    }
+    
+    color: #e6e6e6;
+    list-style-image: none;
+    margin-left: 80px;
+    li{
+    position: relative;
+    display: flex;
+    align-items:flex-end;
+        &::before {
+            content:'';
+            background: image_url("notebook_icon");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 15px;
+            height: 15px;
+            display: block;
+            position: absolute;
+            left: - 20px;
+    }}
+
 }
 
 .NoteIndex {

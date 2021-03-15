@@ -61,17 +61,15 @@ class HomeSidebar extends React.Component {
                     <div className="bg--note-icon"></div>  All Notes
                 </NavLink>
             </nav>
-            {/* <nav className="HomeSidebar_Notebooks-nav">
-                <ul className="HomeSidebar_Notebooks">
-                    <li className="Notebooks_menu">
-                        Notebooks
-                        <ul className="NotebooksList">
-                            <li className="NotebooksList_Notebook">sample 1</li>
-                            <li className="NotebooksList_Notebook">sample 2</li>
-                        </ul>
-                    </li>
+            <nav className="HomeSidebar_Notebooks-nav">
+                 <NavLink to={`/home/notebooks/`} className="HomeSidebar_all-notebooks-button">
+                    <div className="bg--notebook-icon--sidebar"></div>  Notebooks
+                </NavLink>
+                <ul className="HomeSidebar_Notebooks-List--hidden">
+                    <li className="NotebooksList_Notebook">sample 1</li>
+                    <li className="NotebooksList_Notebook">sample 2</li>
                 </ul>
-            </nav> */}
+            </nav>
             <nav className="HomeSidebar_Tags-nav">
                 <NavLink to={`/home/tags`} className="HomeSidebar_all-Tags-button">
                     <div className="bg--tag-sb-icon"></div>  Tags
