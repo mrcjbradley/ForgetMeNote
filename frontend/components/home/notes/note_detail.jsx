@@ -25,31 +25,29 @@ class NoteDetail extends React.Component {
         } 
     }
 
-    componentWillReceiveProps(prevProps, newProps){
+    componentWillReceiveProps(prevProps, _){
          if (prevProps.note !== this.props.note || prevProps.notes || this.props.notes){
             this.setState(this.props.note ? this.props.note : this.props.notes[0]);
         }
     }
 
-    componentDidUpdate(prevProps, prevState){
+    componentDidUpdate(prevProps, _){
         if (prevProps.note !== this.props.note){
             this.setState(this.props.note);
         }
     }
 
     handleChange(field){
-        return e => {
-            this.setState({ [field]: e.target.value });
+        return event => {
+            this.setState({ [field]: event.target.value });
         };
     }
 
-    handleBlur(e){
-        // console.log(e.relatedTarget);
-        // debugger
-        const displayStyle = e.relatedTarget && e.relatedTarget.className.includes("ql") ? "inherit" : "none";
+    handleBlur(event){
+        const displayStyle = event.relatedTarget && event.relatedTarget.className.includes("ql") ? "inherit" : "none";
         $('#tool').css("display", displayStyle);
         const { patchNote } = this.props;
-        if (e.relatedTarget && e.relatedTarget.className.includes("ql")){
+        if (event.relatedTarget && event.relatedTarget.className.includes("ql")){
          return null;
         }else{
         setTimeout(() => patchNote(this.state), 0);}
@@ -59,15 +57,15 @@ class NoteDetail extends React.Component {
         $('#tool').css("display", "inherit");
     }
 
-    toggleFullScreen(e) {
-        e.preventDefault();
+    toggleFullScreen(event) {
+        event.preventDefault();
         this.props.toggleFullScreen();
         $('.js-expand-icon').toggleClass('green');
         $('.userNav_toggleMenu').toggle().delay(1000);
     }
 
-    toggleMoreMenu(e){
-        e.preventDefault();
+    toggleMoreMenu(event){
+        event.preventDefault();
         $('.js-more-menu').toggle();
     }
 
@@ -75,7 +73,7 @@ class NoteDetail extends React.Component {
         this.setState({ content: value, plain_text: editor.getText() });
     }
 
-    handleDeleteNote(e){
+    handleDeleteNote(event){
         const modal = {
             title: 'Delete note',
             content: `${this.props.note.title} will be moved to trash.`,
@@ -83,7 +81,7 @@ class NoteDetail extends React.Component {
         this.props.openModal(modal);
     }
 
-    handleRestoreNote(e)
+    handleRestoreNote(event)
     {
         const { patchNote, note, history, noteId } = this.props;
         const restoredNote = merge({}, note, { deleted_at: null });
